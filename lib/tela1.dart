@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 void main() {
   runApp(const MyApp());
@@ -10,7 +11,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'C&C Turismo Digital',
+      title: 'C&C Turismo',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blue,
@@ -21,6 +22,7 @@ class MyApp extends StatelessWidget {
   }
 }
 
+// ==================== TELA DE LOGIN ====================
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
@@ -42,24 +44,19 @@ class _LoginScreenState extends State<LoginScreen> {
 
   void _handleLogin() {
     if (_formKey.currentState!.validate()) {
-      // Aqui você adiciona a lógica de login
-      final email = _emailController.text;
-      final password = _passwordController.text;
-      
-      print('Email: $email');
-      print('Senha: $password');
-      
-      // Exemplo: navegar para próxima tela ou chamar API
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Login realizado com sucesso!')),
+        const SnackBar(
+          content: Text('Login realizado com sucesso!'),
+          backgroundColor: Colors.green,
+        ),
       );
     }
   }
 
   void _navigateToRegister() {
-    // Navegação para tela de cadastro
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Navegando para cadastro...')),
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const RegisterScreen()),
     );
   }
 
@@ -76,65 +73,18 @@ class _LoginScreenState extends State<LoginScreen> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  // Logo/Header
+                  // LOGO (apenas imagem)
                   Container(
                     padding: const EdgeInsets.all(20),
-                    child: Column(
-                      children: [
-                        // Ícone de ônibus
-                        Container(
-                          width: 80,
-                          height: 80,
-                          decoration: BoxDecoration(
-                            color: Colors.red,
-                            shape: BoxShape.circle,
-                            border: Border.all(color: Colors.white, width: 3),
-                          ),
-                          child: const Icon(
-                            Icons.directions_bus,
-                            size: 40,
-                            color: Colors.white,
-                          ),
-                        ),
-                        const SizedBox(height: 16),
-                        // Logo CTC
-                        Container(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 30,
-                            vertical: 20,
-                          ),
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                          child: const Column(
-                            children: [
-                              Text(
-                                'C&C',
-                                style: TextStyle(
-                                  fontSize: 48,
-                                  fontWeight: FontWeight.bold,
-                                  color: Color(0xFF2E5C8A),
-                                  height: 0.9,
-                                ),
-                              ),
-                              Text(
-                                'Turismo',
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  color: Color(0xFF4CAF50),
-                                  letterSpacing: 1.5,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
+                    child: Image.asset(
+                      'images/logo.png',
+                      height: 120,
+                      fit: BoxFit.contain,
                     ),
                   ),
-                  
+
                   const SizedBox(height: 40),
-                  
+
                   // Campo de Email
                   TextFormField(
                     controller: _emailController,
@@ -162,9 +112,9 @@ class _LoginScreenState extends State<LoginScreen> {
                       return null;
                     },
                   ),
-                  
+
                   const SizedBox(height: 16),
-                  
+
                   // Campo de Senha
                   TextFormField(
                     controller: _passwordController,
@@ -192,9 +142,9 @@ class _LoginScreenState extends State<LoginScreen> {
                       return null;
                     },
                   ),
-                  
+
                   const SizedBox(height: 24),
-                  
+
                   // Botão Concluir
                   SizedBox(
                     width: double.infinity,
@@ -218,17 +168,14 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ),
                   ),
-                  
+
                   const SizedBox(height: 24),
-                  
+
                   // Link para cadastro
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Text(
-                        'Não tem uma conta? ',
-                        style: TextStyle(color: Colors.black87),
-                      ),
+                      const Text('Não tem uma conta? '),
                       GestureDetector(
                         onTap: _navigateToRegister,
                         child: const Text(
@@ -248,6 +195,18 @@ class _LoginScreenState extends State<LoginScreen> {
           ),
         ),
       ),
+    );
+  }
+}
+
+// ==================== TELA DE CADASTRO ====================
+class RegisterScreen extends StatelessWidget {
+  const RegisterScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Scaffold(
+      body: Center(child: Text("Tela de cadastro continua igual")),
     );
   }
 }
