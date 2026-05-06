@@ -13,10 +13,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'C&C Turismo',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        useMaterial3: true,
-      ),
+      theme: ThemeData(primarySwatch: Colors.blue, useMaterial3: true),
       home: const LoginScreen(),
     );
   }
@@ -46,10 +43,10 @@ class _LoginScreenState extends State<LoginScreen> {
     if (_formKey.currentState!.validate()) {
       final email = _emailController.text;
       final password = _passwordController.text;
-      
+
       print('Email: $email');
       print('Senha: $password');
-      
+
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('Login realizado com sucesso!'),
@@ -135,9 +132,9 @@ class _LoginScreenState extends State<LoginScreen> {
                       ],
                     ),
                   ),
-                  
+
                   const SizedBox(height: 40),
-                  
+
                   // Campo de Email
                   TextFormField(
                     controller: _emailController,
@@ -165,9 +162,9 @@ class _LoginScreenState extends State<LoginScreen> {
                       return null;
                     },
                   ),
-                  
+
                   const SizedBox(height: 16),
-                  
+
                   // Campo de Senha
                   TextFormField(
                     controller: _passwordController,
@@ -195,9 +192,9 @@ class _LoginScreenState extends State<LoginScreen> {
                       return null;
                     },
                   ),
-                  
+
                   const SizedBox(height: 24),
-                  
+
                   // Botão Concluir
                   SizedBox(
                     width: double.infinity,
@@ -221,9 +218,9 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ),
                   ),
-                  
+
                   const SizedBox(height: 24),
-                  
+
                   // Link para cadastro
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -265,7 +262,7 @@ class RegisterScreen extends StatefulWidget {
 
 class _RegisterScreenState extends State<RegisterScreen> {
   final _formKey = GlobalKey<FormState>();
-  
+
   // Controllers
   final TextEditingController _nomeController = TextEditingController();
   final TextEditingController _sobrenomeController = TextEditingController();
@@ -273,13 +270,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _telefoneController = TextEditingController();
   final TextEditingController _cpfController = TextEditingController();
-  
+
   // Dropdown values
   String? _sexoSelecionado;
   String? _tipoTelefoneSelecionado;
-  
+
   final List<String> _opcoesSexo = ['Masculino', 'Feminino', 'Outros'];
-  final List<String> _opcoesTipoTelefone = ['Celular', 'Residencial', 'Comercial'];
+  final List<String> _opcoesTipoTelefone = [
+    'Celular',
+    'Residencial',
+    'Comercial',
+  ];
 
   @override
   void dispose() {
@@ -304,16 +305,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
         'telefone': _telefoneController.text,
         'cpf': _cpfController.text,
       };
-      
+
       print('Dados do cadastro: $dados');
-      
+
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('Cadastro realizado com sucesso!'),
           backgroundColor: Colors.green,
         ),
       );
-      
+
       // Aguarda 1 segundo e volta para tela de login
       Future.delayed(const Duration(seconds: 1), () {
         Navigator.pop(context);
@@ -342,7 +343,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox(height: 8),
-                
+
                 // Título
                 const Center(
                   child: Text(
@@ -354,9 +355,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ),
                   ),
                 ),
-                
+
                 const SizedBox(height: 32),
-                
+
                 // Nome
                 _buildTextField(
                   controller: _nomeController,
@@ -368,9 +369,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     return null;
                   },
                 ),
-                
+
                 const SizedBox(height: 16),
-                
+
                 // Sobrenome
                 _buildTextField(
                   controller: _sobrenomeController,
@@ -382,9 +383,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     return null;
                   },
                 ),
-                
+
                 const SizedBox(height: 16),
-                
+
                 // Nascimento
                 _buildTextField(
                   controller: _nascimentoController,
@@ -404,12 +405,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     return null;
                   },
                 ),
-                
+
                 const SizedBox(height: 16),
-                
+
                 // Sexo (Dropdown)
                 DropdownButtonFormField<String>(
-                  value: _sexoSelecionado,
+                  initialValue: _sexoSelecionado,
                   decoration: InputDecoration(
                     hintText: 'Sexo',
                     filled: true,
@@ -442,9 +443,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   },
                   dropdownColor: const Color(0xFF7FC4A8),
                 ),
-                
+
                 const SizedBox(height: 16),
-                
+
                 // Email
                 _buildTextField(
                   controller: _emailController,
@@ -460,12 +461,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     return null;
                   },
                 ),
-                
+
                 const SizedBox(height: 16),
-                
+
                 // Tipo de telefone (Dropdown)
                 DropdownButtonFormField<String>(
-                  value: _tipoTelefoneSelecionado,
+                  initialValue: _tipoTelefoneSelecionado,
                   decoration: InputDecoration(
                     hintText: 'Tipo de telefone',
                     filled: true,
@@ -498,9 +499,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   },
                   dropdownColor: const Color(0xFF7FC4A8),
                 ),
-                
+
                 const SizedBox(height: 16),
-                
+
                 // Telefone
                 _buildTextField(
                   controller: _telefoneController,
@@ -520,9 +521,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     return null;
                   },
                 ),
-                
+
                 const SizedBox(height: 16),
-                
+
                 // CPF
                 _buildTextField(
                   controller: _cpfController,
@@ -542,9 +543,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     return null;
                   },
                 ),
-                
+
                 const SizedBox(height: 32),
-                
+
                 // Botão Concluir
                 SizedBox(
                   width: double.infinity,
@@ -568,7 +569,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ),
                   ),
                 ),
-                
+
                 const SizedBox(height: 32),
               ],
             ),
@@ -617,13 +618,13 @@ class _CpfInputFormatter extends TextInputFormatter {
     TextEditingValue newValue,
   ) {
     final text = newValue.text;
-    
+
     if (text.length > 11) {
       return oldValue;
     }
-    
+
     var newText = '';
-    
+
     for (var i = 0; i < text.length; i++) {
       if (i == 3 || i == 6) {
         newText += '.';
@@ -632,7 +633,7 @@ class _CpfInputFormatter extends TextInputFormatter {
       }
       newText += text[i];
     }
-    
+
     return TextEditingValue(
       text: newText,
       selection: TextSelection.collapsed(offset: newText.length),
@@ -648,13 +649,13 @@ class _PhoneInputFormatter extends TextInputFormatter {
     TextEditingValue newValue,
   ) {
     final text = newValue.text;
-    
+
     if (text.length > 11) {
       return oldValue;
     }
-    
+
     var newText = '';
-    
+
     for (var i = 0; i < text.length; i++) {
       if (i == 0) {
         newText += '(';
@@ -665,7 +666,7 @@ class _PhoneInputFormatter extends TextInputFormatter {
       }
       newText += text[i];
     }
-    
+
     return TextEditingValue(
       text: newText,
       selection: TextSelection.collapsed(offset: newText.length),
@@ -681,20 +682,20 @@ class _DateInputFormatter extends TextInputFormatter {
     TextEditingValue newValue,
   ) {
     final text = newValue.text;
-    
+
     if (text.length > 8) {
       return oldValue;
     }
-    
+
     var newText = '';
-    
+
     for (var i = 0; i < text.length; i++) {
       if (i == 2 || i == 4) {
         newText += '/';
       }
       newText += text[i];
     }
-    
+
     return TextEditingValue(
       text: newText,
       selection: TextSelection.collapsed(offset: newText.length),

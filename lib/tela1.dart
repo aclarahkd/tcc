@@ -12,10 +12,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'C&C Turismo',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        useMaterial3: true,
-      ),
+      theme: ThemeData(primarySwatch: Colors.blue, useMaterial3: true),
       home: const LoginScreen(),
     );
   }
@@ -76,7 +73,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   Container(
                     padding: const EdgeInsets.all(20),
                     child: Image.asset(
-                      'images/logo.png',
+                      'imagens/logo.png',
                       height: 120,
                       fit: BoxFit.contain,
                     ),
