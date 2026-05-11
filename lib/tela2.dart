@@ -1,22 +1,5 @@
 import 'package:flutter/material.dart';
-
-void main() {
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'C&C Turismo',
-      theme: ThemeData(primarySwatch: Colors.blue, fontFamily: 'Arial'),
-      home: const Tela2(),
-      debugShowCheckedModeBanner: false,
-    );
-  }
-}
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 class Tela2 extends StatefulWidget {
   const Tela2({super.key});
@@ -37,6 +20,22 @@ class _Tela2State extends State<Tela2> {
   String? _sexoSelecionado;
   String? _tipoTelefoneSelecionado;
 
+  // Máscaras de formatação
+  final _cpfMask = MaskTextInputFormatter(
+    mask: '###.###.###-##',
+    filter: {"#": RegExp(r'[0-9]')},
+  );
+
+  final _telefoneMask = MaskTextInputFormatter(
+    mask: '(##) #####-####',
+    filter: {"#": RegExp(r'[0-9]')},
+  );
+
+  final _nascimentoMask = MaskTextInputFormatter(
+    mask: '##/##/####',
+    filter: {"#": RegExp(r'[0-9]')},
+  );
+
   @override
   void dispose() {
     _nomeController.dispose();
@@ -46,6 +45,59 @@ class _Tela2State extends State<Tela2> {
     _telefoneController.dispose();
     _cpfController.dispose();
     super.dispose();
+  }
+
+  void _handleCadastro() {
+    // Validar campos obrigatórios
+    if (!_formKey.currentState!.validate()) {
+      return;
+    }
+
+    // Validar dropdowns
+    if (_sexoSelecionado == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Por favor, selecione o sexo'),
+          backgroundColor: Colors.red,
+        ),
+      );
+      return;
+    }
+
+    if (_tipoTelefoneSelecionado == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Por favor, selecione o tipo de telefone'),
+          backgroundColor: Colors.red,
+        ),
+      );
+      return;
+    }
+
+    // Processar o cadastro
+    print('=== DADOS DO CADASTRO ===');
+    print('Nome: ${_nomeController.text}');
+    print('Sobrenome: ${_sobrenomeController.text}');
+    print('Nascimento: ${_nascimentoController.text}');
+    print('Sexo: $_sexoSelecionado');
+    print('E-mail: ${_emailController.text}');
+    print('Tipo de telefone: $_tipoTelefoneSelecionado');
+    print('Telefone: ${_telefoneController.text}');
+    print('CPF: ${_cpfController.text}');
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text('Cadastro realizado com sucesso!'),
+        backgroundColor: Colors.green,
+      ),
+    );
+
+    // Voltar para a tela de login após 2 segundos
+    Future.delayed(const Duration(seconds: 2), () {
+      if (mounted) {
+        Navigator.pop(context);
+      }
+    });
   }
 
   @override
@@ -64,6 +116,19 @@ class _Tela2State extends State<Tela2> {
             icon: const Icon(Icons.more_horiz, color: Color(0xFF6B9080)),
             onPressed: () {
               // Ação do menu
+              showDialog(
+                context: context,
+                builder: (context) => AlertDialog(
+                  title: const Text('Menu'),
+                  content: const Text('Opções adicionais'),
+                  actions: [
+                    TextButton(
+                      onPressed: () => Navigator.pop(context),
+                      child: const Text('Fechar'),
+                    ),
+                  ],
+                ),
+              );
             },
           ),
         ],
@@ -87,19 +152,52 @@ class _Tela2State extends State<Tela2> {
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: 32),
-                _buildTextField(controller: _nomeController, hintText: 'Nome'),
+
+                // ================= NOME =================
+                _buildTextField(
+                  controller: _nomeController,
+                  hintText: 'Nome',
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Por favor, insira seu nome';
+                    }
+                    return null;
+                  },
+                ),
                 const SizedBox(height: 16),
+
+                // ================= SOBRENOME =================
                 _buildTextField(
                   controller: _sobrenomeController,
                   hintText: 'Sobrenome',
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Por favor, insira seu sobrenome';
+                    }
+                    return null;
+                  },
                 ),
                 const SizedBox(height: 16),
+
+                // ================= NASCIMENTO =================
                 _buildTextField(
                   controller: _nascimentoController,
                   hintText: 'Nascimento',
-                  keyboardType: TextInputType.datetime,
+                  keyboardType: TextInputType.number,
+                  inputFormatters: [_nascimentoMask],
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Por favor, insira sua data de nascimento';
+                    }
+                    if (value.length < 10) {
+                      return 'Data inválida (DD/MM/AAAA)';
+                    }
+                    return null;
+                  },
                 ),
                 const SizedBox(height: 16),
+
+                // ================= SEXO =================
                 _buildDropdownField(
                   value: _sexoSelecionado,
                   hintText: 'Sexo',
@@ -111,12 +209,25 @@ class _Tela2State extends State<Tela2> {
                   },
                 ),
                 const SizedBox(height: 16),
+
+                // ================= E-MAIL =================
                 _buildTextField(
                   controller: _emailController,
                   hintText: 'E-mail',
                   keyboardType: TextInputType.emailAddress,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Por favor, insira seu e-mail';
+                    }
+                    if (!value.contains('@')) {
+                      return 'Por favor, insira um e-mail válido';
+                    }
+                    return null;
+                  },
                 ),
                 const SizedBox(height: 16),
+
+                // ================= TIPO DE TELEFONE =================
                 _buildDropdownField(
                   value: _tipoTelefoneSelecionado,
                   hintText: 'Tipo de telefone',
@@ -128,27 +239,46 @@ class _Tela2State extends State<Tela2> {
                   },
                 ),
                 const SizedBox(height: 16),
+
+                // ================= TELEFONE =================
                 _buildTextField(
                   controller: _telefoneController,
                   hintText: 'Telefone',
                   keyboardType: TextInputType.phone,
+                  inputFormatters: [_telefoneMask],
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Por favor, insira seu telefone';
+                    }
+                    if (value.length < 15) {
+                      return 'Telefone inválido';
+                    }
+                    return null;
+                  },
                 ),
                 const SizedBox(height: 16),
+
+                // ================= CPF =================
                 _buildTextField(
                   controller: _cpfController,
                   hintText: 'CPF',
                   keyboardType: TextInputType.number,
+                  inputFormatters: [_cpfMask],
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Por favor, insira seu CPF';
+                    }
+                    if (value.length < 14) {
+                      return 'CPF inválido';
+                    }
+                    return null;
+                  },
                 ),
                 const SizedBox(height: 32),
+
+                // ================= BOTÃO CONCLUIR =================
                 ElevatedButton(
-                  onPressed: () {
-                    if (_formKey.currentState!.validate()) {
-                      // Processar o cadastro
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Cadastro realizado!')),
-                      );
-                    }
-                  },
+                  onPressed: _handleCadastro,
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFF2D4263),
                     padding: const EdgeInsets.symmetric(vertical: 18),
@@ -179,6 +309,8 @@ class _Tela2State extends State<Tela2> {
     required TextEditingController controller,
     required String hintText,
     TextInputType? keyboardType,
+    List<MaskTextInputFormatter>? inputFormatters,
+    String? Function(String?)? validator,
   }) {
     return Container(
       decoration: BoxDecoration(
@@ -188,6 +320,8 @@ class _Tela2State extends State<Tela2> {
       child: TextFormField(
         controller: controller,
         keyboardType: keyboardType,
+        inputFormatters: inputFormatters,
+        validator: validator,
         style: const TextStyle(color: Color(0xFF2D4A3E), fontSize: 16),
         decoration: InputDecoration(
           hintText: hintText,
@@ -197,6 +331,7 @@ class _Tela2State extends State<Tela2> {
             vertical: 18,
           ),
           border: InputBorder.none,
+          errorStyle: const TextStyle(color: Colors.red, fontSize: 12),
         ),
       ),
     );

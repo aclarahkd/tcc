@@ -19,7 +19,6 @@ class MyApp extends StatelessWidget {
   }
 }
 
-// ==================== TELA DE LOGIN ====================
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
@@ -247,25 +246,6 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
             ),
           ],
-        ),
-      ),
-    );
-  }
-}
-
-// ==================== TELA DE CADASTRO ====================
-class RegisterScreen extends StatelessWidget {
-  const RegisterScreen({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Cadastro')),
-
-      body: const Center(
-        child: Text(
-          'Tela de cadastro continua igual',
-          style: TextStyle(fontSize: 18),
         ),
       ),
     );
