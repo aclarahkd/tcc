@@ -10,17 +10,21 @@ class Tela2 extends StatefulWidget {
 
 class _Tela2State extends State<Tela2> {
   final _formKey = GlobalKey<FormState>();
+
   final TextEditingController _nomeController = TextEditingController();
   final TextEditingController _sobrenomeController = TextEditingController();
   final TextEditingController _nascimentoController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _telefoneController = TextEditingController();
   final TextEditingController _cpfController = TextEditingController();
+  final TextEditingController _senhaController = TextEditingController();
 
   String? _sexoSelecionado;
   String? _tipoTelefoneSelecionado;
 
-  // Máscaras de formatação
+  bool _mostrarSenha = false;
+
+  // máscaras
   final _cpfMask = MaskTextInputFormatter(
     mask: '###.###.###-##',
     filter: {"#": RegExp(r'[0-9]')},
@@ -44,20 +48,19 @@ class _Tela2State extends State<Tela2> {
     _emailController.dispose();
     _telefoneController.dispose();
     _cpfController.dispose();
+    _senhaController.dispose();
     super.dispose();
   }
 
   void _handleCadastro() {
-    // Validar campos obrigatórios
     if (!_formKey.currentState!.validate()) {
       return;
     }
 
-    // Validar dropdowns
     if (_sexoSelecionado == null) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text('Por favor, selecione o sexo'),
+          content: Text('Selecione o sexo'),
           backgroundColor: Colors.red,
         ),
       );
@@ -67,64 +70,100 @@ class _Tela2State extends State<Tela2> {
     if (_tipoTelefoneSelecionado == null) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text('Por favor, selecione o tipo de telefone'),
+          content: Text('Selecione o tipo de telefone'),
           backgroundColor: Colors.red,
         ),
       );
       return;
     }
 
-    // Processar o cadastro
-    print('=== DADOS DO CADASTRO ===');
-    print('Nome: ${_nomeController.text}');
-    print('Sobrenome: ${_sobrenomeController.text}');
-    print('Nascimento: ${_nascimentoController.text}');
-    print('Sexo: $_sexoSelecionado');
-    print('E-mail: ${_emailController.text}');
-    print('Tipo de telefone: $_tipoTelefoneSelecionado');
-    print('Telefone: ${_telefoneController.text}');
-    print('CPF: ${_cpfController.text}');
+    debugPrint('Cadastro realizado');
 
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('Cadastro realizado com sucesso!'),
-        backgroundColor: Colors.green,
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Sucesso'),
+        content: const Text('Cadastro realizado com sucesso!'),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.pop(context);
+              Navigator.pop(context);
+            },
+            child: const Text('OK'),
+          ),
+        ],
       ),
     );
-
-    // Voltar para a tela de login após 2 segundos
-    Future.delayed(const Duration(seconds: 2), () {
-      if (mounted) {
-        Navigator.pop(context);
-      }
-    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
+
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
+
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.black),
           onPressed: () => Navigator.of(context).pop(),
         ),
+
         actions: [
           IconButton(
-            icon: const Icon(Icons.more_horiz, color: Color(0xFF6B9080)),
+            icon: const Icon(
+              Icons.more_horiz,
+              color: Color.fromARGB(255, 77, 139, 113),
+            ),
+
             onPressed: () {
-              // Ação do menu
               showDialog(
                 context: context,
+
                 builder: (context) => AlertDialog(
-                  title: const Text('Menu'),
-                  content: const Text('Opções adicionais'),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+
+                  title: Row(
+                    children: const [
+                      Icon(
+                        Icons.support_agent,
+                        color: Color(0xFF2D4263),
+                      ),
+
+                      SizedBox(width: 10),
+
+                      Text(
+                        'Suporte',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
+
+                  content: const Text(
+                    'Precisa de ajuda?\n\nEntre em contato com nossa equipe de suporte para receber assistência sobre cadastro, acesso à conta ou dúvidas relacionadas ao aplicativo.',
+                    style: TextStyle(
+                      fontSize: 15,
+                      height: 1.5,
+                    ),
+                  ),
+
                   actions: [
                     TextButton(
                       onPressed: () => Navigator.pop(context),
-                      child: const Text('Fechar'),
+
+                      child: const Text(
+                        'Fechar',
+                        style: TextStyle(
+                          color: Color(0xFF2D4263),
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                     ),
                   ],
                 ),
@@ -133,162 +172,241 @@ class _Tela2State extends State<Tela2> {
           ),
         ],
       ),
+
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(horizontal: 24.0),
+          padding: const EdgeInsets.symmetric(horizontal: 24),
+
           child: Form(
             key: _formKey,
+
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
+
               children: [
                 const SizedBox(height: 20),
+
                 const Text(
                   'Cadastre-se',
+
+                  textAlign: TextAlign.center,
+
                   style: TextStyle(
                     fontSize: 32,
                     fontWeight: FontWeight.bold,
-                    color: Colors.black,
                   ),
-                  textAlign: TextAlign.center,
                 ),
+
                 const SizedBox(height: 32),
 
-                // ================= NOME =================
+                // nome
                 _buildTextField(
                   controller: _nomeController,
                   hintText: 'Nome',
+
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'Por favor, insira seu nome';
+                      return 'Digite seu nome';
                     }
                     return null;
                   },
                 ),
+
                 const SizedBox(height: 16),
 
-                // ================= SOBRENOME =================
+                // sobrenome
                 _buildTextField(
                   controller: _sobrenomeController,
                   hintText: 'Sobrenome',
+
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'Por favor, insira seu sobrenome';
+                      return 'Digite seu sobrenome';
                     }
                     return null;
                   },
                 ),
+
                 const SizedBox(height: 16),
 
-                // ================= NASCIMENTO =================
+                // nascimento
                 _buildTextField(
                   controller: _nascimentoController,
                   hintText: 'Nascimento',
                   keyboardType: TextInputType.number,
                   inputFormatters: [_nascimentoMask],
+
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'Por favor, insira sua data de nascimento';
+                      return 'Digite sua data';
                     }
+
                     if (value.length < 10) {
-                      return 'Data inválida (DD/MM/AAAA)';
+                      return 'Data inválida';
                     }
+
                     return null;
                   },
                 ),
+
                 const SizedBox(height: 16),
 
-                // ================= SEXO =================
+                // sexo
                 _buildDropdownField(
                   value: _sexoSelecionado,
                   hintText: 'Sexo',
                   items: ['Masculino', 'Feminino', 'Outro'],
+
                   onChanged: (value) {
                     setState(() {
                       _sexoSelecionado = value;
                     });
                   },
                 ),
+
                 const SizedBox(height: 16),
 
-                // ================= E-MAIL =================
+                // email
                 _buildTextField(
                   controller: _emailController,
                   hintText: 'E-mail',
                   keyboardType: TextInputType.emailAddress,
+
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'Por favor, insira seu e-mail';
+                      return 'Digite seu e-mail';
                     }
+
                     if (!value.contains('@')) {
-                      return 'Por favor, insira um e-mail válido';
+                      return 'E-mail inválido';
                     }
+
                     return null;
                   },
                 ),
+
                 const SizedBox(height: 16),
 
-                // ================= TIPO DE TELEFONE =================
+                // tipo telefone
                 _buildDropdownField(
                   value: _tipoTelefoneSelecionado,
                   hintText: 'Tipo de telefone',
                   items: ['Celular', 'Residencial', 'Comercial'],
+
                   onChanged: (value) {
                     setState(() {
                       _tipoTelefoneSelecionado = value;
                     });
                   },
                 ),
+
                 const SizedBox(height: 16),
 
-                // ================= TELEFONE =================
+                // telefone
                 _buildTextField(
                   controller: _telefoneController,
                   hintText: 'Telefone',
                   keyboardType: TextInputType.phone,
                   inputFormatters: [_telefoneMask],
+
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'Por favor, insira seu telefone';
+                      return 'Digite seu telefone';
                     }
+
                     if (value.length < 15) {
                       return 'Telefone inválido';
                     }
+
                     return null;
                   },
                 ),
+
                 const SizedBox(height: 16),
 
-                // ================= CPF =================
+                // cpf
                 _buildTextField(
                   controller: _cpfController,
                   hintText: 'CPF',
                   keyboardType: TextInputType.number,
                   inputFormatters: [_cpfMask],
+
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'Por favor, insira seu CPF';
+                      return 'Digite seu CPF';
                     }
+
                     if (value.length < 14) {
                       return 'CPF inválido';
                     }
+
                     return null;
                   },
                 ),
+
+                const SizedBox(height: 16),
+
+                // senha
+                _buildTextField(
+                  controller: _senhaController,
+                  hintText: 'Senha',
+                  obscureText: !_mostrarSenha,
+
+                  suffixIcon: IconButton(
+                    icon: Icon(
+                      _mostrarSenha
+                          ? Icons.visibility
+                          : Icons.visibility_off,
+                      color: Colors.white,
+                    ),
+
+                    onPressed: () {
+                      setState(() {
+                        _mostrarSenha = !_mostrarSenha;
+                      });
+                    },
+                  ),
+
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Digite uma senha';
+                    }
+
+                    if (value.length < 6) {
+                      return 'Mínimo de 6 caracteres';
+                    }
+
+                    if (!RegExp(r'[A-Z]').hasMatch(value)) {
+                      return 'Use uma letra maiúscula';
+                    }
+
+                    if (!RegExp(r'[!@#$%^&*(),.?":{}|<>]')
+                        .hasMatch(value)) {
+                      return 'Use um caractere especial';
+                    }
+
+                    return null;
+                  },
+                ),
+
                 const SizedBox(height: 32),
 
-                // ================= BOTÃO CONCLUIR =================
                 ElevatedButton(
                   onPressed: _handleCadastro,
+
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFF2D4263),
+
                     padding: const EdgeInsets.symmetric(vertical: 18),
+
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30),
                     ),
-                    elevation: 0,
                   ),
+
                   child: const Text(
                     'Concluir',
+
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.w600,
@@ -296,6 +414,7 @@ class _Tela2State extends State<Tela2> {
                     ),
                   ),
                 ),
+
                 const SizedBox(height: 40),
               ],
             ),
@@ -311,27 +430,48 @@ class _Tela2State extends State<Tela2> {
     TextInputType? keyboardType,
     List<MaskTextInputFormatter>? inputFormatters,
     String? Function(String?)? validator,
+    bool obscureText = false,
+    Widget? suffixIcon,
   }) {
     return Container(
       decoration: BoxDecoration(
-        color: const Color(0xFF6B9080),
+        color: const Color.fromARGB(255, 77, 139, 113),
         borderRadius: BorderRadius.circular(30),
       ),
+
       child: TextFormField(
         controller: controller,
         keyboardType: keyboardType,
         inputFormatters: inputFormatters,
         validator: validator,
-        style: const TextStyle(color: Color(0xFF2D4A3E), fontSize: 16),
+        obscureText: obscureText,
+
+        style: const TextStyle(
+          color: Colors.white,
+          fontSize: 16,
+        ),
+
         decoration: InputDecoration(
           hintText: hintText,
-          hintStyle: const TextStyle(color: Color(0xFF2D4A3E), fontSize: 16),
+
+          hintStyle: const TextStyle(
+            color: Color(0xFFEAF4EF),
+            fontSize: 16,
+          ),
+
+          suffixIcon: suffixIcon,
+
           contentPadding: const EdgeInsets.symmetric(
             horizontal: 24,
             vertical: 18,
           ),
+
           border: InputBorder.none,
-          errorStyle: const TextStyle(color: Colors.red, fontSize: 12),
+
+          errorStyle: const TextStyle(
+            color: Colors.red,
+            fontSize: 12,
+          ),
         ),
       ),
     );
@@ -345,24 +485,48 @@ class _Tela2State extends State<Tela2> {
   }) {
     return Container(
       decoration: BoxDecoration(
-        color: const Color(0xFF6B9080),
+        color: const Color.fromARGB(255, 77, 139, 113),
         borderRadius: BorderRadius.circular(30),
       ),
-      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 4),
+
+      padding: const EdgeInsets.symmetric(
+        horizontal: 24,
+        vertical: 4,
+      ),
+
       child: DropdownButtonHideUnderline(
         child: DropdownButton<String>(
           value: value,
           isExpanded: true,
+
           hint: Text(
             hintText,
-            style: const TextStyle(color: Color(0xFF2D4A3E), fontSize: 16),
+
+            style: const TextStyle(
+              color: Color(0xFFEAF4EF),
+              fontSize: 16,
+            ),
           ),
-          icon: const Icon(Icons.check, color: Color(0xFF2D4A3E)),
-          dropdownColor: const Color(0xFF6B9080),
-          style: const TextStyle(color: Color(0xFF2D4A3E), fontSize: 16),
+
+          icon: const Icon(
+            Icons.keyboard_arrow_down,
+            color: Colors.white,
+          ),
+
+          dropdownColor: const Color.fromARGB(255, 77, 139, 113),
+
+          style: const TextStyle(
+            color: Colors.white,
+            fontSize: 16,
+          ),
+
           items: items.map((String item) {
-            return DropdownMenuItem<String>(value: item, child: Text(item));
+            return DropdownMenuItem<String>(
+              value: item,
+              child: Text(item),
+            );
           }).toList(),
+
           onChanged: onChanged,
         ),
       ),

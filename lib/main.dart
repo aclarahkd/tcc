@@ -1,5 +1,15 @@
 import 'package:flutter/material.dart';
 import 'tela2.dart';
+import 'tela3.dart'; // tela que vai depois do login
+
+void main() {
+  runApp(
+    const MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: LoginScreen(),
+    ),
+  );
+}
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -9,10 +19,15 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+
+  // controladores dos bagulho
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
   final _formKey = GlobalKey<FormState>();
+
+  // pra mostrar a senha
+  bool mostrarSenha = false;
 
   @override
   void dispose() {
@@ -22,17 +37,23 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   void _handleLogin() {
+
+    // verifica se os campos tao certo
     if (_formKey.currentState!.validate()) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Login realizado com sucesso!'),
-          backgroundColor: Colors.green,
+
+      // vai pra proxima tela
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const Tela3(),
         ),
       );
     }
   }
 
   void _navigateToRegister() {
+
+    // vai pra tela de cadastro
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => const Tela2()),
@@ -41,15 +62,17 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       backgroundColor: const Color(0xFFD4E8ED),
 
       body: SafeArea(
         child: Column(
           children: [
-            // ================= PARTE SUPERIOR =================
+
             Expanded(
               flex: 4,
+
               child: Container(
                 width: double.infinity,
                 color: const Color(0xFFD4E8ED),
@@ -65,9 +88,9 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
             ),
 
-            // ================= PARTE INFERIOR =================
             Expanded(
               flex: 5,
+
               child: Container(
                 width: double.infinity,
 
@@ -91,13 +114,16 @@ class _LoginScreenState extends State<LoginScreen> {
 
                     child: Column(
                       children: [
-                        // ================= EMAIL =================
+
+                        // campo email
                         TextFormField(
                           controller: _emailController,
                           keyboardType: TextInputType.emailAddress,
 
                           decoration: InputDecoration(
                             hintText: 'Email',
+
+                            prefixIcon: const Icon(Icons.email),
 
                             filled: true,
                             fillColor: const Color(0xFF7FC4A8),
@@ -114,6 +140,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
 
                           validator: (value) {
+
                             if (value == null || value.isEmpty) {
                               return 'Por favor, insira seu email';
                             }
@@ -128,13 +155,33 @@ class _LoginScreenState extends State<LoginScreen> {
 
                         const SizedBox(height: 16),
 
-                        // ================= SENHA =================
+                        // campo senha
                         TextFormField(
                           controller: _passwordController,
-                          obscureText: true,
+
+                          obscureText: !mostrarSenha,
 
                           decoration: InputDecoration(
                             hintText: 'Senha',
+
+                            prefixIcon: const Icon(Icons.lock),
+
+                            // botao do olho la
+                            suffixIcon: IconButton(
+
+                              onPressed: () {
+
+                                setState(() {
+                                  mostrarSenha = !mostrarSenha;
+                                });
+                              },
+
+                              icon: Icon(
+                                mostrarSenha
+                                    ? Icons.visibility_off
+                                    : Icons.visibility,
+                              ),
+                            ),
 
                             filled: true,
                             fillColor: const Color(0xFF7FC4A8),
@@ -151,6 +198,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
 
                           validator: (value) {
+
                             if (value == null || value.isEmpty) {
                               return 'Por favor, insira sua senha';
                             }
@@ -165,7 +213,6 @@ class _LoginScreenState extends State<LoginScreen> {
 
                         const SizedBox(height: 28),
 
-                        // ================= BOTÃO =================
                         SizedBox(
                           width: double.infinity,
 
@@ -199,11 +246,11 @@ class _LoginScreenState extends State<LoginScreen> {
 
                         const SizedBox(height: 24),
 
-                        // ================= CADASTRO =================
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
 
                           children: [
+
                             const Text('Não tem uma conta? '),
 
                             GestureDetector(
