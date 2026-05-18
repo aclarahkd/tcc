@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'tela6.dart';
 
 class Tela3 extends StatefulWidget {
   const Tela3({super.key});
 
   @override
-  State<Tela3> createState() => _Tela3State();
+ State<Tela3> createState() => _Tela3State();
 }
 
 class _Tela3State extends State<Tela3> {
@@ -313,39 +314,54 @@ Container(
 
   Widget _buildNavItem(IconData icon, String label) {
 
-    return Column(
-      mainAxisSize: MainAxisSize.min,
+    return GestureDetector(
+      onTap: () {
 
-      children: [
+        if (label == 'Agenda') {
 
-        Container(
-          width: 48,
-          height: 48,
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const Tela6Agenda(),
+            ),
+          );
+        }
+      },
 
-          decoration: BoxDecoration(
-            color: const Color(0xFF2C5F5A),
-            borderRadius: BorderRadius.circular(8),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+
+        children: [
+
+          Container(
+            width: 48,
+            height: 48,
+
+            decoration: BoxDecoration(
+              color: const Color(0xFF2C5F5A),
+              borderRadius: BorderRadius.circular(8),
+            ),
+
+            child: Icon(
+              icon,
+              color: Colors.white,
+              size: 24,
+            ),
           ),
 
-          child: Icon(
-            icon,
-            color: Colors.white,
-            size: 24,
+          const SizedBox(height: 6),
+
+          Text(
+            label,
+
+            style: const TextStyle(
+              fontSize: 11,
+              fontWeight: FontWeight.w500,
+              color: Colors.black87,
+            ),
           ),
-        ),
-
-        const SizedBox(height: 6),
-
-        Text(
-          label,
-
-          style: const TextStyle(
-            fontSize: 11,
-            fontWeight: FontWeight.w500,
-            color: Colors.black87,
-          ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
