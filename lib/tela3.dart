@@ -14,7 +14,7 @@ class _Tela3State extends State<Tela3> {
   List<String> imagens = [
     'imagens/foto1.jpg',
     'imagens/foto2.jpg',
-    'imagens/foto3.jpg',
+    'imagens/foto3.png',
   ];
 
   // controla qual foto ta aparecendo

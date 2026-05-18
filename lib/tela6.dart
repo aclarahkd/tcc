@@ -9,26 +9,24 @@ class Tela6Agenda extends StatefulWidget {
 }
 
 class _Tela6AgendaState extends State<Tela6Agenda> {
-
-  // viagens da tela
   final List<Map<String, String>> viagens = [
     {
       'titulo': 'Jaguariúna + Pedreira',
-      'data': '28/6',
+      'data': '28/06',
       'imagem': 'imagens/viagem1.jpg',
     },
     {
-      'titulo': 'Ibitinga + Passeio de barco',
-      'data': '24-27/07',
+      'titulo': 'Ibitinga + Passeio de Barco',
+      'data': '24 a 27/07',
       'imagem': 'imagens/viagem2.jpg',
     },
     {
-      'titulo': 'Festa do morango',
-      'data': '14 a 17 de agosto',
+      'titulo': 'Festa do Morango',
+      'data': '14 a 17 de Agosto',
       'imagem': 'imagens/viagem3.jpg',
     },
     {
-      'titulo': 'ZOO Itatiba',
+      'titulo': 'Zoo Itatiba',
       'data': '27/09',
       'imagem': 'imagens/viagem4.jpg',
     },
@@ -37,121 +35,57 @@ class _Tela6AgendaState extends State<Tela6Agenda> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF9FAFB),
-
+      backgroundColor: const Color(0xFFF8F8F8),
       body: SafeArea(
         child: Column(
           children: [
-
-            // parte verde de cima
-            Container(
-              width: double.infinity,
-              padding: const EdgeInsets.all(16),
-              color: const Color(0xFF6DBAAA),
-
-              child: Align(
-                alignment: Alignment.centerRight,
-                child: PopupMenuButton(
-                  icon: const Icon(
-                    Icons.more_horiz,
-                    color: Colors.white,
-                    size: 28,
-                  ),
-                  onSelected: (value) {
-                    if (value == 'sair') {
-                      Navigator.pop(context);
-                    }
-                  },
-                  itemBuilder: (context) => [
-                    const PopupMenuItem(
-                      value: 'sair',
-                      child: Text('Sair da conta'),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-
-            // menu com os icones
-            Container(
-              padding: const EdgeInsets.symmetric(vertical: 20),
-              color: Colors.white,
-
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  itemMenu(Icons.card_travel, 'Pacotes'),
-                  itemMenu(Icons.local_offer, 'Promoções'),
-                  itemMenu(Icons.calendar_today, 'Agenda'),
-                  itemMenu(Icons.groups, 'Sobre'),
-                ],
-              ),
-            ),
-
-            // conteúdo da tela
+            _buildHeader(),
+            _buildMenu(),
             Expanded(
               child: Stack(
                 children: [
-                  SingleChildScrollView(
-                    padding: const EdgeInsets.all(24),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
+                  ListView(
+                    padding: const EdgeInsets.all(20),
+                    children: [
+                      const Text(
+                        'Programação de viagens e passeios 2026',
+                        style: TextStyle(
+                          fontSize: 22,
+                          fontWeight: FontWeight.bold,
+                          color: Color(0xFF222222),
+                        ),
+                      ),
 
-                        // titulo
-                        const Text(
-                          'Programação viagens e passeios para 2026!',
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                            color: Color(0xFF111827),
-                          ),
+                      const SizedBox(height: 24),
+
+                      for (var viagem in viagens)
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 16),
+                          child: _buildCardViagem(viagem),
                         ),
 
-                        const SizedBox(height: 24),
-
-                        // cards das viagens
-                        ...viagens.map(
-                          (viagem) => Padding(
-                            padding: const EdgeInsets.only(bottom: 16),
-                            child: cardViagem(
-                              viagem['titulo']!,
-                              viagem['data']!,
-                              viagem['imagem']!,
-                            ),
-                          ),
-                        ),
-
-                        const SizedBox(height: 100),
-                      ],
-                    ),
+                      const SizedBox(height: 80),
+                    ],
                   ),
 
-                  // botão pra abrir mais viagens
                   Positioned(
-                    bottom: 30,
-                    right: 24,
-                    child: GestureDetector(
-                      onTap: () {
+                    right: 20,
+                    bottom: 25,
+                    child: FloatingActionButton(
+                      backgroundColor: const Color(0xFF6DBAAA),
+                      elevation: 2,
+                      onPressed: () {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const Tela6_5(),
+                            builder: (_) => const Tela6_5(),
                           ),
                         );
                       },
-                      child: Container(
-                        width: 60,
-                        height: 60,
-                        decoration: const BoxDecoration(
-                          color: Color(0xFF6DBAAA),
-                          shape: BoxShape.circle,
-                        ),
-                        child: const Icon(
-                          Icons.expand_more,
-                          color: Colors.white,
-                          size: 35,
-                        ),
+                      child: const Icon(
+                        Icons.keyboard_arrow_down_rounded,
+                        size: 34,
+                        color: Colors.white,
                       ),
                     ),
                   ),
@@ -161,102 +95,142 @@ class _Tela6AgendaState extends State<Tela6Agenda> {
           ],
         ),
       ),
+    );
+  }
 
-      // botão verde de confirmar
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: const Color(0xFF6DBAAA),
-        onPressed: () {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text('Ação confirmada'),
+  Widget _buildHeader() {
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.symmetric(
+        horizontal: 16,
+        vertical: 14,
+      ),
+      color: const Color(0xFF6DBAAA),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          PopupMenuButton<String>(
+            icon: const Icon(
+              Icons.more_horiz,
+              color: Colors.white,
             ),
-          );
-        },
-        child: const Icon(
-          Icons.check,
-          color: Colors.white,
-        ),
+            onSelected: (value) {
+              if (value == 'sair') {
+                Navigator.pop(context);
+              }
+            },
+            itemBuilder: (context) => const [
+              PopupMenuItem(
+                value: 'sair',
+                child: Text('Sair da conta'),
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }
 
-  Widget itemMenu(IconData icone, String texto) {
+  Widget _buildMenu() {
+    final itens = [
+      {'icone': Icons.card_travel, 'titulo': 'Pacotes'},
+      {'icone': Icons.local_offer, 'titulo': 'Promoções'},
+      {'icone': Icons.calendar_month, 'titulo': 'Agenda'},
+      {'icone': Icons.groups, 'titulo': 'Sobre'},
+    ];
+
+    return Container(
+      padding: const EdgeInsets.symmetric(vertical: 18),
+      color: Colors.white,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: itens.map((item) {
+          return _itemMenu(
+            item['icone'] as IconData,
+            item['titulo'] as String,
+          );
+        }).toList(),
+      ),
+    );
+  }
+
+  Widget _itemMenu(IconData icone, String titulo) {
+    final bool ativo = titulo == 'Agenda';
+
     return Column(
+      mainAxisSize: MainAxisSize.min,
       children: [
         Container(
           width: 48,
           height: 48,
           decoration: BoxDecoration(
-            color: const Color(0xFF2C5F5A),
-            borderRadius: BorderRadius.circular(8),
+            color: ativo
+                ? const Color(0xFF2C5F5A)
+                : Colors.grey.shade300,
+            borderRadius: BorderRadius.circular(10),
           ),
           child: Icon(
             icone,
-            color: Colors.white,
+            color: ativo ? Colors.white : Colors.black54,
           ),
         ),
-
-        const SizedBox(height: 8),
-
+        const SizedBox(height: 6),
         Text(
-          texto,
+          titulo,
           style: const TextStyle(
-            fontSize: 11,
+            fontSize: 12,
             fontWeight: FontWeight.w500,
-            color: Color(0xFF374151),
           ),
         ),
       ],
     );
   }
 
-  Widget cardViagem(String titulo, String data, String imagem) {
+  Widget _buildCardViagem(Map<String, String> viagem) {
     return Container(
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
-        color: const Color(0xFFF3F4F6),
-        borderRadius: BorderRadius.circular(16),
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(18),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.04),
+            blurRadius: 8,
+            offset: const Offset(0, 3),
+          ),
+        ],
       ),
-
       child: Row(
         children: [
-
-          // imagem da viagem
-          Container(
-            width: 64,
-            height: 64,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              image: DecorationImage(
-                image: AssetImage(imagem),
-                fit: BoxFit.cover,
-              ),
+          ClipRRect(
+            borderRadius: BorderRadius.circular(50),
+            child: Image.asset(
+              viagem['imagem']!,
+              width: 65,
+              height: 65,
+              fit: BoxFit.cover,
             ),
           ),
 
           const SizedBox(width: 16),
 
-          // nome e data
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  titulo,
+                  viagem['titulo']!,
                   style: const TextStyle(
-                    fontSize: 14,
+                    fontSize: 15,
                     fontWeight: FontWeight.w600,
-                    color: Color(0xFF111827),
                   ),
                 ),
-
                 const SizedBox(height: 4),
-
                 Text(
-                  data,
-                  style: const TextStyle(
-                    fontSize: 12,
-                    color: Color(0xFF6B7280),
+                  viagem['data']!,
+                  style: TextStyle(
+                    fontSize: 13,
+                    color: Colors.grey.shade600,
                   ),
                 ),
               ],

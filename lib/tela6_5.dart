@@ -15,12 +15,12 @@ class _Tela6_5State extends State<Tela6_5> {
     {
       'titulo': 'Foz, Paraguai e Argentina',
       'data': '18-22/11',
-      'imagem': 'imagens/viagem5.jpg',
+      'imagem': 'imagens/fozpa.png',
     },
     {
       'titulo': 'Natal Iluminado - Poços de caldas',
       'data': '27-29/11',
-      'imagem': 'imagens/viagem6.jpg',
+      'imagem': 'imagens/natal.png',
     },
     {
       'titulo': 'Petrópolis - RJ',
