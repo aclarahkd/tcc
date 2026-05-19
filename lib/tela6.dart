@@ -13,22 +13,22 @@ class _Tela6AgendaState extends State<Tela6Agenda> {
     {
       'titulo': 'Jaguariúna + Pedreira',
       'data': '28/06',
-      'imagem': 'imagens/viagem1.jpg',
+      'imagem': 'imagens/jaguariuna.png',
     },
     {
       'titulo': 'Ibitinga + Passeio de Barco',
       'data': '24 a 27/07',
-      'imagem': 'imagens/viagem2.jpg',
+      'imagem': 'imagens/ibitinga.png',
     },
     {
       'titulo': 'Festa do Morango',
       'data': '14 a 17 de Agosto',
-      'imagem': 'imagens/viagem3.jpg',
+      'imagem': 'imagens/morango.png',
     },
     {
       'titulo': 'Zoo Itatiba',
       'data': '27/09',
-      'imagem': 'imagens/viagem4.jpg',
+      'imagem': 'imagens/zooitatiba.png',
     },
   ];
 

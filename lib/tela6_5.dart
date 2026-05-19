@@ -25,7 +25,7 @@ class _Tela6_5State extends State<Tela6_5> {
     {
       'titulo': 'Petrópolis - RJ',
       'data': 'Data não definida',
-      'imagem': 'imagens/viagem7.jpg',
+      'imagem': 'imagens/petropolis.png',
     },
   ];
 
