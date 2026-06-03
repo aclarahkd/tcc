@@ -1,266 +1,333 @@
 import 'package:flutter/material.dart';
+import 'package:tcc/tela6.dart';// ajuste os imports conforme sua estrutura
 
-void main() {
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class Tela7 extends StatefulWidget {
+  const Tela7({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'C&C Turismo',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: const Color(0xFF2E7D32),
-          primary: const Color(0xFF2E7D32),
-        ),
-        useMaterial3: true,
-      ),
-      home: const MainNavigation(),
-    );
-  }
+  State<Tela7> createState() => _Tela7State();
 }
 
-class MainNavigation extends StatefulWidget {
-  const MainNavigation({super.key});
-
-  @override
-  State<MainNavigation> createState() => _MainNavigationState();
-}
-
-class _MainNavigationState extends State<MainNavigation> {
-  int _selectedIndex = 0;
-
-  final List<Widget> _screens = const [
-    _PacotesScreen(),
-    _PromocoesScreen(),
-    _AgendaScreen(),
-    _SobreScreen(),
-  ];
-
+class _Tela7State extends State<Tela7> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.more_vert, color: Colors.black54),
-            onPressed: () {},
-          ),
-        ],
-        bottom: PreferredSize(
-          preferredSize: const Size.fromHeight(70),
-          child: _TopTabBar(
-            selectedIndex: _selectedIndex,
-            onTap: (index) => setState(() => _selectedIndex = index),
-          ),
-        ),
-      ),
-      body: _screens[_selectedIndex],
-    );
-  }
-}
-
-// tabela
-
-class _TopTabBar extends StatelessWidget {
-  final int selectedIndex;
-  final ValueChanged<int> onTap;
-
-  const _TopTabBar({required this.selectedIndex, required this.onTap});
-
-  static const _tabs = [
-    (icon: Icons.work_outline,             label: 'Pacotes'),
-    (icon: Icons.directions_bus_outlined,  label: 'Promoções'),
-    (icon: Icons.calendar_month_outlined,  label: 'Agenda'),
-    (icon: Icons.people_outline,           label: 'Sobre'),
-  ];
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      color: Colors.white,
-      padding: const EdgeInsets.only(bottom: 8),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: List.generate(_tabs.length, (i) {
-          final selected = i == selectedIndex;
-          return GestureDetector(
-            onTap: () => onTap(i),
-            child: AnimatedContainer(
-              duration: const Duration(milliseconds: 200),
-              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-              decoration: BoxDecoration(
-                color: selected
-                    ? const Color(0xFF2E7D32).withOpacity(0.08)
-                    : Colors.transparent,
-                borderRadius: BorderRadius.circular(8),
-              ),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Icon(
-                    _tabs[i].icon,
-                    color: selected ? const Color(0xFF2E7D32) : Colors.black45,
-                    size: 26,
-                  ),
-                  const SizedBox(height: 4),
-                  Text(
-                    _tabs[i].label,
-                    style: TextStyle(
-                      fontSize: 11,
-                      color: selected ? const Color(0xFF2E7D32) : Colors.black45,
-                      fontWeight: selected ? FontWeight.w600 : FontWeight.normal,
+      backgroundColor: const Color(0xFFF8F8F8),
+      body: SafeArea(
+        child: Column(
+          children: [
+            _buildHeader(),
+            _buildMenu(),
+            Expanded(
+              child: SingleChildScrollView(
+                padding: const EdgeInsets.all(20),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      'Quem somos nós?',
+                      style: TextStyle(
+                        fontSize: 22,
+                        fontWeight: FontWeight.bold,
+                        color: Color(0xFF222222),
+                      ),
                     ),
-                  ),
-                ],
+
+                    const SizedBox(height: 20),
+
+                    _buildFotoCard(),
+
+                    const SizedBox(height: 24),
+
+                    _buildSobreCard(),
+
+                    const SizedBox(height: 24),
+
+                    _buildContatoCard(),
+
+                    const SizedBox(height: 32),
+
+                    const Center(
+                      child: Text(
+                        '"O melhor caminho para o seu destino!"',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 13,
+                          fontStyle: FontStyle.italic,
+                          color: Colors.black87,
+                        ),
+                      ),
+                    ),
+
+                    const SizedBox(height: 8),
+
+                    const Center(
+                      child: Text(
+                        '@ccturismosjc',
+                        style: TextStyle(
+                          fontSize: 12,
+                          color: Colors.black54,
+                        ),
+                      ),
+                    ),
+
+                    const SizedBox(height: 24),
+                  ],
+                ),
               ),
             ),
-          );
-        }),
+          ],
+        ),
       ),
     );
   }
-}
 
-// ── Telas 
+  Widget _buildHeader() {
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+      color: const Color(0xFF6DBAAA),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          PopupMenuButton<String>(
+            icon: const Icon(Icons.more_horiz, color: Colors.white),
+            onSelected: (value) {
+              if (value == 'sair') {
+                Navigator.pop(context);
+              }
+            },
+            itemBuilder: (context) => const [
+              PopupMenuItem(
+                value: 'sair',
+                child: Text('Sair da conta'),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
 
-class _PacotesScreen extends StatelessWidget {
-  const _PacotesScreen();
-  @override
-  Widget build(BuildContext context) => const Center(
-        child: Text('Pacotes', style: TextStyle(fontSize: 20, color: Colors.black54)),
-      );
-}
+  Widget _buildMenu() {
+    final itens = [
+      {'icone': Icons.card_travel,      'titulo': 'Pacotes'},
+      {'icone': Icons.local_offer,      'titulo': 'Promoções'},
+      {'icone': Icons.calendar_month,   'titulo': 'Agenda'},
+      {'icone': Icons.groups,           'titulo': 'Sobre'},
+    ];
 
-class _PromocoesScreen extends StatelessWidget {
-  const _PromocoesScreen();
-  @override
-  Widget build(BuildContext context) => const Center(
-        child: Text('Promoções', style: TextStyle(fontSize: 20, color: Colors.black54)),
-      );
-}
+    return Container(
+      padding: const EdgeInsets.symmetric(vertical: 18),
+      color: Colors.white,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: itens.map((item) {
+          return _itemMenu(
+            item['icone'] as IconData,
+            item['titulo'] as String,
+          );
+        }).toList(),
+      ),
+    );
+  }
 
-class _AgendaScreen extends StatelessWidget {
-  const _AgendaScreen();
-  @override
-  Widget build(BuildContext context) => const Center(
-        child: Text('Agenda', style: TextStyle(fontSize: 20, color: Colors.black54)),
-      );
-}
+  Widget _itemMenu(IconData icone, String titulo) {
+    final bool ativo = titulo == 'Sobre';
 
-class _SobreScreen extends StatelessWidget {
-  const _SobreScreen();
+    return GestureDetector(
+      onTap: () {
+        if (titulo == 'Agenda') {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (_) => const Tela6Agenda()),
+          );
+        }
+      },
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Container(
+            width: 48,
+            height: 48,
+            decoration: BoxDecoration(
+              color: ativo
+                  ? const Color(0xFF2C5F5A)
+                  : Colors.grey.shade300,
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: Icon(
+              icone,
+              color: ativo ? Colors.white : Colors.black54,
+            ),
+          ),
+          const SizedBox(height: 6),
+          Text(
+            titulo,
+            style: const TextStyle(
+              fontSize: 12,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 
-  @override
-  Widget build(BuildContext context) {
-    return SingleChildScrollView(
+  Widget _buildFotoCard() {
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(18),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.04),
+            blurRadius: 8,
+            offset: const Offset(0, 3),
+          ),
+        ],
+      ),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(18),
+        child: Stack(
+          children: [
+            Image.asset(
+              'imagens/cidinha_conrado.png',
+              width: double.infinity,
+              height: 220,
+              fit: BoxFit.cover,
+              errorBuilder: (_, __, ___) => Container(
+                width: double.infinity,
+                height: 220,
+                color: const Color(0xFF6DBAAA).withOpacity(0.3),
+                child: const Center(
+                  child: Icon(Icons.people, size: 80, color: Color(0xFF6DBAAA)),
+                ),
+              ),
+            ),
+            Positioned(
+              top: 12,
+              left: 14,
+              child: _buildNameTag('Cidinha'),
+            ),
+            Positioned(
+              top: 12,
+              right: 14,
+              child: _buildNameTag('Conrado'),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildNameTag(String nome) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+      decoration: BoxDecoration(
+        color: Colors.white.withOpacity(0.88),
+        borderRadius: BorderRadius.circular(8),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.08),
+            blurRadius: 4,
+          ),
+        ],
+      ),
+      child: Text(
+        nome,
+        style: const TextStyle(
+          fontWeight: FontWeight.bold,
+          fontSize: 13,
+          color: Color(0xFF222222),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildSobreCard() {
+    return Container(
+      padding: const EdgeInsets.all(18),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(18),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.04),
+            blurRadius: 8,
+            offset: const Offset(0, 3),
+          ),
+        ],
+      ),
+      child: const Text(
+        'A C&C Turismo é uma agência que está há mais 10 anos no mercado '
+        'com o objetivo de levar pessoas para realizarem seus sonhos.',
+        style: TextStyle(
+          fontSize: 15,
+          color: Color(0xFF333333),
+          height: 1.6,
+        ),
+      ),
+    );
+  }
+
+  Widget _buildContatoCard() {
+    return Container(
+      padding: const EdgeInsets.all(18),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(18),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.04),
+            blurRadius: 8,
+            offset: const Offset(0, 3),
+          ),
+        ],
+      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const SizedBox(height: 24),
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16),
-            child: Text(
-              'Quem somos nós?',
-              style: TextStyle(
-                fontSize: 22,
-                fontWeight: FontWeight.bold,
-                color: Colors.black87,
-              ),
+          const Text(
+            'Entre em contato',
+            style: TextStyle(
+              fontSize: 15,
+              fontWeight: FontWeight.w600,
+              color: Color(0xFF222222),
             ),
           ),
-          const SizedBox(height: 16),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(12),
-              child: Stack(
-                children: [
-                  Image.asset(
-                    'assets/images/cidinha_conrado.png',
-                    width: double.infinity,
-                    height: 220,
-                    fit: BoxFit.cover,
-                    errorBuilder: (_, __, ___) => Container(
-                      width: double.infinity,
-                      height: 220,
-                      color: const Color(0xFF5B8A5B),
-                      child: const Center(
-                        child: Icon(Icons.people, size: 80, color: Colors.white54),
-                      ),
-                    ),
-                  ),
-                  _label('Cidinha', top: 12, left: 16),
-                  _label('Conrado', top: 12, right: 16),
-                  Positioned(
-                    bottom: 0,
-                    left: 0,
-                    right: 0,
-                    child: Container(
-                      padding: const EdgeInsets.all(16),
-                      color: Colors.white.withOpacity(0.92),
-                      child: const Text(
-                        'A C&C Turismo é uma agência que está há mais 10 anos no '
-                        'mercado com o objetivo de levar pessoas para realizarem seus sonhos.',
-                        style: TextStyle(fontSize: 14, color: Colors.black87, height: 1.5),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          const SizedBox(height: 24),
-          Center(
-            child: Text(
-              '"O melhor caminho para o seu destino!"',
-              style: TextStyle(
-                fontSize: 13,
-                color: Colors.green.shade700,
-                fontStyle: FontStyle.italic,
-              ),
-              textAlign: TextAlign.center,
-            ),
-          ),
-          const SizedBox(height: 8),
-          const Center(
-            child: Text(
-              '@ccturismosjc',
-              style: TextStyle(
-                fontSize: 14,
-                color: Color(0xFF2E7D32),
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-          ),
-          const SizedBox(height: 32),
+          const SizedBox(height: 14),
+          _buildContatoItem(Icons.phone, '(12) 99999-9999'),
+          const SizedBox(height: 10),
+          _buildContatoItem(Icons.email_outlined, 'ccturismo@email.com'),
+          const SizedBox(height: 10),
+          _buildContatoItem(Icons.photo_camera_outlined, '@ccturismosjc'),
         ],
       ),
     );
   }
 
-  Widget _label(String text, {double? top, double? left, double? right}) {
-    return Positioned(
-      top: top,
-      left: left,
-      right: right,
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-        decoration: BoxDecoration(
-          color: Colors.white.withOpacity(0.85),
-          borderRadius: BorderRadius.circular(6),
+  Widget _buildContatoItem(IconData icone, String texto) {
+    return Row(
+      children: [
+        Container(
+          width: 36,
+          height: 36,
+          decoration: BoxDecoration(
+            color: const Color(0xFF6DBAAA).withOpacity(0.15),
+            borderRadius: BorderRadius.circular(8),
+          ),
+          child: Icon(icone, color: const Color(0xFF2C5F5A), size: 20),
         ),
-        child: Text(
-          text,
-          style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
+        const SizedBox(width: 12),
+        Text(
+          texto,
+          style: const TextStyle(
+            fontSize: 14,
+            color: Color(0xFF444444),
+          ),
         ),
-      ),
+      ],
     );
   }
 }

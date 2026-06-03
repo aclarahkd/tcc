@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'tela7.dart';
 class Tela6_5 extends StatefulWidget {
   const Tela6_5({super.key});
 
@@ -159,44 +159,55 @@ class _Tela6_5State extends State<Tela6_5> {
     );
   }
 
-  Widget _buildNavItem(IconData icon, String label) {
-    return GestureDetector(
-      onTap: () {
-        // Navegação baseada no label
-        if (label == 'Agenda') {
-          // Já está na tela de agenda
-        }
-        // Adicione navegação para outras telas aqui
-      },
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Container(
-            width: 48,
-            height: 48,
-            decoration: BoxDecoration(
-              color: const Color(0xFF2C5F5A),
-              borderRadius: BorderRadius.circular(8),
-            ),
-            child: Icon(
-              icon,
-              color: Colors.white,
-              size: 24,
-            ),
+ Widget _buildNavItem(IconData icon, String label) {
+  return GestureDetector(
+    onTap: () {
+      if (label == 'Sobre') {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (_) => const Tela7(),
           ),
-          const SizedBox(height: 8),
-          Text(
-            label,
-            style: const TextStyle(
-              fontSize: 11,
-              fontWeight: FontWeight.w500,
-              color: Color(0xFF374151),
-            ),
+        );
+      }
+
+      if (label == 'Agenda') {
+        // Já está na tela de agenda
+      }
+
+      // Adicione outras navegações aqui
+      // if (label == 'Pacotes') { ... }
+      // if (label == 'Promoções') { ... }
+    },
+    child: Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Container(
+          width: 48,
+          height: 48,
+          decoration: BoxDecoration(
+            color: const Color(0xFF2C5F5A),
+            borderRadius: BorderRadius.circular(8),
           ),
-        ],
-      ),
-    );
-  }
+          child: Icon(
+            icon,
+            color: Colors.white,
+            size: 24,
+          ),
+        ),
+        const SizedBox(height: 8),
+        Text(
+          label,
+          style: const TextStyle(
+            fontSize: 11,
+            fontWeight: FontWeight.w500,
+            color: Color(0xFF374151),
+          ),
+        ),
+      ],
+    ),
+  );
+}
 
   Widget _buildViagemCard(String titulo, String data, String imagemPath) {
     return Container(
