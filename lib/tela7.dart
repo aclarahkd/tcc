@@ -66,7 +66,7 @@ class _MainNavigationState extends State<MainNavigation> {
   }
 }
 
-// ── Tab bar ──────────────────────────────────────────────────────────────────
+// tabela
 
 class _TopTabBar extends StatelessWidget {
   final int selectedIndex;
