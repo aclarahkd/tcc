@@ -38,7 +38,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   void _handleLogin() {
 
-    // verifica se os campos tao certo
+    // verifica se os campos tao certos
     if (_formKey.currentState!.validate()) {
 
       // vai pra proxima tela
