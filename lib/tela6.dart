@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'tela6_5.dart';
+import 'tela7.dart';
 
 class Tela6Agenda extends StatefulWidget {
   const Tela6Agenda({super.key});
@@ -55,19 +56,15 @@ class _Tela6AgendaState extends State<Tela6Agenda> {
                           color: Color(0xFF222222),
                         ),
                       ),
-
                       const SizedBox(height: 24),
-
                       for (var viagem in viagens)
                         Padding(
                           padding: const EdgeInsets.only(bottom: 16),
                           child: _buildCardViagem(viagem),
                         ),
-
                       const SizedBox(height: 80),
                     ],
                   ),
-
                   Positioned(
                     right: 20,
                     bottom: 25,
@@ -77,9 +74,7 @@ class _Tela6AgendaState extends State<Tela6Agenda> {
                       onPressed: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(
-                            builder: (_) => const Tela6_5(),
-                          ),
+                          MaterialPageRoute(builder: (_) => const Tela6_5()),
                         );
                       },
                       child: const Icon(
@@ -101,22 +96,16 @@ class _Tela6AgendaState extends State<Tela6Agenda> {
   Widget _buildHeader() {
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.symmetric(
-        horizontal: 16,
-        vertical: 14,
-      ),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
       color: const Color(0xFF6DBAAA),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
           PopupMenuButton<String>(
-            icon: const Icon(
-              Icons.more_horiz,
-              color: Colors.white,
-            ),
+            icon: const Icon(Icons.more_horiz, color: Colors.white),
             onSelected: (value) {
               if (value == 'sair') {
-                Navigator.pop(context);
+                Navigator.of(context).popUntil((route) => route.isFirst);
               }
             },
             itemBuilder: (context) => const [
@@ -133,10 +122,10 @@ class _Tela6AgendaState extends State<Tela6Agenda> {
 
   Widget _buildMenu() {
     final itens = [
-      {'icone': Icons.card_travel, 'titulo': 'Pacotes'},
-      {'icone': Icons.local_offer, 'titulo': 'Promoções'},
+      {'icone': Icons.card_travel,    'titulo': 'Pacotes'},
+      {'icone': Icons.local_offer,    'titulo': 'Promoções'},
       {'icone': Icons.calendar_month, 'titulo': 'Agenda'},
-      {'icone': Icons.groups, 'titulo': 'Sobre'},
+      {'icone': Icons.groups,         'titulo': 'Sobre'},
     ];
 
     return Container(
@@ -157,32 +146,43 @@ class _Tela6AgendaState extends State<Tela6Agenda> {
   Widget _itemMenu(IconData icone, String titulo) {
     final bool ativo = titulo == 'Agenda';
 
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Container(
-          width: 48,
-          height: 48,
-          decoration: BoxDecoration(
-            color: ativo
-                ? const Color(0xFF2C5F5A)
-                : Colors.grey.shade300,
-            borderRadius: BorderRadius.circular(10),
+    return GestureDetector(
+      onTap: () {
+        if (titulo == 'Sobre') {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (_) => const Tela7()),
+          );
+        }
+        // Agenda já é a tela atual — não navega
+      },
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Container(
+            width: 48,
+            height: 48,
+            decoration: BoxDecoration(
+              color: ativo
+                  ? const Color(0xFF2C5F5A)
+                  : Colors.grey.shade300,
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: Icon(
+              icone,
+              color: ativo ? Colors.white : Colors.black54,
+            ),
           ),
-          child: Icon(
-            icone,
-            color: ativo ? Colors.white : Colors.black54,
+          const SizedBox(height: 6),
+          Text(
+            titulo,
+            style: const TextStyle(
+              fontSize: 12,
+              fontWeight: FontWeight.w500,
+            ),
           ),
-        ),
-        const SizedBox(height: 6),
-        Text(
-          titulo,
-          style: const TextStyle(
-            fontSize: 12,
-            fontWeight: FontWeight.w500,
-          ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 
@@ -211,9 +211,7 @@ class _Tela6AgendaState extends State<Tela6Agenda> {
               fit: BoxFit.cover,
             ),
           ),
-
           const SizedBox(width: 16),
-
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,

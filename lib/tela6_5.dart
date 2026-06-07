@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'tela6.dart';
 import 'tela7.dart';
+
 class Tela6_5 extends StatefulWidget {
   const Tela6_5({super.key});
 
@@ -8,9 +10,6 @@ class Tela6_5 extends StatefulWidget {
 }
 
 class _Tela6_5State extends State<Tela6_5> {
-  bool mostrarMenu = false;
-
-  // Lista de viagens da segunda página
   final List<Map<String, String>> viagens = [
     {
       'titulo': 'Foz, Paraguai e Argentina',
@@ -33,64 +32,11 @@ class _Tela6_5State extends State<Tela6_5> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFF9FAFB),
-      
       body: SafeArea(
         child: Column(
           children: [
-            // Header verde
-            Container(
-              width: double.infinity,
-              padding: const EdgeInsets.all(16),
-              decoration: const BoxDecoration(
-                color: Color(0xFF6DBAAA),
-              ),
-              child: Align(
-                alignment: Alignment.centerRight,
-                child: PopupMenuButton(
-                  onSelected: (value) {
-                    if (value == 'sair') {
-                      Navigator.pop(context);
-                    }
-                  },
-                  icon: const Icon(
-                    Icons.more_horiz,
-                    color: Colors.white,
-                    size: 28,
-                  ),
-                  itemBuilder: (context) => [
-                    const PopupMenuItem(
-                      value: 'sair',
-                      child: Text('Sair da conta'),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-
-            // Ícones de navegação
-            Container(
-              padding: const EdgeInsets.symmetric(vertical: 20),
-              decoration: const BoxDecoration(
-                color: Colors.white,
-                border: Border(
-                  bottom: BorderSide(
-                    color: Color(0xFFF3F4F6),
-                    width: 1,
-                  ),
-                ),
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  _buildNavItem(Icons.card_travel, 'Pacotes'),
-                  _buildNavItem(Icons.local_offer, 'Promoções'),
-                  _buildNavItem(Icons.calendar_today, 'Agenda'),
-                  _buildNavItem(Icons.groups, 'Sobre'),
-                ],
-              ),
-            ),
-
-            // Conteúdo principal
+            _buildHeader(),
+            _buildMenu(),
             Expanded(
               child: Stack(
                 children: [
@@ -99,7 +45,6 @@ class _Tela6_5State extends State<Tela6_5> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        // Título
                         const Text(
                           'Programação viagens e passeios para 2026!',
                           style: TextStyle(
@@ -108,33 +53,25 @@ class _Tela6_5State extends State<Tela6_5> {
                             color: Color(0xFF111827),
                           ),
                         ),
-
                         const SizedBox(height: 24),
-
-                        // Lista de viagens
                         ...viagens.map((viagem) => Padding(
-                          padding: const EdgeInsets.only(bottom: 16),
-                          child: _buildViagemCard(
-                            viagem['titulo']!,
-                            viagem['data']!,
-                            viagem['imagem']!,
-                          ),
-                        )),
-
+                              padding: const EdgeInsets.only(bottom: 16),
+                              child: _buildViagemCard(
+                                viagem['titulo']!,
+                                viagem['data']!,
+                                viagem['imagem']!,
+                              ),
+                            )),
                         const SizedBox(height: 80),
                       ],
                     ),
                   ),
-
-                  // Botão de seta para voltar (seta para cima)
+                  // Botão de seta para voltar
                   Positioned(
                     right: 24,
                     bottom: 32,
                     child: GestureDetector(
-                      onTap: () {
-                        // Volta para a tela 6
-                        Navigator.pop(context);
-                      },
+                      onTap: () => Navigator.pop(context),
                       child: Container(
                         width: 56,
                         height: 56,
@@ -159,55 +96,109 @@ class _Tela6_5State extends State<Tela6_5> {
     );
   }
 
- Widget _buildNavItem(IconData icon, String label) {
-  return GestureDetector(
-    onTap: () {
-      if (label == 'Sobre') {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (_) => const Tela7(),
-          ),
-        );
-      }
-
-      if (label == 'Agenda') {
-        // Já está na tela de agenda
-      }
-
-      // Adicione outras navegações aqui
-      // if (label == 'Pacotes') { ... }
-      // if (label == 'Promoções') { ... }
-    },
-    child: Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Container(
-          width: 48,
-          height: 48,
-          decoration: BoxDecoration(
-            color: const Color(0xFF2C5F5A),
-            borderRadius: BorderRadius.circular(8),
-          ),
-          child: Icon(
-            icon,
-            color: Colors.white,
-            size: 24,
-          ),
+  Widget _buildHeader() {
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(16),
+      decoration: const BoxDecoration(color: Color(0xFF6DBAAA)),
+      child: Align(
+        alignment: Alignment.centerRight,
+        child: PopupMenuButton(
+          onSelected: (value) {
+            if (value == 'sair') {
+              Navigator.of(context).popUntil((route) => route.isFirst);
+            }
+          },
+          icon: const Icon(Icons.more_horiz, color: Colors.white, size: 28),
+          itemBuilder: (context) => [
+            const PopupMenuItem(
+              value: 'sair',
+              child: Text('Sair da conta'),
+            ),
+          ],
         ),
-        const SizedBox(height: 8),
-        Text(
-          label,
-          style: const TextStyle(
-            fontSize: 11,
-            fontWeight: FontWeight.w500,
-            color: Color(0xFF374151),
-          ),
+      ),
+    );
+  }
+
+  Widget _buildMenu() {
+    final itens = [
+      {'icone': Icons.card_travel,    'titulo': 'Pacotes'},
+      {'icone': Icons.local_offer,    'titulo': 'Promoções'},
+      {'icone': Icons.calendar_today, 'titulo': 'Agenda'},
+      {'icone': Icons.groups,         'titulo': 'Sobre'},
+    ];
+
+    return Container(
+      padding: const EdgeInsets.symmetric(vertical: 20),
+      decoration: const BoxDecoration(
+        color: Colors.white,
+        border: Border(
+          bottom: BorderSide(color: Color(0xFFF3F4F6), width: 1),
         ),
-      ],
-    ),
-  );
-}
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: itens.map((item) {
+          return _buildNavItem(
+            item['icone'] as IconData,
+            item['titulo'] as String,
+          );
+        }).toList(),
+      ),
+    );
+  }
+
+  Widget _buildNavItem(IconData icon, String label) {
+    // Agenda está ativa pois esta tela é parte da Agenda
+    final bool ativo = label == 'Agenda';
+
+    return GestureDetector(
+      onTap: () {
+        if (label == 'Sobre') {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (_) => const Tela7()),
+          );
+        } else if (label == 'Agenda') {
+          // Volta para a tela6 (primeira página da agenda)
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (_) => const Tela6Agenda()),
+          );
+        }
+      },
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Container(
+            width: 48,
+            height: 48,
+            decoration: BoxDecoration(
+              color: ativo
+                  ? const Color(0xFF2C5F5A)
+                  : Colors.grey.shade300,
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: Icon(
+              icon,
+              color: ativo ? Colors.white : Colors.black54,
+              size: 24,
+            ),
+          ),
+          const SizedBox(height: 8),
+          Text(
+            label,
+            style: const TextStyle(
+              fontSize: 11,
+              fontWeight: FontWeight.w500,
+              color: Color(0xFF374151),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 
   Widget _buildViagemCard(String titulo, String data, String imagemPath) {
     return Container(
@@ -218,7 +209,6 @@ class _Tela6_5State extends State<Tela6_5> {
       ),
       child: Row(
         children: [
-          // Imagem circular
           Container(
             width: 64,
             height: 64,
@@ -230,10 +220,7 @@ class _Tela6_5State extends State<Tela6_5> {
               ),
             ),
           ),
-
           const SizedBox(width: 16),
-
-          // Texto
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
