@@ -35,17 +35,11 @@ class _Tela7State extends State<Tela7> {
 
                     const SizedBox(height: 20),
 
-                    // Foto com tags de nome
-                    _buildFotoCard(),
-
-                    const SizedBox(height: 20),
-
-                    // Texto sobre a empresa
-                    _buildSobreCard(),
+                    // Card único verde com foto + texto (igual à imagem)
+                    _buildRetrato(),
 
                     const SizedBox(height: 32),
 
-                    // Rodapé com slogan e arroba
                     Center(
                       child: Column(
                         children: const [
@@ -81,7 +75,7 @@ class _Tela7State extends State<Tela7> {
     );
   }
 
-  // ── Header verde com menu ──────────────────────────────────────────────────
+  // ── Header verde ────────────────────────────────────────────────────────────
   Widget _buildHeader() {
     return Container(
       width: double.infinity,
@@ -94,9 +88,7 @@ class _Tela7State extends State<Tela7> {
             icon: const Icon(Icons.more_horiz, color: Colors.white),
             onSelected: (value) {
               if (value == 'sair') {
-                // volta até a tela de login (root)
-                Navigator.of(context)
-                    .popUntil((route) => route.isFirst);
+                Navigator.of(context).popUntil((route) => route.isFirst);
               }
             },
             itemBuilder: (context) => const [
@@ -111,7 +103,7 @@ class _Tela7State extends State<Tela7> {
     );
   }
 
-  // ── Barra de navegação inferior ────────────────────────────────────────────
+  // ── Menu de navegação ───────────────────────────────────────────────────────
   Widget _buildMenu() {
     final itens = [
       {'icone': Icons.card_travel,    'titulo': 'Pacotes'},
@@ -146,7 +138,6 @@ class _Tela7State extends State<Tela7> {
             MaterialPageRoute(builder: (_) => const Tela6Agenda()),
           );
         }
-        // Pacotes e Promoções: adicione navegação quando as telas existirem
       },
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -178,45 +169,77 @@ class _Tela7State extends State<Tela7> {
     );
   }
 
-  // ── Card com a foto dos proprietários ─────────────────────────────────────
-  Widget _buildFotoCard() {
+  // ── Card retrato: foto em cima + texto embaixo, tudo no mesmo card verde ───
+  Widget _buildRetrato() {
     return Container(
+      width: double.infinity,
       decoration: BoxDecoration(
         color: const Color(0xFF6DBAAA),
-        borderRadius: BorderRadius.circular(18),
+        borderRadius: BorderRadius.circular(20),
       ),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(18),
-        child: Stack(
-          children: [
-            Image.asset(
-              'imagens/cidinha_conrado.png',
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // ── Foto com tags de nome ────────────────────────────────────────
+          ClipRRect(
+            borderRadius: const BorderRadius.only(
+              topLeft:  Radius.circular(20),
+              topRight: Radius.circular(20),
+            ),
+            child: SizedBox(
               width: double.infinity,
-              height: 220,
-              fit: BoxFit.cover,
-              errorBuilder: (_, __, ___) => Container(
-                width: double.infinity,
-                height: 220,
-                color: const Color(0xFF6DBAAA).withOpacity(0.4),
-                child: const Center(
-                  child: Icon(Icons.people, size: 80, color: Colors.white),
-                ),
+              height: 210,
+              child: Stack(
+                fit: StackFit.expand,
+                children: [
+                  // Imagem de fundo
+                  Image.asset(
+                    'imagens/cidinhaeconrado.png',
+                    fit: BoxFit.cover,
+                    errorBuilder: (_, __, ___) => Container(
+                      color: const Color(0xFF4DA898),
+                      child: const Center(
+                        child: Icon(
+                          Icons.photo,
+                          size: 72,
+                          color: Colors.white54,
+                        ),
+                      ),
+                    ),
+                  ),
+
+                  // Tag "Cidinha" — canto superior esquerdo
+                  Positioned(
+                    top: 10,
+                    left: 12,
+                    child: _buildNameTag('Cidinha'),
+                  ),
+
+                  // Tag "Conrado" — canto superior direito
+                  Positioned(
+                    top: 10,
+                    right: 12,
+                    child: _buildNameTag('Conrado'),
+                  ),
+                ],
               ),
             ),
-            // Tag "Cidinha" — canto superior esquerdo
-            Positioned(
-              top: 10,
-              left: 12,
-              child: _buildNameTag('Cidinha'),
+          ),
+
+          // ── Texto "sobre" embaixo da foto ───────────────────────────────
+          const Padding(
+            padding: EdgeInsets.all(18),
+            child: Text(
+              'A C&C Turismo é uma agência que está há mais 10 anos no mercado '
+              'com o objetivo de levar pessoas para realizarem seus sonhos.',
+              style: TextStyle(
+                fontSize: 15,
+                color: Colors.white,
+                height: 1.6,
+              ),
             ),
-            // Tag "Conrado" — canto superior direito
-            Positioned(
-              top: 10,
-              right: 12,
-              child: _buildNameTag('Conrado'),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
@@ -234,27 +257,6 @@ class _Tela7State extends State<Tela7> {
           fontWeight: FontWeight.bold,
           fontSize: 13,
           color: Colors.white,
-        ),
-      ),
-    );
-  }
-
-  // ── Card com o texto "sobre" ───────────────────────────────────────────────
-  Widget _buildSobreCard() {
-    return Container(
-      width: double.infinity,
-      padding: const EdgeInsets.all(18),
-      decoration: BoxDecoration(
-        color: const Color(0xFF6DBAAA),
-        borderRadius: BorderRadius.circular(18),
-      ),
-      child: const Text(
-        'A C&C Turismo é uma agência que está há mais 10 anos no mercado '
-        'com o objetivo de levar pessoas para realizarem seus sonhos.',
-        style: TextStyle(
-          fontSize: 15,
-          color: Colors.white,
-          height: 1.6,
         ),
       ),
     );
