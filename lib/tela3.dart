@@ -17,15 +17,12 @@ class _Tela3State extends State<Tela3> {
   ];
 
   int fotoAtual = 0;
-
   TextEditingController pesquisaController = TextEditingController();
 
   void proximaFoto() {
     setState(() {
       fotoAtual++;
-      if (fotoAtual >= imagens.length) {
-        fotoAtual = 0;
-      }
+      if (fotoAtual >= imagens.length) fotoAtual = 0;
     });
   }
 
@@ -47,39 +44,30 @@ class _Tela3State extends State<Tela3> {
             Container(
               width: double.infinity,
               padding: const EdgeInsets.all(16),
-              decoration: const BoxDecoration(
-                color: Color(0xFF6DBAAA),
-              ),
+              decoration: const BoxDecoration(color: Color(0xFF6DBAAA)),
               child: Align(
                 alignment: Alignment.centerRight,
                 child: PopupMenuButton(
                   onSelected: (value) {
                     if (value == 'sair') {
-                      Navigator.of(context)
-                          .popUntil((route) => route.isFirst);
+                      Navigator.of(context).popUntil((route) => route.isFirst);
                     }
                   },
-                  icon: const Icon(
-                    Icons.more_horiz,
-                    color: Colors.white,
-                    size: 28,
-                  ),
+                  icon: const Icon(Icons.more_horiz, color: Colors.white, size: 28),
                   itemBuilder: (context) => [
-                    const PopupMenuItem(
-                      value: 'sair',
-                      child: Text('Sair da conta'),
-                    ),
+                    const PopupMenuItem(value: 'sair', child: Text('Sair da conta')),
                   ],
                 ),
               ),
             ),
 
-            // Botões de navegação
+            // Menu de navegação com 5 itens
             Container(
               padding: const EdgeInsets.symmetric(vertical: 20),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
+                  _buildNavItem(Icons.home,           'Início'),
                   _buildNavItem(Icons.card_travel,    'Pacotes'),
                   _buildNavItem(Icons.local_offer,    'Promoções'),
                   _buildNavItem(Icons.calendar_today, 'Agenda'),
@@ -185,11 +173,8 @@ class _Tela3State extends State<Tela3> {
                             color: Color(0xFF6DBAAA),
                             shape: BoxShape.circle,
                           ),
-                          child: const Icon(
-                            Icons.chevron_right,
-                            color: Colors.white,
-                            size: 24,
-                          ),
+                          child: const Icon(Icons.chevron_right,
+                              color: Colors.white, size: 24),
                         ),
                       ),
                     ),
@@ -206,10 +191,9 @@ class _Tela3State extends State<Tela3> {
                 '"O melhor caminho para o seu destino!"',
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  fontSize: 13,
-                  fontStyle: FontStyle.italic,
-                  color: Colors.black87,
-                ),
+                    fontSize: 13,
+                    fontStyle: FontStyle.italic,
+                    color: Colors.black87),
               ),
             ),
 
@@ -229,6 +213,9 @@ class _Tela3State extends State<Tela3> {
   }
 
   Widget _buildNavItem(IconData icon, String label) {
+    // Início é a aba ativa nesta tela
+    final bool ativo = label == 'Início';
+
     return GestureDetector(
       onTap: () {
         if (label == 'Agenda') {
@@ -242,18 +229,25 @@ class _Tela3State extends State<Tela3> {
             MaterialPageRoute(builder: (_) => const Tela7()),
           );
         }
+        // Início: já está aqui, não faz nada
       },
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           Container(
-            width: 48,
-            height: 48,
+            width: 44,
+            height: 44,
             decoration: BoxDecoration(
-              color: const Color(0xFF2C5F5A),
+              color: ativo
+                  ? const Color(0xFF2C5F5A)
+                  : Colors.grey.shade300,
               borderRadius: BorderRadius.circular(8),
             ),
-            child: Icon(icon, color: Colors.white, size: 24),
+            child: Icon(
+              icon,
+              size: 22,
+              color: ativo ? Colors.white : Colors.black54,
+            ),
           ),
           const SizedBox(height: 6),
           Text(

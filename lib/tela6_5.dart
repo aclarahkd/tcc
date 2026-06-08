@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'tela3.dart';
 import 'tela6.dart';
 import 'tela7.dart';
 
@@ -66,7 +67,6 @@ class _Tela6_5State extends State<Tela6_5> {
                       ],
                     ),
                   ),
-                  // Botão de seta para voltar
                   Positioned(
                     right: 24,
                     bottom: 32,
@@ -111,10 +111,7 @@ class _Tela6_5State extends State<Tela6_5> {
           },
           icon: const Icon(Icons.more_horiz, color: Colors.white, size: 28),
           itemBuilder: (context) => [
-            const PopupMenuItem(
-              value: 'sair',
-              child: Text('Sair da conta'),
-            ),
+            const PopupMenuItem(value: 'sair', child: Text('Sair da conta')),
           ],
         ),
       ),
@@ -123,6 +120,7 @@ class _Tela6_5State extends State<Tela6_5> {
 
   Widget _buildMenu() {
     final itens = [
+      {'icone': Icons.home,           'titulo': 'Início'},
       {'icone': Icons.card_travel,    'titulo': 'Pacotes'},
       {'icone': Icons.local_offer,    'titulo': 'Promoções'},
       {'icone': Icons.calendar_today, 'titulo': 'Agenda'},
@@ -133,9 +131,7 @@ class _Tela6_5State extends State<Tela6_5> {
       padding: const EdgeInsets.symmetric(vertical: 20),
       decoration: const BoxDecoration(
         color: Colors.white,
-        border: Border(
-          bottom: BorderSide(color: Color(0xFFF3F4F6), width: 1),
-        ),
+        border: Border(bottom: BorderSide(color: Color(0xFFF3F4F6), width: 1)),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -150,18 +146,21 @@ class _Tela6_5State extends State<Tela6_5> {
   }
 
   Widget _buildNavItem(IconData icon, String label) {
-    // Agenda está ativa pois esta tela é parte da Agenda
     final bool ativo = label == 'Agenda';
 
     return GestureDetector(
       onTap: () {
-        if (label == 'Sobre') {
+        if (label == 'Início') {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (_) => const Tela3()),
+          );
+        } else if (label == 'Sobre') {
           Navigator.push(
             context,
             MaterialPageRoute(builder: (_) => const Tela7()),
           );
         } else if (label == 'Agenda') {
-          // Volta para a tela6 (primeira página da agenda)
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(builder: (_) => const Tela6Agenda()),
@@ -172,18 +171,16 @@ class _Tela6_5State extends State<Tela6_5> {
         mainAxisSize: MainAxisSize.min,
         children: [
           Container(
-            width: 48,
-            height: 48,
+            width: 44,
+            height: 44,
             decoration: BoxDecoration(
-              color: ativo
-                  ? const Color(0xFF2C5F5A)
-                  : Colors.grey.shade300,
+              color: ativo ? const Color(0xFF2C5F5A) : Colors.grey.shade300,
               borderRadius: BorderRadius.circular(8),
             ),
             child: Icon(
               icon,
+              size: 22,
               color: ativo ? Colors.white : Colors.black54,
-              size: 24,
             ),
           ),
           const SizedBox(height: 8),
