@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'agenda.dart';
+import 'inicio.dart';
 import 'tela_pacotes.dart';
 import 'tela_promocoes.dart';
-
 
 class Tela7 extends StatefulWidget {
   const Tela7({super.key});
@@ -35,14 +35,9 @@ class _Tela7State extends State<Tela7> {
                         color: Color(0xFF222222),
                       ),
                     ),
-
                     const SizedBox(height: 20),
-
-                    // Card único verde com foto + texto (igual à imagem)
                     _buildRetrato(),
-
                     const SizedBox(height: 32),
-
                     Center(
                       child: Column(
                         children: const [
@@ -50,23 +45,16 @@ class _Tela7State extends State<Tela7> {
                             '"O melhor caminho para o seu destino!"',
                             textAlign: TextAlign.center,
                             style: TextStyle(
-                              fontSize: 13,
-                              fontStyle: FontStyle.italic,
-                              color: Colors.black87,
-                            ),
+                                fontSize: 13,
+                                fontStyle: FontStyle.italic,
+                                color: Colors.black87),
                           ),
                           SizedBox(height: 6),
-                          Text(
-                            '@ccturismosjc',
-                            style: TextStyle(
-                              fontSize: 12,
-                              color: Colors.black54,
-                            ),
-                          ),
+                          Text('@ccturismosjc',
+                              style: TextStyle(fontSize: 12, color: Colors.black54)),
                         ],
                       ),
                     ),
-
                     const SizedBox(height: 24),
                   ],
                 ),
@@ -78,7 +66,6 @@ class _Tela7State extends State<Tela7> {
     );
   }
 
-  // ── Header verde ────────────────────────────────────────────────────────────
   Widget _buildHeader() {
     return Container(
       width: double.infinity,
@@ -95,10 +82,7 @@ class _Tela7State extends State<Tela7> {
               }
             },
             itemBuilder: (context) => const [
-              PopupMenuItem(
-                value: 'sair',
-                child: Text('Sair da conta'),
-              ),
+              PopupMenuItem(value: 'sair', child: Text('Sair da conta')),
             ],
           ),
         ],
@@ -106,9 +90,9 @@ class _Tela7State extends State<Tela7> {
     );
   }
 
-  // ── Menu de navegação ───────────────────────────────────────────────────────
   Widget _buildMenu() {
     final itens = [
+      {'icone': Icons.home,           'titulo': 'Início'},
       {'icone': Icons.card_travel,    'titulo': 'Pacotes'},
       {'icone': Icons.local_offer,    'titulo': 'Promoções'},
       {'icone': Icons.calendar_month, 'titulo': 'Agenda'},
@@ -121,10 +105,7 @@ class _Tela7State extends State<Tela7> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: itens.map((item) {
-          return _itemMenu(
-            item['icone'] as IconData,
-            item['titulo'] as String,
-          );
+          return _itemMenu(item['icone'] as IconData, item['titulo'] as String);
         }).toList(),
       ),
     );
@@ -135,44 +116,40 @@ class _Tela7State extends State<Tela7> {
 
     return GestureDetector(
       onTap: () {
-        if (titulo == 'Agenda') {
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(builder: (_) => const Tela6Agenda()),
-          );
+        if (titulo == 'Início') {
+          Navigator.pushReplacement(context,
+              MaterialPageRoute(builder: (_) => const Tela3()));
+        } else if (titulo == 'Pacotes') {
+          Navigator.pushReplacement(context,
+              MaterialPageRoute(builder: (_) => const TelaPacotes()));
+        } else if (titulo == 'Promoções') {
+          Navigator.pushReplacement(context,
+              MaterialPageRoute(builder: (_) => const TelaPromocoes()));
+        } else if (titulo == 'Agenda') {
+          Navigator.pushReplacement(context,
+              MaterialPageRoute(builder: (_) => const Tela6Agenda()));
         }
       },
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           Container(
-            width: 48,
-            height: 48,
+            width: 44, height: 44,
             decoration: BoxDecoration(
-              color: ativo
-                  ? const Color(0xFF2C5F5A)
-                  : Colors.grey.shade300,
+              color: ativo ? const Color(0xFF2C5F5A) : Colors.grey.shade300,
               borderRadius: BorderRadius.circular(10),
             ),
-            child: Icon(
-              icone,
-              color: ativo ? Colors.white : Colors.black54,
-            ),
+            child: Icon(icone, size: 22,
+                color: ativo ? Colors.white : Colors.black54),
           ),
           const SizedBox(height: 6),
-          Text(
-            titulo,
-            style: const TextStyle(
-              fontSize: 12,
-              fontWeight: FontWeight.w500,
-            ),
-          ),
+          Text(titulo,
+              style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w500)),
         ],
       ),
     );
   }
 
-  // ── Card retrato: foto em cima + texto embaixo, tudo no mesmo card verde ───
   Widget _buildRetrato() {
     return Container(
       width: double.infinity,
@@ -183,10 +160,9 @@ class _Tela7State extends State<Tela7> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // ── Foto com tags de nome ────────────────────────────────────────
           ClipRRect(
             borderRadius: const BorderRadius.only(
-              topLeft:  Radius.circular(20),
+              topLeft: Radius.circular(20),
               topRight: Radius.circular(20),
             ),
             child: SizedBox(
@@ -195,51 +171,34 @@ class _Tela7State extends State<Tela7> {
               child: Stack(
                 fit: StackFit.expand,
                 children: [
-                  // Imagem de fundo
                   Image.asset(
                     'imagens/cidinhaeconrado.png',
                     fit: BoxFit.cover,
                     errorBuilder: (_, __, ___) => Container(
                       color: const Color(0xFF4DA898),
                       child: const Center(
-                        child: Icon(
-                          Icons.photo,
-                          size: 72,
-                          color: Colors.white54,
-                        ),
+                        child: Icon(Icons.photo, size: 72, color: Colors.white54),
                       ),
                     ),
                   ),
-
-                  // Tag "Cidinha" — canto superior esquerdo
                   Positioned(
-                    top: 10,
-                    left: 12,
+                    top: 10, left: 12,
                     child: _buildNameTag('Cidinha'),
                   ),
-
-                  // Tag "Conrado" — canto superior direito
                   Positioned(
-                    top: 10,
-                    right: 12,
+                    top: 10, right: 12,
                     child: _buildNameTag('Conrado'),
                   ),
                 ],
               ),
             ),
           ),
-
-          // ── Texto "sobre" embaixo da foto ───────────────────────────────
           const Padding(
             padding: EdgeInsets.all(18),
             child: Text(
               'A C&C Turismo é uma agência que está há mais 10 anos no mercado '
               'com o objetivo de levar pessoas para realizarem seus sonhos.',
-              style: TextStyle(
-                fontSize: 15,
-                color: Colors.white,
-                height: 1.6,
-              ),
+              style: TextStyle(fontSize: 15, color: Colors.white, height: 1.6),
             ),
           ),
         ],
@@ -254,14 +213,9 @@ class _Tela7State extends State<Tela7> {
         color: const Color(0xFF2C5F5A),
         borderRadius: BorderRadius.circular(6),
       ),
-      child: Text(
-        nome,
-        style: const TextStyle(
-          fontWeight: FontWeight.bold,
-          fontSize: 13,
-          color: Colors.white,
-        ),
-      ),
+      child: Text(nome,
+          style: const TextStyle(
+              fontWeight: FontWeight.bold, fontSize: 13, color: Colors.white)),
     );
   }
 }

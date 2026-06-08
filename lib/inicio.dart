@@ -63,9 +63,10 @@ class _Tela3State extends State<Tela3> {
               ),
             ),
 
-            // Menu de navegação com 5 itens
+            // Menu
             Container(
               padding: const EdgeInsets.symmetric(vertical: 20),
+              color: Colors.white,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
@@ -82,11 +83,7 @@ class _Tela3State extends State<Tela3> {
               padding: EdgeInsets.symmetric(horizontal: 24, vertical: 8),
               child: Text(
                 'Pesquise seu destino ideal:',
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500,
-                  color: Colors.black87,
-                ),
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: Colors.black87),
               ),
             ),
 
@@ -149,9 +146,6 @@ class _Tela3State extends State<Tela3> {
                 children: [
                   Container(
                     margin: const EdgeInsets.symmetric(horizontal: 24),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(12),
                       child: Image.asset(
@@ -162,21 +156,17 @@ class _Tela3State extends State<Tela3> {
                     ),
                   ),
                   Positioned(
-                    right: 32,
-                    top: 0,
-                    bottom: 0,
+                    right: 32, top: 0, bottom: 0,
                     child: Center(
                       child: GestureDetector(
                         onTap: proximaFoto,
                         child: Container(
-                          width: 32,
-                          height: 32,
+                          width: 32, height: 32,
                           decoration: const BoxDecoration(
                             color: Color(0xFF6DBAAA),
                             shape: BoxShape.circle,
                           ),
-                          child: const Icon(Icons.chevron_right,
-                              color: Colors.white, size: 24),
+                          child: const Icon(Icons.chevron_right, color: Colors.white, size: 24),
                         ),
                       ),
                     ),
@@ -192,10 +182,7 @@ class _Tela3State extends State<Tela3> {
               child: Text(
                 '"O melhor caminho para o seu destino!"',
                 textAlign: TextAlign.center,
-                style: TextStyle(
-                    fontSize: 13,
-                    fontStyle: FontStyle.italic,
-                    color: Colors.black87),
+                style: TextStyle(fontSize: 13, fontStyle: FontStyle.italic, color: Colors.black87),
               ),
             ),
 
@@ -203,10 +190,8 @@ class _Tela3State extends State<Tela3> {
 
             const Padding(
               padding: EdgeInsets.only(bottom: 24),
-              child: Text(
-                '@ccturismosjc',
-                style: TextStyle(fontSize: 12, color: Colors.black54),
-              ),
+              child: Text('@ccturismosjc',
+                  style: TextStyle(fontSize: 12, color: Colors.black54)),
             ),
           ],
         ),
@@ -215,51 +200,39 @@ class _Tela3State extends State<Tela3> {
   }
 
   Widget _buildNavItem(IconData icon, String label) {
-    // Início é a aba ativa nesta tela
     final bool ativo = label == 'Início';
 
     return GestureDetector(
       onTap: () {
-        if (label == 'Agenda') {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (_) => const Tela6Agenda()),
-          );
+        if (label == 'Pacotes') {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (_) => const TelaPacotes()));
+        } else if (label == 'Promoções') {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (_) => const TelaPromocoes()));
+        } else if (label == 'Agenda') {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (_) => const Tela6Agenda()));
         } else if (label == 'Sobre') {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (_) => const Tela7()),
-          );
+          Navigator.push(context,
+              MaterialPageRoute(builder: (_) => const Tela7()));
         }
-        // Início: já está aqui, não faz nada
       },
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           Container(
-            width: 44,
-            height: 44,
+            width: 44, height: 44,
             decoration: BoxDecoration(
-              color: ativo
-                  ? const Color(0xFF2C5F5A)
-                  : Colors.grey.shade300,
+              color: ativo ? const Color(0xFF2C5F5A) : Colors.grey.shade300,
               borderRadius: BorderRadius.circular(8),
             ),
-            child: Icon(
-              icon,
-              size: 22,
-              color: ativo ? Colors.white : Colors.black54,
-            ),
+            child: Icon(icon, size: 22,
+                color: ativo ? Colors.white : Colors.black54),
           ),
           const SizedBox(height: 6),
-          Text(
-            label,
-            style: const TextStyle(
-              fontSize: 11,
-              fontWeight: FontWeight.w500,
-              color: Colors.black87,
-            ),
-          ),
+          Text(label,
+              style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w500, color: Colors.black87)),
         ],
       ),
     );

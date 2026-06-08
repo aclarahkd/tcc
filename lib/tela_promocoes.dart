@@ -54,14 +54,11 @@ class _TelaPromocoesState extends State<TelaPromocoes> {
                     const Text(
                       'Pacotes com ótimas promoções!',
                       style: TextStyle(
-                        fontSize: 22,
-                        fontWeight: FontWeight.bold,
-                        color: Color(0xFF1A1A1A),
-                      ),
+                          fontSize: 22,
+                          fontWeight: FontWeight.bold,
+                          color: Color(0xFF1A1A1A)),
                     ),
                     const SizedBox(height: 20),
-
-                    // Grid 2 colunas
                     GridView.builder(
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
@@ -73,11 +70,9 @@ class _TelaPromocoesState extends State<TelaPromocoes> {
                         mainAxisSpacing: 12,
                         childAspectRatio: 0.52,
                       ),
-                      itemBuilder: (context, index) {
-                        return _buildCard(promocoes[index]);
-                      },
+                      itemBuilder: (context, index) =>
+                          _buildCard(promocoes[index]),
                     ),
-
                     const SizedBox(height: 20),
                   ],
                 ),
@@ -89,7 +84,6 @@ class _TelaPromocoesState extends State<TelaPromocoes> {
     );
   }
 
-  // ── Header ────────────────────────────────────────────────────────────────
   Widget _buildHeader() {
     return Container(
       width: double.infinity,
@@ -114,7 +108,6 @@ class _TelaPromocoesState extends State<TelaPromocoes> {
     );
   }
 
-  // ── Menu ──────────────────────────────────────────────────────────────────
   Widget _buildMenu() {
     final itens = [
       {'icone': Icons.home,           'titulo': 'Início'},
@@ -130,10 +123,7 @@ class _TelaPromocoesState extends State<TelaPromocoes> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: itens.map((item) {
-          return _itemMenu(
-            item['icone'] as IconData,
-            item['titulo'] as String,
-          );
+          return _itemMenu(item['icone'] as IconData, item['titulo'] as String);
         }).toList(),
       ),
     );
@@ -162,33 +152,22 @@ class _TelaPromocoesState extends State<TelaPromocoes> {
         mainAxisSize: MainAxisSize.min,
         children: [
           Container(
-            width: 44,
-            height: 44,
+            width: 44, height: 44,
             decoration: BoxDecoration(
-              color: ativo
-                  ? const Color(0xFF2C5F5A)
-                  : Colors.grey.shade200,
+              color: ativo ? const Color(0xFF2C5F5A) : Colors.grey.shade300,
               borderRadius: BorderRadius.circular(10),
             ),
-            child: Icon(icone,
-                size: 22,
-                color: ativo ? Colors.white : const Color(0xFF2C5F5A)),
+            child: Icon(icone, size: 22,
+                color: ativo ? Colors.white : Colors.black54),
           ),
           const SizedBox(height: 5),
-          Text(
-            titulo,
-            style: TextStyle(
-              fontSize: 11,
-              fontWeight: FontWeight.w600,
-              color: ativo ? const Color(0xFF2C5F5A) : const Color(0xFF2C5F5A),
-            ),
-          ),
+          Text(titulo,
+              style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w500)),
         ],
       ),
     );
   }
 
-  // ── Card de promoção ──────────────────────────────────────────────────────
   Widget _buildCard(Map<String, String> promo) {
     return Container(
       decoration: BoxDecoration(
@@ -196,19 +175,17 @@ class _TelaPromocoesState extends State<TelaPromocoes> {
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.06),
-            blurRadius: 8,
-            offset: const Offset(0, 3),
-          ),
+              color: Colors.black.withOpacity(0.06),
+              blurRadius: 8,
+              offset: const Offset(0, 3)),
         ],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Foto
           ClipRRect(
             borderRadius: const BorderRadius.only(
-              topLeft:  Radius.circular(16),
+              topLeft: Radius.circular(16),
               topRight: Radius.circular(16),
             ),
             child: Image.asset(
@@ -220,43 +197,28 @@ class _TelaPromocoesState extends State<TelaPromocoes> {
                 height: 120,
                 color: const Color(0xFF6DBAAA).withOpacity(0.3),
                 child: const Center(
-                  child: Icon(Icons.image, color: Colors.white, size: 40),
-                ),
+                    child: Icon(Icons.image, color: Colors.white, size: 40)),
               ),
             ),
           ),
-
           Padding(
             padding: const EdgeInsets.all(10),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Título
-                Text(
-                  promo['titulo']!,
-                  style: const TextStyle(
-                    fontSize: 13,
-                    fontWeight: FontWeight.bold,
-                    color: Color(0xFF1A1A1A),
-                  ),
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                ),
+                Text(promo['titulo']!,
+                    style: const TextStyle(
+                        fontSize: 13,
+                        fontWeight: FontWeight.bold,
+                        color: Color(0xFF1A1A1A)),
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis),
                 const SizedBox(height: 3),
-
-                // Origem
-                Text(
-                  promo['origem']!,
-                  style: const TextStyle(
-                    fontSize: 11,
-                    color: Color(0xFF6DBAAA),
-                  ),
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                ),
+                Text(promo['origem']!,
+                    style: const TextStyle(fontSize: 11, color: Color(0xFF6DBAAA)),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis),
                 const SizedBox(height: 10),
-
-                // Ícone ônibus + preço
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -264,40 +226,27 @@ class _TelaPromocoesState extends State<TelaPromocoes> {
                         size: 18, color: Color(0xFF2C5F5A)),
                     const SizedBox(width: 6),
                     Expanded(
-                      child: Text(
-                        promo['preco']!,
-                        style: const TextStyle(
-                          fontSize: 11,
-                          fontWeight: FontWeight.w600,
-                          color: Color(0xFF1A1A1A),
-                        ),
-                      ),
+                      child: Text(promo['preco']!,
+                          style: const TextStyle(
+                              fontSize: 11,
+                              fontWeight: FontWeight.w600,
+                              color: Color(0xFF1A1A1A))),
                     ),
                   ],
                 ),
                 const SizedBox(height: 8),
-
-                // Ida e volta
-                const Text(
-                  'Ida e volta',
-                  style: TextStyle(
-                    fontSize: 11,
-                    fontWeight: FontWeight.w600,
-                    color: Color(0xFF1A1A1A),
-                  ),
-                ),
+                const Text('Ida e volta',
+                    style: TextStyle(
+                        fontSize: 11,
+                        fontWeight: FontWeight.w600,
+                        color: Color(0xFF1A1A1A))),
                 const SizedBox(height: 2),
-                Text(
-                  promo['parcelas']!,
-                  style: const TextStyle(
-                    fontSize: 13,
-                    fontWeight: FontWeight.bold,
-                    color: Color(0xFF2C5F5A),
-                  ),
-                ),
+                Text(promo['parcelas']!,
+                    style: const TextStyle(
+                        fontSize: 13,
+                        fontWeight: FontWeight.bold,
+                        color: Color(0xFF2C5F5A))),
                 const SizedBox(height: 10),
-
-                // Botão Compre no app
                 SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
@@ -307,46 +256,27 @@ class _TelaPromocoesState extends State<TelaPromocoes> {
                       foregroundColor: Colors.white,
                       padding: const EdgeInsets.symmetric(vertical: 8),
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20),
-                      ),
+                          borderRadius: BorderRadius.circular(20)),
                       elevation: 0,
                     ),
-                    child: const Text(
-                      'Compre no app',
-                      style: TextStyle(fontSize: 11),
-                    ),
+                    child: const Text('Compre no app',
+                        style: TextStyle(fontSize: 11)),
                   ),
                 ),
                 const SizedBox(height: 6),
-
-                // Botão Fale com a gente
                 SizedBox(
                   width: double.infinity,
                   child: OutlinedButton.icon(
                     onPressed: () {},
-                    icon: Image.asset(
-                      'imagens/whatsapp.png',
-                      width: 18,
-                      height: 18,
-                      errorBuilder: (_, __, ___) => const Icon(
-                        Icons.chat,
-                        size: 16,
-                        color: Color(0xFF2C5F5A),
-                      ),
-                    ),
-                    label: const Text(
-                      'Fale com a gente',
-                      style: TextStyle(
-                        fontSize: 11,
-                        color: Color(0xFF2C5F5A),
-                      ),
-                    ),
+                    icon: const Icon(Icons.chat,
+                        size: 16, color: Color(0xFF2C5F5A)),
+                    label: const Text('Fale com a gente',
+                        style: TextStyle(fontSize: 11, color: Color(0xFF2C5F5A))),
                     style: OutlinedButton.styleFrom(
                       padding: const EdgeInsets.symmetric(vertical: 8),
                       side: const BorderSide(color: Color(0xFF6DBAAA)),
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20),
-                      ),
+                          borderRadius: BorderRadius.circular(20)),
                     ),
                   ),
                 ),

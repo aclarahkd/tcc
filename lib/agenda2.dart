@@ -70,22 +70,17 @@ class _Tela6_5State extends State<Tela6_5> {
                     ),
                   ),
                   Positioned(
-                    right: 24,
-                    bottom: 32,
+                    right: 24, bottom: 32,
                     child: GestureDetector(
                       onTap: () => Navigator.pop(context),
                       child: Container(
-                        width: 56,
-                        height: 56,
+                        width: 56, height: 56,
                         decoration: const BoxDecoration(
                           color: Color(0xFF6DBAAA),
                           shape: BoxShape.circle,
                         ),
-                        child: const Icon(
-                          Icons.keyboard_arrow_up,
-                          color: Colors.white,
-                          size: 32,
-                        ),
+                        child: const Icon(Icons.keyboard_arrow_up,
+                            color: Colors.white, size: 32),
                       ),
                     ),
                   ),
@@ -138,10 +133,7 @@ class _Tela6_5State extends State<Tela6_5> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: itens.map((item) {
-          return _buildNavItem(
-            item['icone'] as IconData,
-            item['titulo'] as String,
-          );
+          return _buildNavItem(item['icone'] as IconData, item['titulo'] as String);
         }).toList(),
       ),
     );
@@ -153,47 +145,40 @@ class _Tela6_5State extends State<Tela6_5> {
     return GestureDetector(
       onTap: () {
         if (label == 'Início') {
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(builder: (_) => const Tela3()),
-          );
-        } else if (label == 'Sobre') {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (_) => const Tela7()),
-          );
+          Navigator.pushReplacement(context,
+              MaterialPageRoute(builder: (_) => const Tela3()));
+        } else if (label == 'Pacotes') {
+          Navigator.pushReplacement(context,
+              MaterialPageRoute(builder: (_) => const TelaPacotes()));
+        } else if (label == 'Promoções') {
+          Navigator.pushReplacement(context,
+              MaterialPageRoute(builder: (_) => const TelaPromocoes()));
         } else if (label == 'Agenda') {
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(builder: (_) => const Tela6Agenda()),
-          );
+          Navigator.pushReplacement(context,
+              MaterialPageRoute(builder: (_) => const Tela6Agenda()));
+        } else if (label == 'Sobre') {
+          Navigator.pushReplacement(context,
+              MaterialPageRoute(builder: (_) => const Tela7()));
         }
       },
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           Container(
-            width: 44,
-            height: 44,
+            width: 44, height: 44,
             decoration: BoxDecoration(
               color: ativo ? const Color(0xFF2C5F5A) : Colors.grey.shade300,
               borderRadius: BorderRadius.circular(8),
             ),
-            child: Icon(
-              icon,
-              size: 22,
-              color: ativo ? Colors.white : Colors.black54,
-            ),
+            child: Icon(icon, size: 22,
+                color: ativo ? Colors.white : Colors.black54),
           ),
           const SizedBox(height: 8),
-          Text(
-            label,
-            style: const TextStyle(
-              fontSize: 11,
-              fontWeight: FontWeight.w500,
-              color: Color(0xFF374151),
-            ),
-          ),
+          Text(label,
+              style: const TextStyle(
+                  fontSize: 11,
+                  fontWeight: FontWeight.w500,
+                  color: Color(0xFF374151))),
         ],
       ),
     );
@@ -209,8 +194,7 @@ class _Tela6_5State extends State<Tela6_5> {
       child: Row(
         children: [
           Container(
-            width: 64,
-            height: 64,
+            width: 64, height: 64,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               image: DecorationImage(
@@ -224,22 +208,15 @@ class _Tela6_5State extends State<Tela6_5> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  titulo,
-                  style: const TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w600,
-                    color: Color(0xFF111827),
-                  ),
-                ),
+                Text(titulo,
+                    style: const TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600,
+                        color: Color(0xFF111827))),
                 const SizedBox(height: 4),
-                Text(
-                  data,
-                  style: const TextStyle(
-                    fontSize: 12,
-                    color: Color(0xFF6B7280),
-                  ),
-                ),
+                Text(data,
+                    style: const TextStyle(
+                        fontSize: 12, color: Color(0xFF6B7280))),
               ],
             ),
           ),
