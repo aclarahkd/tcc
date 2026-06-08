@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
+import 'tela_pacotes.dart';
+import 'tela_promocoes.dart';
+
 
 class Tela2 extends StatefulWidget {
   const Tela2({super.key});

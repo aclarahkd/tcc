@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'tela6.dart';
-import 'tela7.dart';
+import 'agenda.dart';
+import 'sobre.dart';
+import 'tela_pacotes.dart';
+import 'tela_promocoes.dart';
 
 class Tela3 extends StatefulWidget {
   const Tela3({super.key});

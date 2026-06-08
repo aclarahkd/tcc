@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'tela3.dart';
-import 'tela6.dart';
+import 'agenda.dart';
+import 'tela_pacotes.dart';
+import 'tela_promocoes.dart';
+
 
 class Tela7 extends StatefulWidget {
   const Tela7({super.key});
@@ -36,6 +38,7 @@ class _Tela7State extends State<Tela7> {
 
                     const SizedBox(height: 20),
 
+                    // Card único verde com foto + texto (igual à imagem)
                     _buildRetrato(),
 
                     const SizedBox(height: 32),
@@ -75,6 +78,7 @@ class _Tela7State extends State<Tela7> {
     );
   }
 
+  // ── Header verde ────────────────────────────────────────────────────────────
   Widget _buildHeader() {
     return Container(
       width: double.infinity,
@@ -102,9 +106,9 @@ class _Tela7State extends State<Tela7> {
     );
   }
 
+  // ── Menu de navegação ───────────────────────────────────────────────────────
   Widget _buildMenu() {
     final itens = [
-      {'icone': Icons.home,           'titulo': 'Início'},
       {'icone': Icons.card_travel,    'titulo': 'Pacotes'},
       {'icone': Icons.local_offer,    'titulo': 'Promoções'},
       {'icone': Icons.calendar_month, 'titulo': 'Agenda'},
@@ -131,12 +135,7 @@ class _Tela7State extends State<Tela7> {
 
     return GestureDetector(
       onTap: () {
-        if (titulo == 'Início') {
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(builder: (_) => const Tela3()),
-          );
-        } else if (titulo == 'Agenda') {
+        if (titulo == 'Agenda') {
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(builder: (_) => const Tela6Agenda()),
@@ -147,8 +146,8 @@ class _Tela7State extends State<Tela7> {
         mainAxisSize: MainAxisSize.min,
         children: [
           Container(
-            width: 44,
-            height: 44,
+            width: 48,
+            height: 48,
             decoration: BoxDecoration(
               color: ativo
                   ? const Color(0xFF2C5F5A)
@@ -157,7 +156,6 @@ class _Tela7State extends State<Tela7> {
             ),
             child: Icon(
               icone,
-              size: 22,
               color: ativo ? Colors.white : Colors.black54,
             ),
           ),
@@ -165,7 +163,7 @@ class _Tela7State extends State<Tela7> {
           Text(
             titulo,
             style: const TextStyle(
-              fontSize: 11,
+              fontSize: 12,
               fontWeight: FontWeight.w500,
             ),
           ),
@@ -174,6 +172,7 @@ class _Tela7State extends State<Tela7> {
     );
   }
 
+  // ── Card retrato: foto em cima + texto embaixo, tudo no mesmo card verde ───
   Widget _buildRetrato() {
     return Container(
       width: double.infinity,
@@ -184,6 +183,7 @@ class _Tela7State extends State<Tela7> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          // ── Foto com tags de nome ────────────────────────────────────────
           ClipRRect(
             borderRadius: const BorderRadius.only(
               topLeft:  Radius.circular(20),
@@ -195,8 +195,9 @@ class _Tela7State extends State<Tela7> {
               child: Stack(
                 fit: StackFit.expand,
                 children: [
+                  // Imagem de fundo
                   Image.asset(
-                    'imagens/cidinha_conrado.png',
+                    'imagens/cidinhaeconrado.png',
                     fit: BoxFit.cover,
                     errorBuilder: (_, __, ___) => Container(
                       color: const Color(0xFF4DA898),
@@ -209,11 +210,15 @@ class _Tela7State extends State<Tela7> {
                       ),
                     ),
                   ),
+
+                  // Tag "Cidinha" — canto superior esquerdo
                   Positioned(
                     top: 10,
                     left: 12,
                     child: _buildNameTag('Cidinha'),
                   ),
+
+                  // Tag "Conrado" — canto superior direito
                   Positioned(
                     top: 10,
                     right: 12,
@@ -223,6 +228,8 @@ class _Tela7State extends State<Tela7> {
               ),
             ),
           ),
+
+          // ── Texto "sobre" embaixo da foto ───────────────────────────────
           const Padding(
             padding: EdgeInsets.all(18),
             child: Text(

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'tela2.dart';
-import 'tela3.dart'; // tela que vai depois do login
+import 'cadastro.dart';
+import 'inicio.dart'; // tela que vai depois do login
 
 void main() {
   runApp(
