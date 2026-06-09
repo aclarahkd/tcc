@@ -3,6 +3,7 @@ import 'agenda.dart';
 import 'sobre.dart';
 import 'tela_pacotes.dart';
 import 'tela_promocoes.dart';
+import 'configuracoes.dart';
 
 class Tela3 extends StatefulWidget {
   const Tela3({super.key});
@@ -42,28 +43,34 @@ class _Tela3State extends State<Tela3> {
       body: SafeArea(
         child: Column(
           children: [
-            // Header verde
+            // ── Header verde ──────────────────────────────────────────────
             Container(
               width: double.infinity,
-              padding: const EdgeInsets.all(16),
-              decoration: const BoxDecoration(color: Color(0xFF6DBAAA)),
-              child: Align(
-                alignment: Alignment.centerRight,
-                child: PopupMenuButton(
-                  onSelected: (value) {
-                    if (value == 'sair') {
-                      Navigator.of(context).popUntil((route) => route.isFirst);
-                    }
-                  },
-                  icon: const Icon(Icons.more_horiz, color: Colors.white, size: 28),
-                  itemBuilder: (context) => [
-                    const PopupMenuItem(value: 'sair', child: Text('Sair da conta')),
-                  ],
-                ),
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+              color: const Color(0xFF6DBAAA),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  PopupMenuButton<String>(
+                    icon: const Icon(Icons.more_horiz, color: Colors.white),
+                    onSelected: (value) {
+                      if (value == 'editar') {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (_) => const TelaConfiguracoes()));
+                      } else if (value == 'sair') {
+                        Navigator.of(context).popUntil((route) => route.isFirst);
+                      }
+                    },
+                    itemBuilder: (context) => const [
+                      PopupMenuItem(value: 'editar', child: Text('Editar perfil')),
+                      PopupMenuItem(value: 'sair',   child: Text('Sair da conta')),
+                    ],
+                  ),
+                ],
               ),
             ),
 
-            // Menu
+            // ── Menu de navegação ─────────────────────────────────────────
             Container(
               padding: const EdgeInsets.symmetric(vertical: 20),
               color: Colors.white,
@@ -81,13 +88,10 @@ class _Tela3State extends State<Tela3> {
 
             const Padding(
               padding: EdgeInsets.symmetric(horizontal: 24, vertical: 8),
-              child: Text(
-                'Pesquise seu destino ideal:',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: Colors.black87),
-              ),
+              child: Text('Pesquise seu destino ideal:',
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: Colors.black87)),
             ),
 
-            // Barra de pesquisa IA
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
               child: Container(
@@ -120,27 +124,21 @@ class _Tela3State extends State<Tela3> {
 
             const SizedBox(height: 24),
 
-            const Text(
-              'Nossa galeria',
-              style: TextStyle(
-                fontFamily: 'Brush Script MT',
-                fontSize: 36,
-                fontWeight: FontWeight.w400,
-                fontStyle: FontStyle.italic,
-              ),
-            ),
+            const Text('Nossa galeria',
+                style: TextStyle(
+                    fontFamily: 'Brush Script MT',
+                    fontSize: 36,
+                    fontWeight: FontWeight.w400,
+                    fontStyle: FontStyle.italic)),
 
             const Padding(
               padding: EdgeInsets.symmetric(horizontal: 24, vertical: 4),
-              child: Text(
-                'Compartilhando nossos momentos com você!',
-                style: TextStyle(fontSize: 12, color: Colors.black87),
-              ),
+              child: Text('Compartilhando nossos momentos com você!',
+                  style: TextStyle(fontSize: 12, color: Colors.black87)),
             ),
 
             const SizedBox(height: 16),
 
-            // Área das fotos
             Expanded(
               child: Stack(
                 children: [
@@ -148,11 +146,8 @@ class _Tela3State extends State<Tela3> {
                     margin: const EdgeInsets.symmetric(horizontal: 24),
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(12),
-                      child: Image.asset(
-                        imagens[fotoAtual],
-                        width: double.infinity,
-                        fit: BoxFit.cover,
-                      ),
+                      child: Image.asset(imagens[fotoAtual],
+                          width: double.infinity, fit: BoxFit.cover),
                     ),
                   ),
                   Positioned(
@@ -163,9 +158,7 @@ class _Tela3State extends State<Tela3> {
                         child: Container(
                           width: 32, height: 32,
                           decoration: const BoxDecoration(
-                            color: Color(0xFF6DBAAA),
-                            shape: BoxShape.circle,
-                          ),
+                              color: Color(0xFF6DBAAA), shape: BoxShape.circle),
                           child: const Icon(Icons.chevron_right, color: Colors.white, size: 24),
                         ),
                       ),
@@ -179,11 +172,9 @@ class _Tela3State extends State<Tela3> {
 
             const Padding(
               padding: EdgeInsets.symmetric(horizontal: 24),
-              child: Text(
-                '"O melhor caminho para o seu destino!"',
-                textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 13, fontStyle: FontStyle.italic, color: Colors.black87),
-              ),
+              child: Text('"O melhor caminho para o seu destino!"',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 13, fontStyle: FontStyle.italic, color: Colors.black87)),
             ),
 
             const SizedBox(height: 8),
@@ -201,21 +192,16 @@ class _Tela3State extends State<Tela3> {
 
   Widget _buildNavItem(IconData icon, String label) {
     final bool ativo = label == 'Início';
-
     return GestureDetector(
       onTap: () {
         if (label == 'Pacotes') {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (_) => const TelaPacotes()));
+          Navigator.push(context, MaterialPageRoute(builder: (_) => const TelaPacotes()));
         } else if (label == 'Promoções') {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (_) => const TelaPromocoes()));
+          Navigator.push(context, MaterialPageRoute(builder: (_) => const TelaPromocoes()));
         } else if (label == 'Agenda') {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (_) => const Tela6Agenda()));
+          Navigator.push(context, MaterialPageRoute(builder: (_) => const Tela6Agenda()));
         } else if (label == 'Sobre') {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (_) => const Tela7()));
+          Navigator.push(context, MaterialPageRoute(builder: (_) => const Tela7()));
         }
       },
       child: Column(
@@ -227,12 +213,10 @@ class _Tela3State extends State<Tela3> {
               color: ativo ? const Color(0xFF2C5F5A) : Colors.grey.shade300,
               borderRadius: BorderRadius.circular(8),
             ),
-            child: Icon(icon, size: 22,
-                color: ativo ? Colors.white : Colors.black54),
+            child: Icon(icon, size: 22, color: ativo ? Colors.white : Colors.black54),
           ),
           const SizedBox(height: 6),
-          Text(label,
-              style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w500, color: Colors.black87)),
+          Text(label, style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w500, color: Colors.black87)),
         ],
       ),
     );
