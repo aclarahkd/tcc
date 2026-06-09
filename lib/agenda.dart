@@ -5,6 +5,10 @@ import 'inicio.dart';
 import 'tela_pacotes.dart';
 import 'tela_promocoes.dart';
 import 'configuracoes.dart';
+import 'jaguariunainfo.dart';
+import 'ibitingainfo.dart';
+import 'morangoinfo.dart';
+import 'zooitatibainfo.dart';
 
 class Tela6Agenda extends StatefulWidget {
   const Tela6Agenda({super.key});
@@ -14,11 +18,32 @@ class Tela6Agenda extends StatefulWidget {
 }
 
 class _Tela6AgendaState extends State<Tela6Agenda> {
-  final List<Map<String, String>> viagens = [
-    {'titulo': 'Jaguariúna + Pedreira',       'data': '28/06',             'imagem': 'imagens/jaguariuna.png'},
-    {'titulo': 'Ibitinga + Passeio de Barco', 'data': '24 a 27/07',       'imagem': 'imagens/ibitinga.png'},
-    {'titulo': 'Festa do Morango',             'data': '14 a 17 de Agosto','imagem': 'imagens/morango.png'},
-    {'titulo': 'Zoo Itatiba',                  'data': '27/09',             'imagem': 'imagens/zooitatiba.png'},
+
+  final List<Map<String, dynamic>> viagens = [
+    {
+      'titulo': 'Jaguariúna + Pedreira',
+      'data': '28/06',
+      'imagem': 'imagens/jaguariuna.png',
+      'tela': const DetalheJaguariuna(),
+    },
+    {
+      'titulo': 'Ibitinga + Passeio de Barco',
+      'data': '24 a 27/07',
+      'imagem': 'imagens/ibitinga.png',
+      'tela': const DetalheIbitinga(),
+    },
+    {
+      'titulo': 'Festa do Morango',
+      'data': '14 a 17 de Agosto',
+      'imagem': 'imagens/morango.png',
+      'tela': const DetalheFestaDoMorango(),
+    },
+    {
+      'titulo': 'Zoo Itatiba',
+      'data': '27/09',
+      'imagem': 'imagens/zooitatiba.png',
+      'tela': const DetalheZooItatiba(),
+    },
   ];
 
   @override
@@ -77,8 +102,10 @@ class _Tela6AgendaState extends State<Tela6Agenda> {
                   ListView(
                     padding: const EdgeInsets.all(20),
                     children: [
-                      const Text('Programação de viagens e passeios 2026',
-                          style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Color(0xFF222222))),
+                      const Text(
+                        'Programação de viagens e passeios 2026',
+                        style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Color(0xFF222222)),
+                      ),
                       const SizedBox(height: 24),
                       for (var viagem in viagens)
                         Padding(
@@ -139,32 +166,41 @@ class _Tela6AgendaState extends State<Tela6Agenda> {
     );
   }
 
-  Widget _buildCardViagem(Map<String, String> viagem) {
-    return Container(
-      padding: const EdgeInsets.all(14),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(18),
-        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 8, offset: const Offset(0, 3))],
-      ),
-      child: Row(
-        children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(50),
-            child: Image.asset(viagem['imagem']!, width: 65, height: 65, fit: BoxFit.cover),
-          ),
-          const SizedBox(width: 16),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(viagem['titulo']!, style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w600)),
-                const SizedBox(height: 4),
-                Text(viagem['data']!, style: TextStyle(fontSize: 13, color: Colors.grey.shade600)),
-              ],
+  Widget _buildCardViagem(Map<String, dynamic> viagem) {
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (_) => viagem['tela'] as Widget),
+        );
+      },
+      child: Container(
+        padding: const EdgeInsets.all(14),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(18),
+          boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 8, offset: const Offset(0, 3))],
+        ),
+        child: Row(
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(50),
+              child: Image.asset(viagem['imagem'], width: 65, height: 65, fit: BoxFit.cover),
             ),
-          ),
-        ],
+            const SizedBox(width: 16),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(viagem['titulo'], style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w600)),
+                  const SizedBox(height: 4),
+                  Text(viagem['data'], style: TextStyle(fontSize: 13, color: Colors.grey.shade600)),
+                ],
+              ),
+            ),
+            const Icon(Icons.chevron_right, color: Color(0xFF6DBAAA)),
+          ],
+        ),
       ),
     );
   }

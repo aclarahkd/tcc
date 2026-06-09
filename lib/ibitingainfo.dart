@@ -1,27 +1,27 @@
-
 import 'package:flutter/material.dart';
 import 'agenda.dart';
+import 'agenda2.dart';
 import 'sobre.dart';
 import 'inicio.dart';
 import 'tela_pacotes.dart';
 import 'tela_promocoes.dart';
 import 'configuracoes.dart';
 
-class DetalheJaguariuna extends StatefulWidget {
-  const DetalheJaguariuna({super.key});
+class DetalheIbitinga extends StatefulWidget {
+  const DetalheIbitinga({super.key});
 
   @override
-  State<DetalheJaguariuna> createState() => _DetalheJaguariunaState();
+  State<DetalheIbitinga> createState() => _DetalheIbitingaState();
 }
 
-class _DetalheJaguariunaState extends State<DetalheJaguariuna> {
+class _DetalheIbitingaState extends State<DetalheIbitinga> {
   int _fotoAtual = 0;
 
   final List<String> _imagens = [
-    'imagens/jaguariuna.png',
-    'imagens/jaguariuna2.png',
-    'imagens/jaguariuna3.png',
-    'imagens/jaguariuna4.png',
+    'imagens/ibitinga.png',
+    'imagens/ibitinga2.png',
+    'imagens/ibitinga3.png',
+    'imagens/ibitinga4.png',
   ];
 
   void _proximaFoto() {
@@ -43,20 +43,20 @@ class _DetalheJaguariunaState extends State<DetalheJaguariuna> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text('Jaguariúna + Pedreira',
-                        style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold, color: Color(0xFF2C5F5A))),
+                    Text('Ibitinga',
+                        style: const TextStyle(fontSize: 26, fontWeight: FontWeight.bold, color: Color(0xFF2C5F5A))),
                     const SizedBox(height: 4),
-                    const Text('28/06',
-                        style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: Colors.black87)),
+                    Text('24 - 27/07',
+                        style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: Colors.black87)),
                     const SizedBox(height: 16),
                     _buildCarrossel(),
                     const SizedBox(height: 20),
-                    const Text(
-                      'Conheça Jaguariúna, um destino que une tradição, natureza e cultura no interior paulista. Explore seus cenários, trilhos históricos e festas juntamente de Pedreira com suas atividades culturais.',
-                      style: TextStyle(fontSize: 15, color: Colors.black87, height: 1.5),
+                    Text(
+                      'Conheça Ibitinga, um destino cheio de charme no interior paulista. Explore suas feiras tradicionais, ateliês artesanais, o cenário cultural, e viva uma experiência do passeio de barco.',
+                      style: const TextStyle(fontSize: 15, color: Colors.black87, height: 1.5),
                     ),
                     const SizedBox(height: 16),
-                    _buildLinkContato(context),
+                    _buildLinkContato(),
                     const SizedBox(height: 28),
                     _buildBotaoAviseme(context),
                     const SizedBox(height: 20),
@@ -126,7 +126,7 @@ class _DetalheJaguariunaState extends State<DetalheJaguariuna> {
     );
   }
 
-  Widget _buildLinkContato(BuildContext context) {
+  Widget _buildLinkContato() {
     return RichText(
       text: const TextSpan(
         style: TextStyle(fontSize: 15, color: Colors.black87),
@@ -202,7 +202,8 @@ class _DetalheJaguariunaState extends State<DetalheJaguariuna> {
       color: Colors.white,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: itens.map((item) => _itemMenu(context, item['icone'] as IconData, item['titulo'] as String)).toList(),
+        children: itens.map((item) =>
+            _itemMenu(context, item['icone'] as IconData, item['titulo'] as String)).toList(),
       ),
     );
   }

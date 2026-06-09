@@ -5,6 +5,9 @@ import 'sobre.dart';
 import 'tela_pacotes.dart';
 import 'tela_promocoes.dart';
 import 'configuracoes.dart';
+import 'fozinfo.dart';
+import 'natalpocosinfo.dart';
+import 'petropolisinfo.dart';
 
 class Tela6_5 extends StatefulWidget {
   const Tela6_5({super.key});
@@ -14,10 +17,26 @@ class Tela6_5 extends StatefulWidget {
 }
 
 class _Tela6_5State extends State<Tela6_5> {
-  final List<Map<String, String>> viagens = [
-    {'titulo': 'Foz, Paraguai e Argentina',        'data': '18-22/11',          'imagem': 'imagens/fozpa.png'},
-    {'titulo': 'Natal Iluminado - Poços de caldas', 'data': '27-29/11',          'imagem': 'imagens/natal.png'},
-    {'titulo': 'Petrópolis - RJ',                   'data': 'Data não definida', 'imagem': 'imagens/petropolis.png'},
+
+  final List<Map<String, dynamic>> viagens = [
+    {
+      'titulo': 'Foz, Paraguai e Argentina',
+      'data': '18-22/11',
+      'imagem': 'imagens/fozpa.png',
+      'tela': const DetalheFoz(),
+    },
+    {
+      'titulo': 'Natal Iluminado - Poços de Caldas',
+      'data': '27-29/11',
+      'imagem': 'imagens/natal.png',
+      'tela': const DetalheNatalPocos(),
+    },
+    {
+      'titulo': 'Petrópolis - RJ',
+      'data': 'Data não definida',
+      'imagem': 'imagens/petropolis.png',
+      'tela': const DetalhePetropolis(),
+    },
   ];
 
   @override
@@ -81,12 +100,14 @@ class _Tela6_5State extends State<Tela6_5> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text('Programação viagens e passeios para 2026!',
-                            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xFF111827))),
+                        const Text(
+                          'Programação viagens e passeios para 2026!',
+                          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xFF111827)),
+                        ),
                         const SizedBox(height: 24),
                         ...viagens.map((v) => Padding(
                               padding: const EdgeInsets.only(bottom: 16),
-                              child: _buildViagemCard(v['titulo']!, v['data']!, v['imagem']!),
+                              child: _buildViagemCard(v),
                             )),
                         const SizedBox(height: 80),
                       ],
@@ -146,31 +167,45 @@ class _Tela6_5State extends State<Tela6_5> {
     );
   }
 
-  Widget _buildViagemCard(String titulo, String data, String imagemPath) {
-    return Container(
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(color: const Color(0xFFF3F4F6), borderRadius: BorderRadius.circular(16)),
-      child: Row(
-        children: [
-          Container(
-            width: 64, height: 64,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              image: DecorationImage(image: AssetImage(imagemPath), fit: BoxFit.cover),
+  Widget _buildViagemCard(Map<String, dynamic> viagem) {
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (_) => viagem['tela'] as Widget),
+        );
+      },
+      child: Container(
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          color: const Color(0xFFF3F4F6),
+          borderRadius: BorderRadius.circular(16),
+        ),
+        child: Row(
+          children: [
+            Container(
+              width: 64, height: 64,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                image: DecorationImage(image: AssetImage(viagem['imagem']), fit: BoxFit.cover),
+              ),
             ),
-          ),
-          const SizedBox(width: 16),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(titulo, style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: Color(0xFF111827))),
-                const SizedBox(height: 4),
-                Text(data, style: const TextStyle(fontSize: 12, color: Color(0xFF6B7280))),
-              ],
+            const SizedBox(width: 16),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(viagem['titulo'],
+                      style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: Color(0xFF111827))),
+                  const SizedBox(height: 4),
+                  Text(viagem['data'],
+                      style: const TextStyle(fontSize: 12, color: Color(0xFF6B7280))),
+                ],
+              ),
             ),
-          ),
-        ],
+            const Icon(Icons.chevron_right, color: Color(0xFF6DBAAA)),
+          ],
+        ),
       ),
     );
   }
