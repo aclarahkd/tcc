@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tcc/editarperfil.dart';
-import 'package:tcc/editarperfil.dart';
+import 'editarperfil.dart';
 
 class TelaConfiguracoes extends StatefulWidget {
   const TelaConfiguracoes({super.key});
@@ -81,12 +80,12 @@ class _TelaConfiguracoesState extends State<TelaConfiguracoes> {
                         ),
                         Switch(
                           value: notificacoesAtivas,
-                          activeColor: Colors.black,
-                          activeTrackColor: Colors.white,
-                          inactiveThumbColor: Colors.black,
-                          inactiveTrackColor: Colors.white,
+                          activeColor: Colors.white,
+                          activeTrackColor: const Color(0xFF2D4263),
+                          inactiveThumbColor: Colors.white,
+                          inactiveTrackColor: Colors.grey.shade400,
                           trackOutlineColor:
-                              WidgetStateProperty.all(Colors.black),
+                              WidgetStateProperty.all(Colors.transparent),
                           onChanged: (val) {
                             setState(() => notificacoesAtivas = val);
                           },
@@ -117,7 +116,7 @@ class _TelaConfiguracoesState extends State<TelaConfiguracoes> {
 
                   // Sair
                   _buildOpcao(
-                    icone: Icons.arrow_back_ios_new_outlined,
+                    icone: Icons.arrow_back_ios_new,
                     titulo: 'Sair',
                     subtitulo: 'Fazer logout de sua conta',
                     onTap: () {
