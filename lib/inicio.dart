@@ -47,7 +47,7 @@ class _Tela3State extends State<Tela3> {
             Container(
               width: double.infinity,
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-              color: const Color(0xFF6DBAAA),
+              color: const Color.fromARGB(255, 38, 174, 147),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
@@ -97,7 +97,7 @@ class _Tela3State extends State<Tela3> {
               child: Container(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 decoration: BoxDecoration(
-                  color: const Color(0xFF6DBAAA),
+                  color: const Color.fromARGB(255, 69, 177, 155),
                   borderRadius: BorderRadius.circular(25),
                 ),
                 child: Row(
@@ -107,7 +107,7 @@ class _Tela3State extends State<Tela3> {
                         controller: pesquisaController,
                         style: const TextStyle(color: Colors.white),
                         decoration: const InputDecoration(
-                          hintText: 'Utilize IA para lhe auxiliar',
+                          hintText: 'Utilize o filtro para lhe auxiliar',
                           hintStyle: TextStyle(color: Colors.white70),
                           border: InputBorder.none,
                         ),
@@ -210,7 +210,7 @@ class _Tela3State extends State<Tela3> {
           Container(
             width: 44, height: 44,
             decoration: BoxDecoration(
-              color: ativo ? const Color(0xFF2C5F5A) : Colors.grey.shade300,
+              color: ativo ? const Color.fromARGB(255, 12, 29, 96) : Colors.grey.shade300,
               borderRadius: BorderRadius.circular(8),
             ),
             child: Icon(icon, size: 22, color: ativo ? Colors.white : Colors.black54),
