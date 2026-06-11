@@ -6,6 +6,7 @@ import 'inicio.dart';
 import 'tela_pacotes.dart';
 import 'tela_promocoes.dart';
 import 'configuracoes.dart';
+import 'avisoemail.dart';
 
 class DetalheNatalPocos extends StatefulWidget {
   const DetalheNatalPocos({super.key});
@@ -145,9 +146,15 @@ class _DetalheNatalPocosState extends State<DetalheNatalPocos> {
     return SizedBox(
       width: double.infinity,
       child: ElevatedButton(
-        onPressed: () => ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Você será avisado!')),
-        ),
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              // TODO: substituir '' pelo e-mail real da conta do usuário logado
+              builder: (_) => const AvisoEmail(emailDaConta: ''),
+            ),
+          );
+        },
         style: ElevatedButton.styleFrom(
           backgroundColor: const Color(0xFF2D4263),
           padding: const EdgeInsets.symmetric(vertical: 16),
