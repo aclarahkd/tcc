@@ -47,7 +47,7 @@ class _Tela3State extends State<Tela3> {
             Container(
               width: double.infinity,
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-              color: const Color.fromARGB(255, 38, 174, 147),
+              color: const Color.fromARGB(255, 78, 187, 165),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
@@ -97,7 +97,7 @@ class _Tela3State extends State<Tela3> {
               child: Container(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 decoration: BoxDecoration(
-                  color: const Color.fromARGB(255, 69, 177, 155),
+                  color: const Color.fromARGB(255, 78, 187, 165),
                   borderRadius: BorderRadius.circular(25),
                 ),
                 child: Row(
@@ -158,7 +158,7 @@ class _Tela3State extends State<Tela3> {
                         child: Container(
                           width: 32, height: 32,
                           decoration: const BoxDecoration(
-                              color: Color(0xFF6DBAAA), shape: BoxShape.circle),
+                              color: const Color.fromARGB(255, 78, 187, 165), shape: BoxShape.circle),
                           child: const Icon(Icons.chevron_right, color: Colors.white, size: 24),
                         ),
                       ),
