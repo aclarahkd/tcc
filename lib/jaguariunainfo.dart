@@ -20,8 +20,8 @@ class _DetalheJaguariunaState extends State<DetalheJaguariuna> {
 
   final List<String> _imagens = [
     'imagens/jaguariuna.png',
-    'imagens/jaguariuna2.png',
-    'imagens/jaguariuna3.png',
+    'imagens/jaguariuna2.webp',
+    'imagens/jaguariuna3.jpg',
     'imagens/jaguariuna4.png',
   ];
 

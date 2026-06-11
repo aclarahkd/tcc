@@ -20,9 +20,9 @@ class _DetalheZooItatibaState extends State<DetalheZooItatiba> {
 
   final List<String> _imagens = [
     'imagens/zooitatiba.png',
-    'imagens/zooitatiba2.png',
-    'imagens/zooitatiba3.png',
-    'imagens/zooitatiba4.png',
+    'imagens/zooitatiba2.jpg',
+    'imagens/zooitatiba3.jpg',
+    'imagens/zooitatiba4.jpg',
   ];
 
   void _proximaFoto() {

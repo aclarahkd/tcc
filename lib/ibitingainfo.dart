@@ -20,9 +20,9 @@ class _DetalheIbitingaState extends State<DetalheIbitinga> {
 
   final List<String> _imagens = [
     'imagens/ibitinga.png',
-    'imagens/ibitinga2.png',
-    'imagens/ibitinga3.png',
-    'imagens/ibitinga4.png',
+    'imagens/ibitinga2.jpg',
+    'imagens/ibitinga3.jpeg',
+    'imagens/ibitinga4.jpeg',
   ];
 
   void _proximaFoto() {

@@ -20,9 +20,9 @@ class _DetalheFestaDoMorangoState extends State<DetalheFestaDoMorango> {
 
   final List<String> _imagens = [
     'imagens/morango.png',
-    'imagens/morango2.png',
-    'imagens/morango3.png',
-    'imagens/morango4.png',
+    'imagens/morango2.webp',
+    'imagens/morango3.jpg',
+    'imagens/morango4.jpg',
   ];
 
   void _proximaFoto() {
