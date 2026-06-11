@@ -14,14 +14,14 @@ class TelaPacotes extends StatefulWidget {
 
 class _TelaPacotesState extends State<TelaPacotes> {
   final List<Map<String, String>> pacotes = [
-    {'titulo': 'Foz do Iguaçu, Paraguai e Argentina', 'origem': 'Saindo de São José dos Campos', 'preco': 'A partir de R\$2900 por pessoa', 'parcelas': '5X de R\$580',  'imagem': 'imagens/fozpa.png'},
-    {'titulo': 'Beto Carrero World',                   'origem': 'Saindo de São José dos Campos', 'preco': 'A partir de R\$2800 por pessoa', 'parcelas': '5X de R\$560',  'imagem': 'imagens/betocarrero.png'},
+    {'titulo': 'Foz do Iguaçu, Paraguai e Argentina', 'origem': 'Saindo de São José dos Campos', 'preco': 'A partir de R\$2800 por pessoa', 'parcelas': '5X de R\$580',  'imagem': 'imagens/fozpa.png'},
+    {'titulo': 'Beto Carrero World, Balneário Camboriú e Curitiba',                   'origem': 'Saindo de São José dos Campos', 'preco': 'A partir de R\$2900 por pessoa', 'parcelas': '5X de R\$560',  'imagem': 'imagens/betocarrero.jpg'},
     {'titulo': 'Petrópolis - RJ',                      'origem': 'Saindo de São José dos Campos', 'preco': 'A partir de R\$1500 por pessoa', 'parcelas': '5X de R\$300',  'imagem': 'imagens/petropolis.png'},
     {'titulo': 'Ibitinga + Passeio de Barco',          'origem': 'Saindo de São José dos Campos', 'preco': 'A partir de R\$1050 por pessoa', 'parcelas': '5X de R\$210',  'imagem': 'imagens/ibitinga.png'},
-    {'titulo': 'Jaguariúna + Pedreira',                'origem': 'Saindo de São José dos Campos', 'preco': 'A partir de R\$800 por pessoa',  'parcelas': '5X de R\$160',  'imagem': 'imagens/jaguariuna.png'},
-    {'titulo': 'Zoo Itatiba',                          'origem': 'Saindo de São José dos Campos', 'preco': 'A partir de R\$500 por pessoa',  'parcelas': '5X de R\$100',  'imagem': 'imagens/zooitatiba.png'},
-    {'titulo': 'Festa do Morango',                     'origem': 'Saindo de São José dos Campos', 'preco': 'A partir de R\$600 por pessoa',  'parcelas': '5X de R\$120',  'imagem': 'imagens/morango.png'},
-    {'titulo': 'Natal Iluminado - Poços de Caldas',    'origem': 'Saindo de São José dos Campos', 'preco': 'A partir de R\$900 por pessoa',  'parcelas': '5X de R\$180',  'imagem': 'imagens/natal.png'},
+    {'titulo': 'Jaguariúna + Pedreira',                'origem': 'Saindo de São José dos Campos', 'preco': 'A partir de R\$1100 por pessoa',  'parcelas': '4X de R\$160',  'imagem': 'imagens/jaguariuna.png'},
+    {'titulo': 'Zoo Itatiba',                          'origem': 'Saindo de São José dos Campos', 'preco': 'A partir de R\$250 por pessoa',  'parcelas': '3X de R\$83',  'imagem': 'imagens/zooitatiba.png'},
+    {'titulo': 'Festa do Morango',                     'origem': 'Saindo de São José dos Campos', 'preco': 'A partir de R\$100 por pessoa',  'parcelas': '2X de R\$50',  'imagem': 'imagens/morango.png'},
+    {'titulo': 'Natal Iluminado - Poços de Caldas',    'origem': 'Saindo de São José dos Campos', 'preco': 'A partir de R\$1300 por pessoa',  'parcelas': '4X de R\$325',  'imagem': 'imagens/natal.png'},
   ];
 
   @override

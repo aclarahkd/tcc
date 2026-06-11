@@ -23,7 +23,6 @@ class _DetalheFozState extends State<DetalheFoz> {
     'imagens/fozpa2.jpeg',
     'imagens/fozpa3.jpg',
     'imagens/fozpa4.jpeg',
-    'imagens/fozpa5.jpg',
   ];
 
   void _proximaFoto() {

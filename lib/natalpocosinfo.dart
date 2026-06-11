@@ -20,9 +20,9 @@ class _DetalheNatalPocosState extends State<DetalheNatalPocos> {
 
   final List<String> _imagens = [
     'imagens/natal.png',
-    'imagens/natal2.png',
-    'imagens/natal3.png',
-    'imagens/natal4.png',
+    'imagens/natal2.jpg',
+    'imagens/natal3.jpg',
+    'imagens/natal4.jpeg',
   ];
 
   void _proximaFoto() {
@@ -44,7 +44,7 @@ class _DetalheNatalPocosState extends State<DetalheNatalPocos> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Poços de caldas',
+                    Text('Natal Iluminado - Poços de caldas',
                         style: const TextStyle(fontSize: 26, fontWeight: FontWeight.bold, color: Color(0xFF2C5F5A))),
                     const SizedBox(height: 4),
                     Text('27 - 29/11',
