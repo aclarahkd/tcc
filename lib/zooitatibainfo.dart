@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'agenda.dart';
 import 'agenda2.dart';
 import 'sobre.dart';
@@ -20,9 +21,9 @@ class _DetalheZooItatibaState extends State<DetalheZooItatiba> {
 
   final List<String> _imagens = [
     'imagens/zooitatiba.png',
-    'imagens/zooitatiba2.jpg',
-    'imagens/zooitatiba3.jpg',
-    'imagens/zooitatiba4.jpg',
+    'imagens/zooitatiba2.png',
+    'imagens/zooitatiba3.png',
+    'imagens/zooitatiba4.png',
   ];
 
   void _proximaFoto() {
@@ -45,7 +46,7 @@ class _DetalheZooItatibaState extends State<DetalheZooItatiba> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text('Zoo Itatiba',
-                        style: const TextStyle(fontSize: 26, fontWeight: FontWeight.bold, color: Color(0xFF2C5F5A))),
+                        style: const TextStyle(fontSize: 26, fontWeight: FontWeight.bold, color: Color.fromARGB(255, 12, 29, 96))),
                     const SizedBox(height: 4),
                     Text('27/09',
                         style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: Colors.black87)),
@@ -84,7 +85,7 @@ class _DetalheZooItatibaState extends State<DetalheZooItatiba> {
             errorBuilder: (_, __, ___) => Container(
               height: 220,
               decoration: BoxDecoration(
-                color: const Color(0xFF6DBAAA).withOpacity(0.3),
+                color: const Color.fromARGB(255, 78, 187, 165).withOpacity(0.3),
                 borderRadius: BorderRadius.circular(16),
               ),
               child: const Center(child: Icon(Icons.image, size: 60, color: Colors.white)),
@@ -127,15 +128,32 @@ class _DetalheZooItatibaState extends State<DetalheZooItatiba> {
     );
   }
 
+  Future<void> _abrirWhatsapp() async {
+    final uri = Uri.parse('https://wa.me/5512982818872');
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(uri, mode: LaunchMode.externalApplication);
+    }
+  }
+
   Widget _buildLinkContato() {
     return RichText(
-      text: const TextSpan(
-        style: TextStyle(fontSize: 15, color: Colors.black87),
+      text: TextSpan(
+        style: const TextStyle(fontSize: 15, color: Colors.black87),
         children: [
-          TextSpan(text: 'Para mais informações, entre em contato conosco '),
-          TextSpan(
-            text: 'clicando aqui.',
-            style: TextStyle(fontWeight: FontWeight.bold, decoration: TextDecoration.underline),
+          const TextSpan(text: 'Para mais informações, entre em contato conosco '),
+          WidgetSpan(
+            child: GestureDetector(
+              onTap: _abrirWhatsapp,
+              child: const Text(
+                'clicando aqui.',
+                style: TextStyle(
+                  fontSize: 15,
+                  color: Colors.black87,
+                  fontWeight: FontWeight.bold,
+                  decoration: TextDecoration.underline,
+                ),
+              ),
+            ),
           ),
         ],
       ),
@@ -170,7 +188,7 @@ class _DetalheZooItatibaState extends State<DetalheZooItatiba> {
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-      color: const Color(0xFF6DBAAA),
+      color: const Color.fromARGB(255, 78, 187, 165),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -235,13 +253,13 @@ class _DetalheZooItatibaState extends State<DetalheZooItatiba> {
           Container(
             width: 44, height: 44,
             decoration: BoxDecoration(
-              color: ativo ? const Color(0xFF2C5F5A) : Colors.grey.shade300,
+              color: ativo ? const Color.fromARGB(255, 12, 29, 96) : Colors.grey.shade300,
               borderRadius: BorderRadius.circular(10),
             ),
             child: Icon(icone, size: 22, color: ativo ? Colors.white : Colors.black54),
           ),
           const SizedBox(height: 5),
-          Text(titulo, style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: Color(0xFF2C5F5A))),
+          Text(titulo, style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: Color.fromARGB(255, 12, 29, 96))),
         ],
       ),
     );

@@ -24,7 +24,7 @@ class _Tela7State extends State<Tela7> {
             Container(
               width: double.infinity,
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-              color: const Color(0xFF6DBAAA),
+              color: const Color.fromARGB(255, 78, 187, 165),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
@@ -117,7 +117,7 @@ class _Tela7State extends State<Tela7> {
           Container(
             width: 44, height: 44,
             decoration: BoxDecoration(
-              color: ativo ? const Color(0xFF2C5F5A) : Colors.grey.shade300,
+              color: ativo ? const Color.fromARGB(255, 12, 29, 96) : Colors.grey.shade300,
               borderRadius: BorderRadius.circular(10),
             ),
             child: Icon(icone, size: 22, color: ativo ? Colors.white : Colors.black54),
@@ -132,7 +132,7 @@ class _Tela7State extends State<Tela7> {
   Widget _buildRetrato() {
     return Container(
       width: double.infinity,
-      decoration: BoxDecoration(color: const Color(0xFF6DBAAA), borderRadius: BorderRadius.circular(20)),
+      decoration: BoxDecoration(color: const Color.fromARGB(255, 78, 187, 165), borderRadius: BorderRadius.circular(20)),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -143,7 +143,7 @@ class _Tela7State extends State<Tela7> {
               child: Stack(
                 fit: StackFit.expand,
                 children: [
-                  Image.asset('imagens/cidinhaeconrado.jpeg', fit: BoxFit.cover,
+                  Image.asset('imagens/cidinhaeconrado.png', fit: BoxFit.cover,
                       errorBuilder: (_, __, ___) => Container(
                           color: const Color(0xFF4DA898),
                           child: const Center(child: Icon(Icons.photo, size: 72, color: Colors.white54)))),
@@ -168,7 +168,7 @@ class _Tela7State extends State<Tela7> {
   Widget _buildNameTag(String nome) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-      decoration: BoxDecoration(color: const Color(0xFF2C5F5A), borderRadius: BorderRadius.circular(6)),
+      decoration: BoxDecoration(color: const Color.fromARGB(255, 12, 29, 96), borderRadius: BorderRadius.circular(6)),
       child: Text(nome, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13, color: Colors.white)),
     );
   }

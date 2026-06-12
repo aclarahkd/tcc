@@ -22,7 +22,7 @@ class _TelaConfiguracoesState extends State<TelaConfiguracoes> {
             Container(
               width: double.infinity,
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-              color: const Color(0xFF6DBAAA),
+              color: const Color.fromARGB(255, 78, 187, 165),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -116,7 +116,7 @@ class _TelaConfiguracoesState extends State<TelaConfiguracoes> {
 
                   // Sair
                   _buildOpcao(
-                    icone: Icons.arrow_back_ios_new,
+                    icone: Icons.arrow_back_circle_outlined,
                     titulo: 'Sair',
                     subtitulo: 'Fazer logout de sua conta',
                     onTap: () {

@@ -107,7 +107,7 @@ class _Tela3State extends State<Tela3> {
                         controller: pesquisaController,
                         style: const TextStyle(color: Colors.white),
                         decoration: const InputDecoration(
-                          hintText: 'Utilize o filtro para lhe auxiliar',
+                          hintText: 'Utilize IA para lhe auxiliar',
                           hintStyle: TextStyle(color: Colors.white70),
                           border: InputBorder.none,
                         ),
@@ -158,7 +158,7 @@ class _Tela3State extends State<Tela3> {
                         child: Container(
                           width: 32, height: 32,
                           decoration: const BoxDecoration(
-                              color: const Color.fromARGB(255, 78, 187, 165), shape: BoxShape.circle),
+                              color: Color.fromARGB(255, 78, 187, 165), shape: BoxShape.circle),
                           child: const Icon(Icons.chevron_right, color: Colors.white, size: 24),
                         ),
                       ),

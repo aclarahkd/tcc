@@ -81,7 +81,7 @@ class _AvisoEmailState extends State<AvisoEmail> {
                       style: TextStyle(
                         fontSize: 28,
                         fontWeight: FontWeight.bold,
-                        color: Color(0xFF2C5F5A),
+                        color: Color.fromARGB(255, 12, 29, 96),
                       ),
                     ),
                     const SizedBox(height: 8),
@@ -114,7 +114,7 @@ class _AvisoEmailState extends State<AvisoEmail> {
                               hintText: 'Email',
                               hintStyle: const TextStyle(color: Colors.white, fontSize: 16),
                               filled: true,
-                              fillColor: const Color(0xFF6DBAAA),
+                              fillColor: const Color.fromARGB(255, 78, 187, 165),
                               contentPadding:
                                   const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
                               border: OutlineInputBorder(
@@ -135,7 +135,7 @@ class _AvisoEmailState extends State<AvisoEmail> {
                               hintText: 'Senha',
                               hintStyle: const TextStyle(color: Colors.white, fontSize: 16),
                               filled: true,
-                              fillColor: const Color(0xFF6DBAAA),
+                              fillColor: const Color.fromARGB(255, 78, 187, 165),
                               contentPadding:
                                   const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
                               border: OutlineInputBorder(
@@ -195,7 +195,7 @@ class _AvisoEmailState extends State<AvisoEmail> {
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-      color: const Color(0xFF6DBAAA),
+      color: const Color.fromARGB(255, 78, 187, 165),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -266,7 +266,7 @@ class _AvisoEmailState extends State<AvisoEmail> {
             child: Icon(icone, size: 22, color: Colors.black54),
           ),
           const SizedBox(height: 5),
-          Text(titulo, style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: Color(0xFF2C5F5A))),
+          Text(titulo, style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: Color.fromARGB(255, 12, 29, 96))),
         ],
       ),
     );

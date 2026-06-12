@@ -56,7 +56,7 @@ class _TelaMudarInformacoesState extends State<TelaMudarInformacoes> {
               width: double.infinity,
               padding: const EdgeInsets.symmetric(
                   horizontal: 16, vertical: 14),
-              color: const Color(0xFF6DBAAA),
+              color: const Color.fromARGB(255, 78, 187, 165),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -242,7 +242,7 @@ class _TelaMudarInformacoesState extends State<TelaMudarInformacoes> {
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(30),
           borderSide:
-              const BorderSide(color: Color(0xFF6DBAAA), width: 2),
+              const BorderSide(color: Color.fromARGB(255, 78, 187, 165), width: 2),
         ),
       ),
     );

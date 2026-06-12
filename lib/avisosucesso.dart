@@ -33,7 +33,7 @@ class AvisoSucesso extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 28,
                         fontWeight: FontWeight.bold,
-                        color: Color(0xFF2C5F5A),
+                        color: Color.fromARGB(255, 12, 29, 96),
                       ),
                     ),
                     const SizedBox(height: 32),
@@ -85,7 +85,7 @@ class AvisoSucesso extends StatelessWidget {
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-      color: const Color(0xFF6DBAAA),
+      color: const Color.fromARGB(255, 78, 187, 165),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -156,7 +156,7 @@ class AvisoSucesso extends StatelessWidget {
             child: Icon(icone, size: 22, color: Colors.black54),
           ),
           const SizedBox(height: 5),
-          Text(titulo, style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: Color(0xFF2C5F5A))),
+          Text(titulo, style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: Color.fromARGB(255, 12, 29, 96))),
         ],
       ),
     );

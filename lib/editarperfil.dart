@@ -41,7 +41,7 @@ class _TelaEditarPerfilState extends State<TelaEditarPerfil> {
                   width: double.infinity,
                   padding: const EdgeInsets.symmetric(
                       horizontal: 16, vertical: 14),
-                  color: const Color(0xFF6DBAAA),
+                  color: const Color.fromARGB(255, 78, 187, 165),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -111,7 +111,7 @@ class _TelaEditarPerfilState extends State<TelaEditarPerfil> {
                                   width: 28,
                                   height: 28,
                                   decoration: const BoxDecoration(
-                                    color: Color(0xFF6DBAAA),
+                                    color: Color.fromARGB(255, 78, 187, 165),
                                     shape: BoxShape.circle,
                                   ),
                                   child: const Icon(Icons.add,
@@ -288,7 +288,7 @@ class _TelaEditarPerfilState extends State<TelaEditarPerfil> {
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(30),
           borderSide:
-              const BorderSide(color: Color(0xFF6DBAAA), width: 2),
+              const BorderSide(color: Color.fromARGB(255, 78, 187, 165), width: 2),
         ),
       ),
     );

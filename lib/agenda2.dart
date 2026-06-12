@@ -50,7 +50,7 @@ class _Tela6_5State extends State<Tela6_5> {
             Container(
               width: double.infinity,
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-              color: const Color(0xFF6DBAAA),
+              color: const Color.fromARGB(255, 78, 187, 165),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
@@ -119,7 +119,7 @@ class _Tela6_5State extends State<Tela6_5> {
                       onTap: () => Navigator.pop(context),
                       child: Container(
                         width: 56, height: 56,
-                        decoration: const BoxDecoration(color: Color(0xFF6DBAAA), shape: BoxShape.circle),
+                        decoration: const BoxDecoration(color: Color.fromARGB(255, 78, 187, 165), shape: BoxShape.circle),
                         child: const Icon(Icons.keyboard_arrow_up, color: Colors.white, size: 32),
                       ),
                     ),
@@ -155,7 +155,7 @@ class _Tela6_5State extends State<Tela6_5> {
           Container(
             width: 44, height: 44,
             decoration: BoxDecoration(
-              color: ativo ? const Color(0xFF2C5F5A) : Colors.grey.shade300,
+              color: ativo ? const Color.fromARGB(255, 12, 29, 96) : Colors.grey.shade300,
               borderRadius: BorderRadius.circular(8),
             ),
             child: Icon(icon, size: 22, color: ativo ? Colors.white : Colors.black54),
@@ -203,7 +203,7 @@ class _Tela6_5State extends State<Tela6_5> {
                 ],
               ),
             ),
-            const Icon(Icons.chevron_right, color: Color(0xFF6DBAAA)),
+            const Icon(Icons.chevron_right, color: Color.fromARGB(255, 78, 187, 165)),
           ],
         ),
       ),

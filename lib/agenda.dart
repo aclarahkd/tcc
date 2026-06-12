@@ -57,7 +57,7 @@ class _Tela6AgendaState extends State<Tela6Agenda> {
             Container(
               width: double.infinity,
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-              color: const Color(0xFF6DBAAA),
+              color: const Color.fromARGB(255, 78, 187, 165),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
@@ -118,7 +118,7 @@ class _Tela6AgendaState extends State<Tela6Agenda> {
                   Positioned(
                     right: 20, bottom: 25,
                     child: FloatingActionButton(
-                      backgroundColor: const Color(0xFF6DBAAA),
+                      backgroundColor: const Color.fromARGB(255, 78, 187, 165),
                       elevation: 2,
                       onPressed: () => Navigator.push(context,
                           MaterialPageRoute(builder: (_) => const Tela6_5())),
@@ -154,7 +154,7 @@ class _Tela6AgendaState extends State<Tela6Agenda> {
           Container(
             width: 44, height: 44,
             decoration: BoxDecoration(
-              color: ativo ? const Color(0xFF2C5F5A) : Colors.grey.shade300,
+              color: ativo ? const Color.fromARGB(255, 12, 29, 96) : Colors.grey.shade300,
               borderRadius: BorderRadius.circular(10),
             ),
             child: Icon(icone, size: 22, color: ativo ? Colors.white : Colors.black54),
@@ -198,7 +198,7 @@ class _Tela6AgendaState extends State<Tela6Agenda> {
                 ],
               ),
             ),
-            const Icon(Icons.chevron_right, color: Color(0xFF6DBAAA)),
+            const Icon(Icons.chevron_right, color: Color.fromARGB(255, 78, 187, 165)),
           ],
         ),
       ),

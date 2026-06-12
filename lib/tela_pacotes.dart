@@ -14,14 +14,14 @@ class TelaPacotes extends StatefulWidget {
 
 class _TelaPacotesState extends State<TelaPacotes> {
   final List<Map<String, String>> pacotes = [
-    {'titulo': 'Foz do Iguaçu, Paraguai e Argentina', 'origem': 'Saindo de São José dos Campos', 'preco': 'A partir de R\$2800 por pessoa', 'parcelas': '5X de R\$580',  'imagem': 'imagens/fozpa.png'},
-    {'titulo': 'Beto Carrero World, Balneário Camboriú e Curitiba',                   'origem': 'Saindo de São José dos Campos', 'preco': 'A partir de R\$2900 por pessoa', 'parcelas': '5X de R\$560',  'imagem': 'imagens/betocarrero.jpg'},
+    {'titulo': 'Foz do Iguaçu, Paraguai e Argentina', 'origem': 'Saindo de São José dos Campos', 'preco': 'A partir de R\$2900 por pessoa', 'parcelas': '5X de R\$580',  'imagem': 'imagens/fozpa.png'},
+    {'titulo': 'Beto Carrero World',                   'origem': 'Saindo de São José dos Campos', 'preco': 'A partir de R\$2800 por pessoa', 'parcelas': '5X de R\$560',  'imagem': 'imagens/betocarrero.png'},
     {'titulo': 'Petrópolis - RJ',                      'origem': 'Saindo de São José dos Campos', 'preco': 'A partir de R\$1500 por pessoa', 'parcelas': '5X de R\$300',  'imagem': 'imagens/petropolis.png'},
     {'titulo': 'Ibitinga + Passeio de Barco',          'origem': 'Saindo de São José dos Campos', 'preco': 'A partir de R\$1050 por pessoa', 'parcelas': '5X de R\$210',  'imagem': 'imagens/ibitinga.png'},
-    {'titulo': 'Jaguariúna + Pedreira',                'origem': 'Saindo de São José dos Campos', 'preco': 'A partir de R\$1100 por pessoa',  'parcelas': '4X de R\$160',  'imagem': 'imagens/jaguariuna.png'},
-    {'titulo': 'Zoo Itatiba',                          'origem': 'Saindo de São José dos Campos', 'preco': 'A partir de R\$250 por pessoa',  'parcelas': '3X de R\$83',  'imagem': 'imagens/zooitatiba.png'},
-    {'titulo': 'Festa do Morango',                     'origem': 'Saindo de São José dos Campos', 'preco': 'A partir de R\$100 por pessoa',  'parcelas': '2X de R\$50',  'imagem': 'imagens/morango.png'},
-    {'titulo': 'Natal Iluminado - Poços de Caldas',    'origem': 'Saindo de São José dos Campos', 'preco': 'A partir de R\$1300 por pessoa',  'parcelas': '4X de R\$325',  'imagem': 'imagens/natal.png'},
+    {'titulo': 'Jaguariúna + Pedreira',                'origem': 'Saindo de São José dos Campos', 'preco': 'A partir de R\$800 por pessoa',  'parcelas': '5X de R\$160',  'imagem': 'imagens/jaguariuna.png'},
+    {'titulo': 'Zoo Itatiba',                          'origem': 'Saindo de São José dos Campos', 'preco': 'A partir de R\$500 por pessoa',  'parcelas': '5X de R\$100',  'imagem': 'imagens/zooitatiba.png'},
+    {'titulo': 'Festa do Morango',                     'origem': 'Saindo de São José dos Campos', 'preco': 'A partir de R\$600 por pessoa',  'parcelas': '5X de R\$120',  'imagem': 'imagens/morango.png'},
+    {'titulo': 'Natal Iluminado - Poços de Caldas',    'origem': 'Saindo de São José dos Campos', 'preco': 'A partir de R\$900 por pessoa',  'parcelas': '5X de R\$180',  'imagem': 'imagens/natal.png'},
   ];
 
   @override
@@ -35,7 +35,7 @@ class _TelaPacotesState extends State<TelaPacotes> {
             Container(
               width: double.infinity,
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-              color: const Color(0xFF6DBAAA),
+              color: const Color.fromARGB(255, 78, 187, 165),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
@@ -122,7 +122,7 @@ class _TelaPacotesState extends State<TelaPacotes> {
           Container(
             width: 44, height: 44,
             decoration: BoxDecoration(
-              color: ativo ? const Color(0xFF2C5F5A) : Colors.grey.shade300,
+              color: ativo ? const Color.fromARGB(255, 12, 29, 96) : Colors.grey.shade300,
               borderRadius: BorderRadius.circular(10),
             ),
             child: Icon(icone, size: 22, color: ativo ? Colors.white : Colors.black54),
@@ -147,7 +147,7 @@ class _TelaPacotesState extends State<TelaPacotes> {
             borderRadius: const BorderRadius.only(topLeft: Radius.circular(16), topRight: Radius.circular(16)),
             child: Image.asset(p['imagem']!, height: 120, width: double.infinity, fit: BoxFit.cover,
                 errorBuilder: (_, __, ___) => Container(height: 120,
-                    color: const Color(0xFF6DBAAA).withOpacity(0.3),
+                    color: const Color.fromARGB(255, 78, 187, 165).withOpacity(0.3),
                     child: const Center(child: Icon(Icons.image, color: Colors.white, size: 40)))),
           ),
           Padding(
@@ -157,31 +157,33 @@ class _TelaPacotesState extends State<TelaPacotes> {
               children: [
                 Text(p['titulo']!, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.bold, color: Color(0xFF1A1A1A)), maxLines: 2, overflow: TextOverflow.ellipsis),
                 const SizedBox(height: 3),
-                Text(p['origem']!, style: const TextStyle(fontSize: 11, color: Color(0xFF6DBAAA)), maxLines: 1, overflow: TextOverflow.ellipsis),
+                Text(p['origem']!, style: const TextStyle(fontSize: 11, color: Color.fromARGB(255, 78, 187, 165)), maxLines: 1, overflow: TextOverflow.ellipsis),
                 const SizedBox(height: 10),
                 Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                  const Icon(Icons.directions_bus, size: 18, color: Color(0xFF2C5F5A)),
+                  const Icon(Icons.directions_bus, size: 18, color: Color.fromARGB(255, 12, 29, 96)),
                   const SizedBox(width: 6),
                   Expanded(child: Text(p['preco']!, style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: Color(0xFF1A1A1A)))),
                 ]),
                 const SizedBox(height: 8),
                 const Text('Ida e volta', style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: Color(0xFF1A1A1A))),
                 const SizedBox(height: 2),
-                Text(p['parcelas']!, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.bold, color: Color(0xFF2C5F5A))),
+                Text(p['parcelas']!, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.bold, color: Color.fromARGB(255, 12, 29, 96))),
                 const SizedBox(height: 10),
                 SizedBox(width: double.infinity,
-                  child: ElevatedButton(onPressed: () {},
-                    style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF6DBAAA), foregroundColor: Colors.white,
+                  child: ElevatedButton(onPressed: () {
+                    
+                  },
+                    style: ElevatedButton.styleFrom(backgroundColor: const Color.fromARGB(255, 78, 187, 165), foregroundColor: Colors.white,
                         padding: const EdgeInsets.symmetric(vertical: 8),
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)), elevation: 0),
                     child: const Text('Compre no app', style: TextStyle(fontSize: 11)))),
                 const SizedBox(height: 6),
                 SizedBox(width: double.infinity,
                   child: OutlinedButton.icon(onPressed: () {},
-                    icon: const Icon(Icons.chat, size: 16, color: Color(0xFF2C5F5A)),
-                    label: const Text('Fale com a gente', style: TextStyle(fontSize: 11, color: Color(0xFF2C5F5A))),
+                    icon: const Icon(Icons.chat, size: 16, color: Color.fromARGB(255, 12, 29, 96)),
+                    label: const Text('Fale com a gente', style: TextStyle(fontSize: 11, color: Color.fromARGB(255, 12, 29, 96))),
                     style: OutlinedButton.styleFrom(padding: const EdgeInsets.symmetric(vertical: 8),
-                        side: const BorderSide(color: Color(0xFF6DBAAA)),
+                        side: const BorderSide(color: Color.fromARGB(255, 78, 187, 165)),
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20))))),
               ],
             ),
