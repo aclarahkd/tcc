@@ -52,7 +52,13 @@ class _AvisoVerificarState extends State<AvisoVerificar> {
 
   void _reenviarCodigo() {
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text('Código reenviado para ${widget.email}')),
+      SnackBar(
+        content: Text('Código reenviado com sucesso para ${widget.email}'),
+        backgroundColor: const Color.fromARGB(255, 12, 29, 96),
+        behavior: SnackBarBehavior.floating,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        duration: const Duration(seconds: 3),
+      ),
     );
   }
 

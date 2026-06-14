@@ -164,15 +164,7 @@ class _TelaPromocoesState extends State<TelaPromocoes> {
                 const SizedBox(height: 2),
                 Text(p['parcelas']!, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.bold, color: Color.fromARGB(255, 12, 29, 96))),
                 const SizedBox(height: 10),
-                SizedBox(width: double.infinity,
-                  child: ElevatedButton(onPressed: () {
-                  
-                  },
-                    style: ElevatedButton.styleFrom(backgroundColor: const Color.fromARGB(255, 78, 187, 165), foregroundColor: Colors.white,
-                        padding: const EdgeInsets.symmetric(vertical: 8),
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)), elevation: 0),
-                    child: const Text('Compre no app', style: TextStyle(fontSize: 11)))),
-                const SizedBox(height: 6),
+
                 SizedBox(width: double.infinity,
                   child: OutlinedButton.icon(onPressed: () {},
                     icon: const Icon(Icons.chat, size: 16, color: Color.fromARGB(255, 12, 29, 96)),

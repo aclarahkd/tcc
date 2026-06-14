@@ -116,7 +116,7 @@ class _TelaConfiguracoesState extends State<TelaConfiguracoes> {
 
                   // Sair
                   _buildOpcao(
-                    icone: Icons.arrow_back_circle_outlined,
+                    icone: Icons.arrow_back_ios_new,
                     titulo: 'Sair',
                     subtitulo: 'Fazer logout de sua conta',
                     onTap: () {
