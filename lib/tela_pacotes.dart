@@ -15,7 +15,7 @@ class TelaPacotes extends StatefulWidget {
 class _TelaPacotesState extends State<TelaPacotes> {
   final List<Map<String, String>> pacotes = [
     {'titulo': 'Foz do Iguaçu, Paraguai e Argentina', 'origem': 'Saindo de São José dos Campos', 'preco': 'A partir de R\$2900 por pessoa', 'parcelas': '5X de R\$580',  'imagem': 'imagens/fozpa.png'},
-    {'titulo': 'Beto Carrero World',                   'origem': 'Saindo de São José dos Campos', 'preco': 'A partir de R\$2800 por pessoa', 'parcelas': '5X de R\$560',  'imagem': 'imagens/betocarrero.png'},
+    {'titulo': 'Beto Carrero World',                   'origem': 'Saindo de São José dos Campos', 'preco': 'A partir de R\$2800 por pessoa', 'parcelas': '5X de R\$560',  'imagem': 'imagens/betocarrero.jpg'},
     {'titulo': 'Petrópolis - RJ',                      'origem': 'Saindo de São José dos Campos', 'preco': 'A partir de R\$1500 por pessoa', 'parcelas': '5X de R\$300',  'imagem': 'imagens/petropolis.png'},
     {'titulo': 'Ibitinga + Passeio de Barco',          'origem': 'Saindo de São José dos Campos', 'preco': 'A partir de R\$1050 por pessoa', 'parcelas': '5X de R\$210',  'imagem': 'imagens/ibitinga.png'},
     {'titulo': 'Jaguariúna + Pedreira',                'origem': 'Saindo de São José dos Campos', 'preco': 'A partir de R\$800 por pessoa',  'parcelas': '5X de R\$160',  'imagem': 'imagens/jaguariuna.png'},

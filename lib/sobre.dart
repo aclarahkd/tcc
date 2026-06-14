@@ -143,7 +143,7 @@ class _Tela7State extends State<Tela7> {
               child: Stack(
                 fit: StackFit.expand,
                 children: [
-                  Image.asset('imagens/cidinhaeconrado.png', fit: BoxFit.cover,
+                  Image.asset('imagens/cidinhaeconrado.jpeg', fit: BoxFit.cover,
                       errorBuilder: (_, __, ___) => Container(
                           color: const Color(0xFF4DA898),
                           child: const Center(child: Icon(Icons.photo, size: 72, color: Colors.white54)))),
