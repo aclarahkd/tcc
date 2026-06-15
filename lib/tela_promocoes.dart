@@ -26,47 +26,52 @@ class _TelaPromocoesState extends State<TelaPromocoes> {
         child: Column(
           children: [
             // ── Header verde ──────────────────────────────────────────────
-            Container(
-              width: double.infinity,
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-              color: const Color.fromARGB(255, 78, 187, 165),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  PopupMenuButton<String>(
-                    icon: const Icon(Icons.more_horiz, color: Colors.white),
-                    onSelected: (value) {
-                      if (value == 'editar') {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (_) => const TelaConfiguracoes()));
-                      } else if (value == 'sair') {
-                        Navigator.of(context).popUntil((route) => route.isFirst);
-                      }
-                    },
-                    itemBuilder: (context) => const [
-                      PopupMenuItem(value: 'editar', child: Text('Editar perfil')),
-                      PopupMenuItem(value: 'sair',   child: Text('Sair da conta')),
-                    ],
-                  ),
-                ],
-              ),
-            ),
+           Container(
+  width: double.infinity,
+  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+  color: const Color.fromARGB(255, 78, 187, 165),
+  child: Row(
+    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    children: [
+      Image.asset(
+        'imagens/logo.png',
+        height: 90,
+        fit: BoxFit.contain,
+      ),
 
-            // ── Menu ─────────────────────────────────────────────────────
-            Container(
-              padding: const EdgeInsets.symmetric(vertical: 16),
-              color: Colors.white,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  _itemMenu(Icons.home,           'Início'),
-                  _itemMenu(Icons.card_travel,    'Pacotes'),
-                  _itemMenu(Icons.local_offer,    'Promoções'),
-                  _itemMenu(Icons.calendar_month, 'Agenda'),
-                  _itemMenu(Icons.groups,         'Sobre'),
-                ],
+      PopupMenuButton<String>(
+        icon: const Icon(
+          Icons.more_horiz,
+          color: Colors.white,
+        ),
+        onSelected: (value) {
+          if (value == 'editar') {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (_) => const TelaConfiguracoes(),
               ),
-            ),
+            );
+          } else if (value == 'sair') {
+            Navigator.of(context).popUntil(
+              (route) => route.isFirst,
+            );
+          }
+        },
+        itemBuilder: (context) => const [
+          PopupMenuItem(
+            value: 'editar',
+            child: Text('Editar perfil'),
+          ),
+          PopupMenuItem(
+            value: 'sair',
+            child: Text('Sair da conta'),
+          ),
+        ],
+      ),
+    ],
+  ),
+),
 
             Expanded(
               child: SingleChildScrollView(

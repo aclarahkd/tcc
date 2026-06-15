@@ -32,32 +32,52 @@ class _TelaPacotesState extends State<TelaPacotes> {
         child: Column(
           children: [
             // ── Header verde ──────────────────────────────────────────────
-            Container(
-              width: double.infinity,
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-              color: const Color.fromARGB(255, 78, 187, 165),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  PopupMenuButton<String>(
-                    icon: const Icon(Icons.more_horiz, color: Colors.white),
-                    onSelected: (value) {
-                      if (value == 'editar') {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (_) => const TelaConfiguracoes()));
-                      } else if (value == 'sair') {
-                        Navigator.of(context).popUntil((route) => route.isFirst);
-                      }
-                    },
-                    itemBuilder: (context) => const [
-                      PopupMenuItem(value: 'editar', child: Text('Editar perfil')),
-                      PopupMenuItem(value: 'sair',   child: Text('Sair da conta')),
-                    ],
-                  ),
-                ],
-              ),
-            ),
+           Container(
+  width: double.infinity,
+  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+  color: const Color.fromARGB(255, 78, 187, 165),
+  child: Row(
+    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    children: [
+      Image.asset(
+        'imagens/logo.png',
+        height: 90,
+        fit: BoxFit.contain,
+      ),
 
+      PopupMenuButton<String>(
+        icon: const Icon(
+          Icons.more_horiz,
+          color: Colors.white,
+        ),
+        onSelected: (value) {
+          if (value == 'editar') {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (_) => const TelaConfiguracoes(),
+              ),
+            );
+          } else if (value == 'sair') {
+            Navigator.of(context).popUntil(
+              (route) => route.isFirst,
+            );
+          }
+        },
+        itemBuilder: (context) => const [
+          PopupMenuItem(
+            value: 'editar',
+            child: Text('Editar perfil'),
+          ),
+          PopupMenuItem(
+            value: 'sair',
+            child: Text('Sair da conta'),
+          ),
+        ],
+      ),
+    ],
+  ),
+),
             // ── Menu ─────────────────────────────────────────────────────
             Container(
               padding: const EdgeInsets.symmetric(vertical: 16),
