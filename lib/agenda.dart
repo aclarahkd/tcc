@@ -44,7 +44,7 @@ class _Tela6AgendaState extends State<Tela6Agenda> {
     },
     {
       'titulo': 'Festa do Morango',
-      'data': '14 a 17 de Agosto de 2026',
+      'data': '17/08/26',
       'imagem': 'imagens/morango.png',
       'tela': const DetalheFestaDoMorango(),
     },

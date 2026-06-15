@@ -48,7 +48,7 @@ class _DetalheFestaDoMorangoState extends State<DetalheFestaDoMorango> {
                     Text('Festa do morango',
                         style: const TextStyle(fontSize: 26, fontWeight: FontWeight.bold, color: Color.fromARGB(255, 12, 29, 96))),
                     const SizedBox(height: 4),
-                    Text('Agosto em Atibaia',
+                    Text('17/08',
                         style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: Colors.black87)),
                     const SizedBox(height: 16),
                     _buildCarrossel(),
