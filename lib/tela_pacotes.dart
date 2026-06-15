@@ -14,10 +14,10 @@ class TelaPacotes extends StatefulWidget {
 
 class _TelaPacotesState extends State<TelaPacotes> {
   final List<Map<String, String>> pacotes = [
-    {'titulo': 'Foz do Iguaçu, Paraguai e Argentina', 'origem': 'Saindo de São José dos Campos', 'preco': 'A partir de R\$2900 por pessoa', 'parcelas': '5X de R\$580 sem juros',  'imagem': 'imagens/fozpa.png'},
+    {'titulo': 'Foz do Iguaçu, PY e AR', 'origem': 'Saindo de São José dos Campos', 'preco': 'A partir de R\$2900 por pessoa', 'parcelas': '5X de R\$580 sem juros',  'imagem': 'imagens/fozpa.png'},
     {'titulo': 'Beto Carrero World',                   'origem': 'Saindo de São José dos Campos', 'preco': 'A partir de R\$2850 por pessoa', 'parcelas': '5X de R\$570 sem juros',  'imagem': 'imagens/betocarrero.jpg'},
     {'titulo': 'Petrópolis - RJ',                      'origem': 'Saindo de São José dos Campos', 'preco': 'A partir de R\$1500 por pessoa', 'parcelas': '5X de R\$300 sem juros',  'imagem': 'imagens/petropolis.png'},
-    {'titulo': 'Ibitinga + Passeio de Barco',          'origem': 'Saindo de São José dos Campos', 'preco': 'A partir de R\$1050 por pessoa', 'parcelas': '3X de R\$350 sem juros',  'imagem': 'imagens/ibitinga.png'},
+    {'titulo': 'Ibitinga + Barco',          'origem': 'Saindo de São José dos Campos', 'preco': 'A partir de R\$1050 por pessoa', 'parcelas': '3X de R\$350 sem juros',  'imagem': 'imagens/ibitinga.png'},
     {'titulo': 'Jaguariúna + Pedreira',                'origem': 'Saindo de São José dos Campos', 'preco': 'A partir de R\$950 por pessoa',  'parcelas': '3X de R\$160 sem juros',  'imagem': 'imagens/jaguariuna.png'},
     {'titulo': 'Zoo Itatiba',                          'origem': 'Saindo de São José dos Campos', 'preco': 'A partir de R\$200 por pessoa',  'parcelas': '2X de R\$100 sem juros',  'imagem': 'imagens/zooitatiba.png'},
     {'titulo': 'Festa do Morango',                     'origem': 'Saindo de São José dos Campos', 'preco': 'A partir de R\$100 por pessoa',  'parcelas': '2x de R\$50 sem juros',  'imagem': 'imagens/morango.png'},
