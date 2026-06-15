@@ -12,6 +12,7 @@ class TelaPromocoes extends StatefulWidget {
   State<TelaPromocoes> createState() => _TelaPromocoesState();
 }
 
+
 class _TelaPromocoesState extends State<TelaPromocoes> {
   final List<Map<String, String>> promocoes = [
     {'titulo': 'Holambra - SP',  'origem': 'Saindo de São José dos Campos', 'preco': 'A partir de R\$190 por pessoa',  'parcelas': '2X de R\$95 sem juros',  'imagem': 'imagens/holambra.jpg'},
@@ -73,7 +74,23 @@ class _TelaPromocoesState extends State<TelaPromocoes> {
   ),
 ),
 
+// ── Menu ─────────────────────────────────────────────────────
+Container(
+  padding: const EdgeInsets.symmetric(vertical: 16),
+  color: Colors.white,
+  child: Row(
+    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+    children: [
+      _itemMenu(Icons.home, 'Início'),
+      _itemMenu(Icons.card_travel, 'Pacotes'),
+      _itemMenu(Icons.local_offer, 'Promoções'),
+      _itemMenu(Icons.calendar_month, 'Agenda'),
+      _itemMenu(Icons.groups, 'Sobre'),
+    ],
+  ),
+),
             Expanded(
+              
               child: SingleChildScrollView(
                 padding: const EdgeInsets.all(20),
                 child: Column(
@@ -100,39 +117,63 @@ class _TelaPromocoesState extends State<TelaPromocoes> {
       ),
     );
   }
+Widget _itemMenu(IconData icone, String titulo) {
+  final bool ativo = titulo == 'Promoções';
 
-  Widget _itemMenu(IconData icone, String titulo) {
-    final bool ativo = titulo == 'Promoções';
-    return GestureDetector(
-      onTap: () {
-        if (titulo == 'Início') {
-          Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => const Tela3()));
-        } else if (titulo == 'Pacotes') {
-          Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => const TelaPacotes()));
-        } else if (titulo == 'Agenda') {
-          Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => const Tela6Agenda()));
-        } else if (titulo == 'Sobre') {
-          Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => const Tela7()));
-        }
-      },
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Container(
-            width: 44, height: 44,
-            decoration: BoxDecoration(
-              color: ativo ? const Color.fromARGB(255, 12, 29, 96) : Colors.grey.shade300,
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: Icon(icone, size: 22, color: ativo ? Colors.white : Colors.black54),
+  return GestureDetector(
+    onTap: () {
+      if (titulo == 'Início') {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (_) => const Tela3()),
+        );
+      } else if (titulo == 'Pacotes') {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (_) => const TelaPacotes()),
+        );
+      } else if (titulo == 'Agenda') {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (_) => const Tela6Agenda()),
+        );
+      } else if (titulo == 'Sobre') {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (_) => const Tela7()),
+        );
+      }
+    },
+    child: Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Container(
+          width: 44,
+          height: 44,
+          decoration: BoxDecoration(
+            color: ativo
+                ? const Color.fromARGB(255, 12, 29, 96)
+                : Colors.grey.shade300,
+            borderRadius: BorderRadius.circular(10),
           ),
-          const SizedBox(height: 5),
-          Text(titulo, style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w500)),
-        ],
-      ),
-    );
-  }
-
+          child: Icon(
+            icone,
+            size: 22,
+            color: ativo ? Colors.white : Colors.black54,
+          ),
+        ),
+        const SizedBox(height: 5),
+        Text(
+          titulo,
+          style: const TextStyle(
+            fontSize: 11,
+            fontWeight: FontWeight.w500,
+          ),
+        ),
+      ],
+    ),
+  );
+}
   Widget _buildCard(Map<String, String> p) {
     return Container(
       decoration: BoxDecoration(
@@ -183,4 +224,6 @@ class _TelaPromocoesState extends State<TelaPromocoes> {
       ),
     );
   }
+  
+  _itemmenu(IconData home, String s) {}
 }
