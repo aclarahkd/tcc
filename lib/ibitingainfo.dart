@@ -21,9 +21,9 @@ class _DetalheIbitingaState extends State<DetalheIbitinga> {
 
   final List<String> _imagens = [
     'imagens/ibitinga.png',
-    'imagens/ibitinga2.png',
-    'imagens/ibitinga3.png',
-    'imagens/ibitinga4.png',
+    'imagens/ibitinga2.jpg',
+    'imagens/ibitinga3.jpeg',
+    'imagens/ibitinga4.jpeg',
   ];
 
   void _proximaFoto() {
@@ -45,7 +45,7 @@ class _DetalheIbitingaState extends State<DetalheIbitinga> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Ibitinga',
+                    Text('Ibitinga + Passeio de barco',
                         style: const TextStyle(fontSize: 26, fontWeight: FontWeight.bold, color: Color.fromARGB(255, 12, 29, 96))),
                     const SizedBox(height: 4),
                     Text('24 - 27/07',

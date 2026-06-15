@@ -14,9 +14,11 @@ class Tela3 extends StatefulWidget {
 
 class _Tela3State extends State<Tela3> {
   List<String> imagens = [
-    'imagens/foto1.jpg',
-    'imagens/foto2.jpg',
-    'imagens/foto3.png',
+    'imagens/fozcc.jpg',
+    'imagens/foz2.jpg',
+    'imagens/foz3.jpg',
+    'imagens/foz4.jpg',
+    'imagens/foz5.jpeg',
   ];
 
   int fotoAtual = 0;
@@ -107,7 +109,7 @@ class _Tela3State extends State<Tela3> {
                         controller: pesquisaController,
                         style: const TextStyle(color: Colors.white),
                         decoration: const InputDecoration(
-                          hintText: 'Utilize IA para lhe auxiliar',
+                          hintText: 'Utilize o filtro para lhe auxiliar',
                           hintStyle: TextStyle(color: Colors.white70),
                           border: InputBorder.none,
                         ),

@@ -21,9 +21,9 @@ class _DetalheNatalPocosState extends State<DetalheNatalPocos> {
 
   final List<String> _imagens = [
     'imagens/natal.png',
-    'imagens/natal2.png',
-    'imagens/natal3.png',
-    'imagens/natal4.png',
+    'imagens/natal2.jpg',
+    'imagens/natal3.jpg',
+    'imagens/natal4.jpeg',
   ];
 
   void _proximaFoto() {

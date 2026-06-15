@@ -14,8 +14,8 @@ class TelaPromocoes extends StatefulWidget {
 
 class _TelaPromocoesState extends State<TelaPromocoes> {
   final List<Map<String, String>> promocoes = [
-    {'titulo': 'Holambra, São Paulo',  'origem': 'Saindo de São José dos Campos', 'preco': 'A partir de R\$300 por pessoa',  'parcelas': '5X de R\$60',  'imagem': 'imagens/holambra.jpg'},
-    {'titulo': 'Ibitinga, São Paulo',  'origem': 'Saindo de São José dos Campos', 'preco': 'A partir de R\$1050 por pessoa', 'parcelas': '5X de R\$210', 'imagem': 'imagens/ibitinga.png'},
+    {'titulo': 'Holambra - SP',  'origem': 'Saindo de São José dos Campos', 'preco': 'A partir de R\$300 por pessoa',  'parcelas': '5X de R\$60',  'imagem': 'imagens/holambra.jpg'},
+    {'titulo': 'Ibitinga + Passeio de Barco',  'origem': 'Saindo de São José dos Campos', 'preco': 'A partir de R\$1050 por pessoa', 'parcelas': '5X de R\$210', 'imagem': 'imagens/ibitinga.png'},
     {'titulo': 'Festa do Morango',     'origem': 'Saindo de São José dos Campos', 'preco': 'A partir de R\$600 por pessoa',  'parcelas': '5X de R\$120', 'imagem': 'imagens/morango.png'},
   ];
 

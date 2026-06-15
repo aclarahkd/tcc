@@ -21,8 +21,9 @@ class _DetalhePetropolisState extends State<DetalhePetropolis> {
 
   final List<String> _imagens = [
     'imagens/petropolis.png',
-    'imagens/petropolis2.png',
-    'imagens/petropolis3.png',
+    'imagens/petropolis2.jpg',
+    'imagens/petropolis3.jpg',
+    'imagens/petropolis4.png',
   ];
 
   void _proximaFoto() {

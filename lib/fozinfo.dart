@@ -21,10 +21,9 @@ class _DetalheFozState extends State<DetalheFoz> {
 
   final List<String> _imagens = [
     'imagens/fozpa.png',
-    'imagens/fozpa2.png',
-    'imagens/fozpa3.png',
-    'imagens/fozpa4.png',
-    'imagens/fozpa5.png',
+    'imagens/fozpa2.jpeg',
+    'imagens/fozpa3.jpg',
+    'imagens/fozpa4.jpeg',
   ];
 
   void _proximaFoto() {
