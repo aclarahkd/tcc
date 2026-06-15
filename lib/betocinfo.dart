@@ -8,21 +8,21 @@ import 'tela_promocoes.dart';
 import 'configuracoes.dart';
 import 'avisoemail.dart';
 
-class DetalheZooItatiba extends StatefulWidget {
-  const DetalheZooItatiba({super.key});
+class DetalheBetoCarrero extends StatefulWidget {
+  const DetalheBetoCarrero({super.key});
 
   @override
-  State<DetalheZooItatiba> createState() => _DetalheZooItatibaState();
+  State<DetalheBetoCarrero> createState() => _DetalheBetoCarreroState();
 }
 
-class _DetalheZooItatibaState extends State<DetalheZooItatiba> {
+class _DetalheBetoCarreroState extends State<DetalheBetoCarrero> {
   int _fotoAtual = 0;
 
   final List<String> _imagens = [
-    'imagens/zooitatiba.png',
-    'imagens/zooitatiba2.jpg',
-    'imagens/zooitatiba3.jpg',
-    'imagens/zooitatiba4.jpg',
+    'imagens/betocarrero.jpg',
+    'imagens/betocarrero2.webp',
+    'imagens/betocarrero3.jpg',
+    'imagens/betocarrero4.jpg',
   ];
 
   void _proximaFoto() {
@@ -44,16 +44,16 @@ class _DetalheZooItatibaState extends State<DetalheZooItatiba> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Zoo Itatiba',
+                    Text('Beto Carrero World, Balneário Camboriú e Curitiba',
                         style: const TextStyle(fontSize: 26, fontWeight: FontWeight.bold, color: Color.fromARGB(255, 12, 29, 96))),
                     const SizedBox(height: 4),
-                    Text('27/09',
+                    Text('24 - 27/07',
                         style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: Colors.black87)),
                     const SizedBox(height: 16),
                     _buildCarrossel(),
                     const SizedBox(height: 20),
                     Text(
-                      'Conheça os biomas brasileiros e o papel essencial de cada ecossistema. Explore os ambientes temáticos e viva uma experiência única junto à fauna mundial.',
+                      'Com a hospedagem em Balneário Camboriú, permitindo conhecer as belezas e atrações da cidade. O roteiro também contará com um passeio a Santa Felicidade, famoso por sua tradição italiana e gastronomia típica, além de uma visita ao Beto Carrero World, um dos maiores parques temáticos da América Latina. A viagem proporcionará momentos de lazer, cultura, diversão e convivência entre os participantes.',
                       style: const TextStyle(fontSize: 15, color: Colors.black87, height: 1.5),
                     ),
                     const SizedBox(height: 16),

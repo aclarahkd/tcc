@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'agenda.dart';
-import 'agenda2.dart';
 import 'sobre.dart';
 import 'inicio.dart';
 import 'tela_pacotes.dart';

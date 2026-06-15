@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
-import 'agenda2.dart';
+import 'package:tcc/betocinfo.dart';
+import 'package:tcc/configuracoes.dart';
+import 'package:tcc/fozinfo.dart';
+import 'package:tcc/ibitingainfo.dart';
+import 'package:tcc/jaguariunainfo.dart';
+import 'package:tcc/morangoinfo.dart';
+import 'package:tcc/natalpocosinfo.dart';
+import 'package:tcc/petropolisinfo.dart';
+import 'package:tcc/zooitatibainfo.dart';
 import 'sobre.dart';
 import 'inicio.dart';
 import 'tela_pacotes.dart';
 import 'tela_promocoes.dart';
-import 'configuracoes.dart';
-import 'jaguariunainfo.dart';
-import 'ibitingainfo.dart';
-import 'morangoinfo.dart';
-import 'zooitatibainfo.dart';
+
 
 class Tela6Agenda extends StatefulWidget {
   const Tela6Agenda({super.key});
@@ -19,12 +23,19 @@ class Tela6Agenda extends StatefulWidget {
 
 class _Tela6AgendaState extends State<Tela6Agenda> {
 
+  // ── Todas as viagens unificadas (agenda + agenda2) ────────────────────
   final List<Map<String, dynamic>> viagens = [
     {
       'titulo': 'Jaguariúna + Pedreira',
       'data': '28/06',
       'imagem': 'imagens/jaguariuna.png',
       'tela': const DetalheJaguariuna(),
+    },
+    {
+      'titulo': 'Beto Carrero World, Balneário Camboriú e Curitiba',
+      'data': '28/06',
+      'imagem': 'imagens/betocarrero.jpg',
+      'tela': const DetalheBetoCarrero(),
     },
     {
       'titulo': 'Ibitinga + Passeio de Barco',
@@ -43,6 +54,24 @@ class _Tela6AgendaState extends State<Tela6Agenda> {
       'data': '27/09',
       'imagem': 'imagens/zooitatiba.png',
       'tela': const DetalheZooItatiba(),
+    },
+    {
+      'titulo': 'Foz, Paraguai e Argentina',
+      'data': '18-22/11',
+      'imagem': 'imagens/fozpa.png',
+      'tela': const DetalheFoz(),
+    },
+    {
+      'titulo': 'Natal Iluminado - Poços de Caldas',
+      'data': '27-29/11',
+      'imagem': 'imagens/natal.png',
+      'tela': const DetalheNatalPocos(),
+    },
+    {
+      'titulo': 'Petrópolis - RJ',
+      'data': 'Data não definida',
+      'imagem': 'imagens/petropolis.png',
+      'tela': const DetalhePetropolis(),
     },
   ];
 
@@ -96,35 +125,26 @@ class _Tela6AgendaState extends State<Tela6Agenda> {
               ),
             ),
 
+            // ── Lista unificada com scroll ────────────────────────────────
             Expanded(
-              child: Stack(
+              child: ListView(
+                physics: const BouncingScrollPhysics(),
+                padding: const EdgeInsets.all(20),
                 children: [
-                  ListView(
-                    padding: const EdgeInsets.all(20),
-                    children: [
-                      const Text(
-                        'Programação de viagens e passeios 2026',
-                        style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Color(0xFF222222)),
-                      ),
-                      const SizedBox(height: 24),
-                      for (var viagem in viagens)
-                        Padding(
-                          padding: const EdgeInsets.only(bottom: 16),
-                          child: _buildCardViagem(viagem),
-                        ),
-                      const SizedBox(height: 80),
-                    ],
-                  ),
-                  Positioned(
-                    right: 20, bottom: 25,
-                    child: FloatingActionButton(
-                      backgroundColor: const Color.fromARGB(255, 78, 187, 165),
-                      elevation: 2,
-                      onPressed: () => Navigator.push(context,
-                          MaterialPageRoute(builder: (_) => const Tela6_5())),
-                      child: const Icon(Icons.keyboard_arrow_down_rounded, size: 34, color: Colors.white),
+                  const Text(
+                    'Programação de viagens e passeios 2026',
+                    style: TextStyle(
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold,
+                      color: Color(0xFF222222),
                     ),
                   ),
+                  const SizedBox(height: 24),
+                  ...viagens.map((viagem) => Padding(
+                        padding: const EdgeInsets.only(bottom: 16),
+                        child: _buildCardViagem(viagem),
+                      )),
+                  const SizedBox(height: 20),
                 ],
               ),
             ),
@@ -139,13 +159,17 @@ class _Tela6AgendaState extends State<Tela6Agenda> {
     return GestureDetector(
       onTap: () {
         if (titulo == 'Início') {
-          Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => const Tela3()));
+          Navigator.pushReplacement(context,
+              MaterialPageRoute(builder: (_) => const Tela3()));
         } else if (titulo == 'Pacotes') {
-          Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => const TelaPacotes()));
+          Navigator.pushReplacement(context,
+              MaterialPageRoute(builder: (_) => const TelaPacotes()));
         } else if (titulo == 'Promoções') {
-          Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => const TelaPromocoes()));
+          Navigator.pushReplacement(context,
+              MaterialPageRoute(builder: (_) => const TelaPromocoes()));
         } else if (titulo == 'Sobre') {
-          Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => const Tela7()));
+          Navigator.pushReplacement(context,
+              MaterialPageRoute(builder: (_) => const Tela7()));
         }
       },
       child: Column(
@@ -154,13 +178,17 @@ class _Tela6AgendaState extends State<Tela6Agenda> {
           Container(
             width: 44, height: 44,
             decoration: BoxDecoration(
-              color: ativo ? const Color.fromARGB(255, 12, 29, 96) : Colors.grey.shade300,
+              color: ativo
+                  ? const Color.fromARGB(255, 12, 29, 96)
+                  : Colors.grey.shade300,
               borderRadius: BorderRadius.circular(10),
             ),
-            child: Icon(icone, size: 22, color: ativo ? Colors.white : Colors.black54),
+            child: Icon(icone, size: 22,
+                color: ativo ? Colors.white : Colors.black54),
           ),
           const SizedBox(height: 6),
-          Text(titulo, style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w500)),
+          Text(titulo,
+              style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w500)),
         ],
       ),
     );
@@ -179,26 +207,41 @@ class _Tela6AgendaState extends State<Tela6Agenda> {
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(18),
-          boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 8, offset: const Offset(0, 3))],
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.04),
+              blurRadius: 8,
+              offset: const Offset(0, 3),
+            ),
+          ],
         ),
         child: Row(
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(50),
-              child: Image.asset(viagem['imagem'], width: 65, height: 65, fit: BoxFit.cover),
+              child: Image.asset(
+                viagem['imagem'],
+                width: 65, height: 65,
+                fit: BoxFit.cover,
+              ),
             ),
             const SizedBox(width: 16),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(viagem['titulo'], style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w600)),
+                  Text(viagem['titulo'],
+                      style: const TextStyle(
+                          fontSize: 15, fontWeight: FontWeight.w600)),
                   const SizedBox(height: 4),
-                  Text(viagem['data'], style: TextStyle(fontSize: 13, color: Colors.grey.shade600)),
+                  Text(viagem['data'],
+                      style: TextStyle(
+                          fontSize: 13, color: Colors.grey.shade600)),
                 ],
               ),
             ),
-            const Icon(Icons.chevron_right, color: Color.fromARGB(255, 78, 187, 165)),
+            const Icon(Icons.chevron_right,
+                color: Color.fromARGB(255, 78, 187, 165)),
           ],
         ),
       ),
