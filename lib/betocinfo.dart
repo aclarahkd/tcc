@@ -47,7 +47,7 @@ class _DetalheBetoCarreroState extends State<DetalheBetoCarrero> {
                     Text('Beto Carrero World, Balneário Camboriú e Curitiba',
                         style: const TextStyle(fontSize: 26, fontWeight: FontWeight.bold, color: Color.fromARGB(255, 12, 29, 96))),
                     const SizedBox(height: 4),
-                    Text('24 - 27/07',
+                    Text('8 - 12/07',
                         style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: Colors.black87)),
                     const SizedBox(height: 16),
                     _buildCarrossel(),
