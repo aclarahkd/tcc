@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:tcc/betocinfo.dart';
 import 'sobre.dart';
 import 'inicio.dart';
 import 'tela_pacotes.dart';
 import 'tela_promocoes.dart';
 import 'configuracoes.dart';
-import 'loginguard.dart';
 import 'jaguariunainfo.dart';
 import 'ibitingainfo.dart';
 import 'morangoinfo.dart';
@@ -12,7 +12,6 @@ import 'zooitatibainfo.dart';
 import 'fozinfo.dart';
 import 'natalpocosinfo.dart';
 import 'petropolisinfo.dart';
-
 
 class Tela6Agenda extends StatefulWidget {
   const Tela6Agenda({super.key});
@@ -27,37 +26,43 @@ class _Tela6AgendaState extends State<Tela6Agenda> {
   final List<Map<String, dynamic>> viagens = [
     {
       'titulo': 'Jaguariúna + Pedreira',
-      'data': '28/06',
+      'data': '28/06/26',
       'imagem': 'imagens/jaguariuna.png',
       'tela': const DetalheJaguariuna(),
     },
     {
+      'titulo': 'Beto Carrero World, Balneário Camboriú e Curitiba',
+      'data': '8 a 12/07/26',
+      'imagem': 'imagens/betocarrero.jpg',
+      'tela': const DetalheBetoCarrero(),
+    },
+    {
       'titulo': 'Ibitinga + Passeio de Barco',
-      'data': '24 a 27/07',
+      'data': '24 a 27/07/26',
       'imagem': 'imagens/ibitinga.png',
       'tela': const DetalheIbitinga(),
     },
     {
       'titulo': 'Festa do Morango',
-      'data': '14 a 17 de Agosto',
+      'data': '14 a 17 de Agosto de 2026',
       'imagem': 'imagens/morango.png',
       'tela': const DetalheFestaDoMorango(),
     },
     {
       'titulo': 'Zoo Itatiba',
-      'data': '27/09',
+      'data': '27/09/26',
       'imagem': 'imagens/zooitatiba.png',
       'tela': const DetalheZooItatiba(),
     },
     {
       'titulo': 'Foz, Paraguai e Argentina',
-      'data': '18-22/11',
+      'data': '18-22/11/26',
       'imagem': 'imagens/fozpa.png',
       'tela': const DetalheFoz(),
     },
     {
       'titulo': 'Natal Iluminado - Poços de Caldas',
-      'data': '27-29/11',
+      'data': '27-29/11/26',
       'imagem': 'imagens/natal.png',
       'tela': const DetalheNatalPocos(),
     },
@@ -79,20 +84,17 @@ class _Tela6AgendaState extends State<Tela6Agenda> {
             // ── Header verde ──────────────────────────────────────────────
             Container(
               width: double.infinity,
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
               color: const Color.fromARGB(255, 78, 187, 165),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  Image.asset('imagens/logo.png', height: 40, fit: BoxFit.contain),
                   PopupMenuButton<String>(
                     icon: const Icon(Icons.more_horiz, color: Colors.white),
                     onSelected: (value) {
                       if (value == 'editar') {
-                        LoginGuard.verificar(context, () {
-                          Navigator.push(context,
-                              MaterialPageRoute(builder: (_) => const TelaConfiguracoes()));
-                        });
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (_) => const TelaConfiguracoes()));
                       } else if (value == 'sair') {
                         Navigator.of(context).popUntil((route) => route.isFirst);
                       }
