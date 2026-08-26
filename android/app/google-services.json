@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1041395551734",
+    "project_id": "ccturismo-5ff7a",
+    "storage_bucket": "ccturismo-5ff7a.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1041395551734:android:ef4722c9030c4fda794bd7",
+        "android_client_info": {
+          "package_name": "com.example.projetotcc"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCvuH2_2xdxZTbIBuI03HUPmnTAcQuOzXU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
